@@ -45,7 +45,7 @@
             BlueprintIdentifier = "3680A2CF19DB31CE00B4A07F"
             BuildableName = "TestCoreData1.app"
             BlueprintName = "TestCoreData1"
-            ReferencedContainer = "container:TestCoreData1.xcodeproj">
+            ReferencedContainer = "container:AlphaProject.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "3680A2CF19DB31CE00B4A07F"
             BuildableName = "TestCoreData1.app"
             BlueprintName = "TestCoreData1"
-            ReferencedContainer = "container:TestCoreData1.xcodeproj">
+            ReferencedContainer = "container:AlphaProject.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
