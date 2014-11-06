@@ -1,18 +1,18 @@
 //
-//  OpeningViewController.m
-//  Project
+//  MapViewController.m
+//  AlphaProject
 //
-//  Created by Christopher Metcalf on 10/16/14.
+//  Created by CHRISTOPHER METCALF on 10/21/14.
 //  Copyright (c) 2014 Infinity Software. All rights reserved.
 //
 
-#import "OpeningViewController.h"
+#import "MapViewController.h"
 
-@interface OpeningViewController ()
+@interface MapViewController ()
 
 @end
 
-@implementation OpeningViewController
+@implementation MapViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

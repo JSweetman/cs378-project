@@ -10,6 +10,8 @@
 		1A3C544119E0AAD000295438 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C544019E0AAD000295438 /* DataModel.m */; };
 		1A3C544419E0B12500295438 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C544319E0B12500295438 /* AddViewController.m */; };
 		1A3C544719E4B59F00295438 /* IndivCDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C544619E4B59F00295438 /* IndivCDViewController.m */; };
+		1A41EA7F19F72EF200E3676C /* HappeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41EA7E19F72EF200E3676C /* HappeningViewController.m */; };
+		1A41EA8219F7355D00E3676C /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41EA8119F7355D00E3676C /* MapViewController.m */; };
 		3680A2D419DB31CE00B4A07F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3680A2D319DB31CE00B4A07F /* Foundation.framework */; };
 		3680A2D619DB31CE00B4A07F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3680A2D519DB31CE00B4A07F /* CoreGraphics.framework */; };
 		3680A2D819DB31CE00B4A07F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3680A2D719DB31CE00B4A07F /* UIKit.framework */; };
@@ -46,6 +48,10 @@
 		1A3C544319E0B12500295438 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
 		1A3C544519E4B59F00295438 /* IndivCDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndivCDViewController.h; sourceTree = "<group>"; };
 		1A3C544619E4B59F00295438 /* IndivCDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndivCDViewController.m; sourceTree = "<group>"; };
+		1A41EA7D19F72EF200E3676C /* HappeningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HappeningViewController.h; sourceTree = "<group>"; };
+		1A41EA7E19F72EF200E3676C /* HappeningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HappeningViewController.m; sourceTree = "<group>"; };
+		1A41EA8019F7355D00E3676C /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		1A41EA8119F7355D00E3676C /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		3680A2D019DB31CE00B4A07F /* TestCoreData1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestCoreData1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3680A2D319DB31CE00B4A07F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3680A2D519DB31CE00B4A07F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -133,6 +139,10 @@
 				3680A2E219DB31CE00B4A07F /* CDAppDelegate.h */,
 				3680A2E319DB31CE00B4A07F /* CDAppDelegate.m */,
 				3680A2E519DB31CE00B4A07F /* Main.storyboard */,
+				1A41EA8019F7355D00E3676C /* MapViewController.h */,
+				1A41EA8119F7355D00E3676C /* MapViewController.m */,
+				1A41EA7D19F72EF200E3676C /* HappeningViewController.h */,
+				1A41EA7E19F72EF200E3676C /* HappeningViewController.m */,
 				D04F68F519F066310059049B /* OpeningViewController.h */,
 				D04F68F619F066310059049B /* OpeningViewController.m */,
 				1A3C544519E4B59F00295438 /* IndivCDViewController.h */,
@@ -281,10 +291,12 @@
 			files = (
 				3680A2E019DB31CE00B4A07F /* main.m in Sources */,
 				D04F68F719F066310059049B /* OpeningViewController.m in Sources */,
+				1A41EA7F19F72EF200E3676C /* HappeningViewController.m in Sources */,
 				1A3C544119E0AAD000295438 /* DataModel.m in Sources */,
 				1A3C544419E0B12500295438 /* AddViewController.m in Sources */,
 				3680A2E419DB31CE00B4A07F /* CDAppDelegate.m in Sources */,
 				3680A2EA19DB31CE00B4A07F /* CDViewController.m in Sources */,
+				1A41EA8219F7355D00E3676C /* MapViewController.m in Sources */,
 				3680A30C19DB3BCC00B4A07F /* Model.xcdatamodeld in Sources */,
 				1A3C544719E4B59F00295438 /* IndivCDViewController.m in Sources */,
 			);
@@ -427,6 +439,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestCoreData1/TestCoreData1-Prefix.pch";
 				INFOPLIST_FILE = "TestCoreData1/TestCoreData1-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
