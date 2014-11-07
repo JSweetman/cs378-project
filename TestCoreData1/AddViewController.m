@@ -10,6 +10,7 @@
 #import "DataModel.h"
 #import "CDViewController.h"
 #import "CDAppDelegate.h"
+#import <Parse/Parse.h>
 //#import "CoreGraphics/CGGeometry.h"
 
 @interface AddViewController ()
@@ -37,6 +38,9 @@
     self.where.delegate = self;
     self.time.delegate = self;
     self.food.delegate = self;
+    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    testObject[@"foo"] = @"bar";
+    [testObject saveInBackground];
     // Do any additional setup after loading the view.
     /*
     // register for keyboard notifications
