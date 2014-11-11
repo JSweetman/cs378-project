@@ -38,6 +38,12 @@
     self.where.delegate = self;
     self.time.delegate = self;
     self.food.delegate = self;
+    
+    //PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    //testObject[@"foo"] = @"bar";
+    //[testObject saveInBackground];
+    
+    
     // Do any additional setup after loading the view.
     /*
     // register for keyboard notifications
@@ -147,12 +153,13 @@
     [newContact setValue: dm.time forKey:@"time"];
     [newContact setValue: dm.food forKey:@"food"];
     
-    PFObject *testObject = [PFObject objectWithClassName:@"FoodEvent"];
+    PFObject *testObject = [PFObject objectWithClassName: @"FoodEvent"];
     testObject[@"name"] = dm.event;
     testObject[@"where"] = dm.where;
-    testObject[@"time"] = dm.time;
+    testObject[@"time"]= dm.time;
     testObject[@"food"] = dm.food;
     [testObject saveInBackground];
+    
     
     // Save changes to the persistent store
     NSError *error;
@@ -173,7 +180,29 @@
     [self.time resignFirstResponder];
     [self.food resignFirstResponder];
 }
-
+/*
+Parse.Cloud.afterSave("Comment", function(request) {
+    // Our "Comment" class has a "text" key with the body of the comment itself
+    var commentText = request.object.get('text');
+    
+    var pushQuery = new Parse.Query(Parse.Installation);
+    pushQuery.equalTo('deviceType', 'ios');
+    
+    Parse.Push.send({
+    where: pushQuery, // Set our Installation query
+    data: {
+    alert: "New comment: " + commentText
+    }
+    }, {
+    success: function() {
+        // Push was successful
+    },
+    error: function(error) {
+        throw "Got an error " + error.code + " : " + error.message;
+    }
+    });
+});
+ */
 - (IBAction)btnSaveGo:(id)sender {
     
     _d1 = [[DataModel alloc] init];
@@ -193,6 +222,22 @@
         
         [self addNewContact:_d1];
          self.message_label.text = @"Data Saved";
+  /*
+        Parse.Push.send({
+        channels: [ "Giants", "Mets" ],
+        data: {
+        alert: "The Giants won against the Mets 2-3."
+        }
+        }, {
+        success: function() {
+            // Push was successful
+        },
+        error: function(error) {
+            // Handle error
+        }
+        });
+    */
+        
     }
  
     else

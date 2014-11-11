@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "FreeFoodFinder": {
+            "applicationId": "6K55pLuHjEat7fVj9wfDNscl5ryJB8qBHVBoX4pB", 
+            "masterKey": "eU42kffGXTo4iax6LalyOvUaaElNtpJ8eiIgfsy5"
+        }, 
+        "_default": {
+            "link": "FreeFoodFinder"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.1"
+    }
+}
