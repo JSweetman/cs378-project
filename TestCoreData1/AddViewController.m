@@ -38,9 +38,6 @@
     self.where.delegate = self;
     self.time.delegate = self;
     self.food.delegate = self;
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"foo"] = @"bar";
-    [testObject saveInBackground];
     // Do any additional setup after loading the view.
     /*
     // register for keyboard notifications
@@ -149,6 +146,13 @@
     [newContact setValue: dm.where forKey:@"where"];
     [newContact setValue: dm.time forKey:@"time"];
     [newContact setValue: dm.food forKey:@"food"];
+    
+    PFObject *testObject = [PFObject objectWithClassName:@"FoodEvent"];
+    testObject[@"name"] = dm.event;
+    testObject[@"where"] = dm.where;
+    testObject[@"time"] = dm.time;
+    testObject[@"food"] = dm.food;
+    [testObject saveInBackground];
     
     // Save changes to the persistent store
     NSError *error;

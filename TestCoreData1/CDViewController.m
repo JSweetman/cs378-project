@@ -10,6 +10,7 @@
 #import "CDAppDelegate.h"
 #import "DataModel.h"
 #import "IndivCDViewController.h"
+#import <Parse/Parse.h>
 
 @interface CDViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -32,7 +33,6 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     [self loadModelData];
     [self.tableView reloadData];
 }
@@ -45,38 +45,33 @@
 
 - (void)loadModelData
 {
-    
-    
-    CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = appDelegate.managedObjectContext;
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Contact" inManagedObjectContext:context];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDescription];
-    
-    // LOOK
-    //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(name = %@)", _d1.name];    [request setPredicate:predicate];
-    
     // Fetch (read) the data
-    NSError *error;
-    NSArray *objects = [context executeFetchRequest:request error:&error];
     self.DataModelList = [NSMutableArray new];
-        
-    if ([objects count] == 0) {
-        NSLog(@"No Matches");
-    } else {
-        NSManagedObject *item = nil;
-        //LOOK
-        for (int i = 0; i < [objects count]; i++) {
-            item = objects[i];
-            DataModel *dm = [[DataModel alloc] init];
-            dm.event = [item valueForKey:@"event"];
-            dm.where = [item valueForKey:@"where"];
-            dm.time =[item valueForKey:@"time"];
-            dm.food =[item valueForKey:@"food"];
-            [self.DataModelList addObject: dm];
-        }
+    PFQuery *query = [PFQuery queryWithClassName:@"FoodEvent"];
+    NSArray *parse_list = [query findObjects];
+    DataModel *dm = [[DataModel alloc] init];
+    for (PFObject *obj in parse_list) {
+        dm.event = obj[@"name"];
+        NSLog(@"obj name: %@", obj[@"name"]);
+        dm.where = obj[@"where"];
+        dm.time = obj[@"time"];
+        dm.food = obj[@"food"];
+        [self.DataModelList addObject:dm];
+    }
+    for (DataModel *dm in self.DataModelList) {
+        NSLog(@"object name for loop name: %@", dm.event);
     }
     
+//    PFQuery *query = [PFQuery queryWithClassName:@"FoodEvent"];
+//    DataModel *dm = [[DataModel alloc] init];
+//    PFObject *FoodEvent = [query getObjectWithId:@"2cKLLF7PEX"];
+//    dm.event = FoodEvent[@"name"];
+//    dm.where = FoodEvent[@"where"];
+//    dm.time = FoodEvent[@"time"];
+//    dm.food = FoodEvent[@"food"];
+//    [self.DataModelList addObject:dm];
+//    NSLog(@"loadmodeldata event : %@", dm.event);
+//    NSLog(@"loadmodeldata datamodellist count: %lu@", [self.DataModelList count]);
 }
 
 
@@ -116,7 +111,6 @@
     DataModel* hi = [self.DataModelList objectAtIndex:indexPath.row];
     cell.textLabel.text = hi.event;
     cell.detailTextLabel.text = hi.where;
-    
     return cell;
 }
 
