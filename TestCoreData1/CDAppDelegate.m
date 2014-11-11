@@ -19,12 +19,82 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [Parse setApplicationId:@"vdhZN2rmjBYhLJFlFK8NRFW0wKZHQ3CDNMEkwAWy"
-                  clientKey:@"5J5WzJDG8FR95pmI9eN1HTOCtbcBktoz9B6yRNo4"];
+    
+    
+    [Parse setApplicationId:@"6K55pLuHjEat7fVj9wfDNscl5ryJB8qBHVBoX4pB"
+                   clientKey:@"8cQE2B7UFKbKBaldEaN1E81SlO2Y0Fzx4m3gprVf"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    // Register for Push Notitications, if running iOS 8
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                        UIUserNotificationTypeBadge |
+                                                        UIUserNotificationTypeSound);
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                                 categories:nil];
+        [application registerUserNotificationSettings:settings];
+        [application registerForRemoteNotifications];
+    }
+    else {
+        // Register for Push Notifications before iOS 8
+        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                         UIRemoteNotificationTypeAlert |
+                                                         UIRemoteNotificationTypeSound)];
+    }
+    /*
+    // Extract the notification data
+    NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    
+    // Create a pointer to the Photo object
+    NSString *photoId = [notificationPayload objectForKey:@"p"];
+    PFObject *targetPhoto = [PFObject objectWithoutDataWithClassName:@"Photo"
+                                                            objectId:photoId];
+    
+    // Fetch photo object
+    [targetPhoto fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        // Show photo view controller
+        if (!error && [PFUser currentUser]) {
+            PhotoVC *viewController = [[PhotoVC alloc] initWithPhoto:object];
+            [self.navController pushViewController:viewController animated:YES];
+        }
+    }];
+    
+    */
     return YES;
 }
-							
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    /*
+    fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
+    // Create empty photo object
+    NSString *photoId = [userInfo objectForKey:@"p"];
+    PFObject *targetPhoto = [PFObject objectWithoutDataWithClassName:@"Photo"
+                                                            objectId:photoId];
+    
+    // Fetch photo object
+    [targetPhoto fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        // Show photo view controller
+        if (error) {
+            handler(UIBackgroundFetchResultFailed);
+        } else if ([PFUser currentUser]) {
+            PhotoVC *viewController = [[PhotoVC alloc] initWithPhoto:object];
+            [self.navController pushViewController:viewController animated:YES];
+            handler(UIBackgroundFetchResultNewData);
+        } else {
+            handler(UIBackgroundModeNoData);
+        }
+    }];
+     */
+    [PFPush handlePush:userInfo];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
