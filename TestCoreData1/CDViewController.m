@@ -49,8 +49,8 @@
     self.DataModelList = [NSMutableArray new];
     PFQuery *query = [PFQuery queryWithClassName:@"FoodEvent"];
     NSArray *parse_list = [query findObjects];
-    DataModel *dm = [[DataModel alloc] init];
     for (PFObject *obj in parse_list) {
+        DataModel *dm = [[DataModel alloc] init];
         dm.event = obj[@"name"];
         NSLog(@"obj name: %@", obj[@"name"]);
         dm.where = obj[@"where"];
