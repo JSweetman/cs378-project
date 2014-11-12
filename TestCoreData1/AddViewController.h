@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *save;
 @property (weak, nonatomic) IBOutlet UILabel *message_label;
 @property (weak, nonatomic) IBOutlet UIButton *btnSaveGo;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end

@@ -29,7 +29,10 @@
     //testObject[@"foo"] = @"bar";
     //[testObject saveInBackground];    // create d1 object
     
-    
+    // When users indicate they are Giants fans, we subscribe them to that channel.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation addUniqueObject:@"Food" forKey:@"channels"];
+    [currentInstallation saveInBackground];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

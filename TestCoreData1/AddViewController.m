@@ -19,6 +19,11 @@
 @end
 
 @implementation AddViewController
+{
+    CGRect originalViewFrame;
+    UITextField *textFieldWithFocus;
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +43,35 @@
     self.where.delegate = self;
     self.time.delegate = self;
     self.food.delegate = self;
+    
+    // Register for keyboard notifications.
+    //
+    // Register for when the keyboard is shown.
+    // To make sure the text field that has focus can be seen by the user.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:@"UIKeyboardWillShowNotification"
+                                               object:nil];
+    // Register for when the keyboard is hidden.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidHide:)
+                                                 name:@"UIKeyboardDidHideNotification"
+                                               object:nil];
+    
+    
+    // Remember the starting frame for the view
+    originalViewFrame = self.view.frame;
+    
+    // Set the scroll view to the same size as its parent view - typical
+    self.scrollView.frame = originalViewFrame;
+    
+    // Set the content size to the same size as the scroll view - for now.
+    // Later we'll be changing the content size to allow for scrolling.
+    // Right now, no scrolling would occur because the content and the scroll view
+    // are the same size.
+    self.scrollView.contentSize = originalViewFrame.size;
+    
+  
     
     //PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
     //testObject[@"foo"] = @"bar";
@@ -180,29 +214,63 @@
     [self.time resignFirstResponder];
     [self.food resignFirstResponder];
 }
-/*
-Parse.Cloud.afterSave("Comment", function(request) {
-    // Our "Comment" class has a "text" key with the body of the comment itself
-    var commentText = request.object.get('text');
+
+
+// Called when the keyboard will be shown.
+- (void) keyboardWillShow:(NSNotification *)note {
+    NSDictionary *userInfo = [note userInfo];
+    CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     
-    var pushQuery = new Parse.Query(Parse.Installation);
-    pushQuery.equalTo('deviceType', 'ios');
+    int adjust = 0;
+    int pad = 5;
     
-    Parse.Push.send({
-    where: pushQuery, // Set our Installation query
-    data: {
-    alert: "New comment: " + commentText
+    int top = originalViewFrame.size.height - keyboardFrame.size.height - pad - textFieldWithFocus.frame.size.height;
+    
+    if (textFieldWithFocus.frame.origin.y > top) {
+        adjust = textFieldWithFocus.frame.origin.y - top;
     }
-    }, {
-    success: function() {
-        // Push was successful
-    },
-    error: function(error) {
-        throw "Got an error " + error.code + " : " + error.message;
-    }
-    });
-});
- */
+    
+    CGRect newViewFrame = originalViewFrame;
+    newViewFrame.origin.y -= adjust;
+    newViewFrame.size.height = originalViewFrame.size.height + keyboardFrame.size.height;
+    
+    // Change the content size so we can scroll up and expose the text field widgets
+    // currently under the keyboard.
+    CGSize newContentSize = originalViewFrame.size;
+    newContentSize.height += (keyboardFrame.size.height * 2);
+    self.scrollView.contentSize = newContentSize;
+        
+    // Move the view to keep the text field from being covered up by the keyboard.
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.frame = newViewFrame;
+    }];
+}
+
+// Called when the keyboard will be hidden - the user has touched the Return key.
+- (void) keyboardDidHide:(NSNotification *)note {
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        // Restore the parent view and scroll content view to their original sizes
+        self.view.frame = originalViewFrame;
+        self.scrollView.contentSize = originalViewFrame.size;
+    }];
+}
+
+// Called when you touch inside a text field.
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    
+    // Remember which text field has focus
+    textFieldWithFocus = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    textFieldWithFocus = nil;
+}
+
+
+
+
 - (IBAction)btnSaveGo:(id)sender {
     
     _d1 = [[DataModel alloc] init];
@@ -222,6 +290,13 @@ Parse.Cloud.afterSave("Comment", function(request) {
         
         [self addNewContact:_d1];
          self.message_label.text = @"Data Saved";
+        
+        // Send a notification to all devices subscribed to the "Giants" channel.
+        PFPush *push = [[PFPush alloc] init];
+        [push setChannel:@"Food"];
+        [push setMessage:@"New Event added!"];
+        [push sendPushInBackground];
+        
   /*
         Parse.Push.send({
         channels: [ "Giants", "Mets" ],
