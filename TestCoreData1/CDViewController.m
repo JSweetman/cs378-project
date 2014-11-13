@@ -56,8 +56,8 @@
     NSArray *parse_list = [query findObjects];
     for (PFObject *obj in parse_list) {
         DataModel *dm = [[DataModel alloc] init];
-        dm.event = obj[@"name"];
-        NSLog(@"obj name: %@", obj[@"name"]);
+        dm.event = obj[@"event"];
+        //NSLog(@"obj name: %@", obj[@"name"]);
         dm.where = obj[@"where"];
         dm.time = obj[@"time"];
         dm.food = obj[@"food"];

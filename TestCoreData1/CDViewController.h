@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DataModel.h"
 
+
 @interface CDViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-
-
-
 @end
+

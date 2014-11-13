@@ -188,7 +188,7 @@
     [newContact setValue: dm.food forKey:@"food"];
     
     PFObject *testObject = [PFObject objectWithClassName: @"FoodEvent"];
-    testObject[@"name"] = dm.event;
+    testObject[@"event"] = dm.event;
     testObject[@"where"] = dm.where;
     testObject[@"time"]= dm.time;
     testObject[@"food"] = dm.food;
