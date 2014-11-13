@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *DataModelList;
 
+
+
 @end
 
 
@@ -25,7 +27,7 @@
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UISearchDisplayController *searchController;
-@property (nonatomic, strong) NSMutableArray *searchResults;
+@property (nonatomic, strong) NSArray *searchResults;
 
 @end
 
@@ -82,7 +84,7 @@
     CGPoint offset = CGPointMake(0, self.searchBar.frame.size.height);
     self.tableView.contentOffset = offset;
     
-    self.searchResults = [[NSMutableArray alloc]init];
+    self.searchResults = [[NSArray alloc]init];
     
     [self.searchController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"searchCell"];
     self.searchBar.showsCancelButton = YES;
@@ -173,6 +175,7 @@
 }
 
 //Added for search
+/*
 -(void)filterResults:(NSString *)searchTerm {
     
     [self.searchResults removeAllObjects];
@@ -196,14 +199,26 @@
     
     //[self.searchResults addObjectsFromArray:results];
 }
+ */
 
 //Added for search
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    return YES;
+}
+/* //other search bool
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     [self filterResults:searchString];
     return YES;
 }
-
+*/
+/*
 - (void)callbackWithResult:(NSArray *)celebrities error:(NSError *)error
 {
     if(!error) {
@@ -213,7 +228,7 @@
     }
 }
 
-
+*/
 
 // UiTableViewController data source and delegate methods
 
@@ -224,6 +239,16 @@
 }
 
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return self.searchResults.count;
+        
+    } else {
+        return self.DataModelList.count;
+    }
+}
+/*
 // Added for search
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -245,6 +270,8 @@
     // Return the number of rows in the section.
     return [self.DataModelList count];
 }
+*/
+
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -262,10 +289,41 @@
 }
 */
 
-
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    //[self.searchResults removeAllObjects];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"event contains[c] %@", searchText];
+    self.searchResults = [self.DataModelList filteredArrayUsingPredicate:resultPredicate];
+}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
- 
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellid"];
+    }
+    
+    //DataModel *dm = nil;
+    DataModel* hi = nil;
+    
+    
+     
+    // Display recipe in the table cell
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        hi = [self.searchResults objectAtIndex:indexPath.row];
+        cell.textLabel.text = @"Hi";
+        cell.detailTextLabel.text = hi.where;
+    }
+    else {
+        hi = [self.DataModelList objectAtIndex:indexPath.row];
+        cell.textLabel.text = hi.event;
+        cell.detailTextLabel.text = hi.where;
+    }
+    
+    return cell;
+   
+    /*
     if (tableView == self.tableView) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid"];
         
@@ -278,12 +336,13 @@
     }
     else {
         UITableViewCell *cell = [self.searchController.searchResultsTableView dequeueReusableCellWithIdentifier:@"searchCell"];
-        cell.textLabel.text = @"Hi";
-        cell.detailTextLabel.text = @"Hello";
+        DataModel* hi = [self.searchResults objectAtIndex:indexPath.row];
+        cell.textLabel.text = hi.event;
+        cell.detailTextLabel.text = hi.where;
         
         return cell;
     }
-    
+    */
     
 //    if (cell == nil) {
 //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellid"];
