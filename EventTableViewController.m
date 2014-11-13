@@ -113,7 +113,9 @@
     
     self.DataModelList = [NSMutableArray new];
     PFQuery *query = [PFQuery queryWithClassName:@"FoodEvent"];
+    [query orderByAscending:@"time"];
     NSArray *parse_list = [query findObjects];
+   
     for (PFObject *obj in parse_list) {
         DataModel *dm = [[DataModel alloc] init];
         dm.event = obj[@"event"];
@@ -122,6 +124,7 @@
         dm.time = obj[@"time"];
         dm.food = obj[@"food"];
         [self.DataModelList addObject:dm];
+        
     }
     for (DataModel *dm in self.DataModelList) {
         NSLog(@"object name for loop name: %@", dm.event);

@@ -14,7 +14,7 @@
 		1A41EA7F19F72EF200E3676C /* HappeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41EA7E19F72EF200E3676C /* HappeningViewController.m */; };
 		1A41EA8219F7355D00E3676C /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41EA8119F7355D00E3676C /* MapViewController.m */; };
 		1AAF94ED1A13EEC7009E57C7 /* EventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF94EC1A13EEC7009E57C7 /* EventTableViewController.m */; };
-		1AAF94EF1A13F757009E57C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AAF94EE1A13F757009E57C7 /* Main.storyboard */; };
+		1AAF94F11A156914009E57C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AAF94F01A156914009E57C7 /* Main.storyboard */; };
 		1ABCCD181A0C7E6F00B86A4C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABCCD141A0C7E6F00B86A4C /* Bolts.framework */; };
 		1ABCCD1A1A0C7E6F00B86A4C /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABCCD161A0C7E6F00B86A4C /* ParseFacebookUtils.framework */; };
 		1ABCCD1B1A0C7E6F00B86A4C /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABCCD171A0C7E6F00B86A4C /* ParseUI.framework */; };
@@ -70,6 +70,7 @@
 		1AAF94EB1A13EEC7009E57C7 /* EventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventTableViewController.h; path = ../EventTableViewController.h; sourceTree = "<group>"; };
 		1AAF94EC1A13EEC7009E57C7 /* EventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventTableViewController.m; path = ../EventTableViewController.m; sourceTree = "<group>"; };
 		1AAF94EE1A13F757009E57C7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../.Trash/Main.storyboard; sourceTree = "<group>"; };
+		1AAF94F01A156914009E57C7 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Main.storyboard; path = TestCoreData1/Main.storyboard; sourceTree = "<group>"; };
 		1ABCCD141A0C7E6F00B86A4C /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../Downloads/parse-library-1/Bolts.framework"; sourceTree = "<group>"; };
 		1ABCCD161A0C7E6F00B86A4C /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = "../../../Downloads/parse-library-1/ParseFacebookUtils.framework"; sourceTree = "<group>"; };
 		1ABCCD171A0C7E6F00B86A4C /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = "../../../Downloads/parse-library-1/ParseUI.framework"; sourceTree = "<group>"; };
@@ -147,6 +148,7 @@
 		3680A2C719DB31CE00B4A07F = {
 			isa = PBXGroup;
 			children = (
+				1AAF94F01A156914009E57C7 /* Main.storyboard */,
 				3680A2D919DB31CE00B4A07F /* AlphaProject */,
 				3680A2F819DB31CE00B4A07F /* AlphaProject */,
 				3680A2D219DB31CE00B4A07F /* Frameworks */,
@@ -325,7 +327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AAF94EF1A13F757009E57C7 /* Main.storyboard in Resources */,
+				1AAF94F11A156914009E57C7 /* Main.storyboard in Resources */,
 				3680A2EC19DB31CE00B4A07F /* Images.xcassets in Resources */,
 				3680A2DE19DB31CE00B4A07F /* InfoPlist.strings in Resources */,
 			);
