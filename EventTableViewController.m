@@ -28,7 +28,7 @@
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UISearchDisplayController *searchController;
 @property (nonatomic, strong) NSArray *searchResults;
-
+//@property (nonatomic, strong) NSMutableArray *searchResults;
 @end
 
 
@@ -84,8 +84,8 @@
     CGPoint offset = CGPointMake(0, self.searchBar.frame.size.height);
     self.tableView.contentOffset = offset;
     
-    self.searchResults = [[NSArray alloc]init];
-    
+    //self.searchResults = [[NSArray alloc]init];
+    self.searchResults = [[NSMutableArray alloc]init];
     [self.searchController.searchResultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"searchCell"];
     self.searchBar.showsCancelButton = YES;
 }
@@ -123,6 +123,7 @@
         dm.where = obj[@"where"];
         dm.time = obj[@"time"];
         dm.food = obj[@"food"];
+        //dm.date =obj[@"date"];
         [self.DataModelList addObject:dm];
         
     }
@@ -177,34 +178,53 @@
     
 }
 
-//Added for search
-/*
+//Added for search1
+
 -(void)filterResults:(NSString *)searchTerm {
     
-    [self.searchResults removeAllObjects];
+    NSLog(@"Here");
+    NSMutableArray *newResults = [NSMutableArray new];
+    for (DataModel *event in self.DataModelList) {
+        if ([event.event containsString:searchTerm] || [event.food containsString:searchTerm] || [event.where containsString:searchTerm] || [event.time containsString:searchTerm]) {
+            [newResults addObject:event];
+        }
+    }
     
-    PFQuery *query = [PFQuery queryWithClassName: @"FoodEvent"];
-    [query whereKeyExists:@"event"];  //this is based on whatever query you are trying to accomplish
-    [query whereKeyExists:@"where"]; //this is based on whatever query you are trying to accomplish
-    [query whereKeyExists:@"time"];  //this is based on whatever query you are trying to accomplish
-    [query whereKeyExists:@"food"];
-    [query whereKey:@"event" containsString:searchTerm];
-    [query whereKey:@"where" containsString:searchTerm];
-    [query whereKey:@"time" containsString:searchTerm];
-    [query whereKey:@"food" containsString:searchTerm];
+    //NSString *predicateText = @"event";
+    //NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"event CONTAINS[c] %@", searchTerm];
     
-    [query findObjectsInBackgroundWithTarget:self selector:@selector(callbackWithResult:error:)];
+    //PFQuery *query = [PFQuery queryWithClassName: @"FoodEvent" predicate: resultPredicate];
     
-    //NSArray *results  = [query findObjects];
+    //self.searchResults = (NSMutableArray*)[self.DataModelList filteredArrayUsingPredicate:resultPredicate];
     
-    //NSLog(@"%@", results);
-    //NSLog(@"%u", results.count);
+//    PFQuery *query = [PFQuery queryWithClassName:@"FoodEvent"];
+    //[query whereKeyExists:@"event"];
+    //[query whereKeyExists:@"where"];
+    //[query whereKeyExists:@"time"];
+    //[query whereKeyExists:@"food"];
+//    [query whereKey:@"event" containsString:searchTerm];
+    //[query whereKey:@"where" containsString:searchTerm];
+    //[query whereKey:@"time" containsString:searchTerm];
+    //[query whereKey:@"food" containsString:searchTerm];
     
-    //[self.searchResults addObjectsFromArray:results];
+    //[query findObjectsInBackgroundWithTarget:self selector:@selector(callbackWithResult:error:)];
+    
+//    NSArray *results  = [query findObjects];
+    
+    NSLog(@"The results are : %@", newResults);
+    NSLog(@"The count is %u", newResults.count);
+    
+    //This is breaking it.
+    
+    self.searchResults = newResults;
+     
 }
- */
-
-//Added for search
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    [self filterResults:searchString];
+    return YES;
+}
+//Added for search2
+/*
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     [self filterContentForSearchText:searchString
@@ -214,24 +234,20 @@
     
     return YES;
 }
-/* //other search bool
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
-{
-    [self filterResults:searchString];
-    return YES;
-}
-*/
-/*
-- (void)callbackWithResult:(NSArray *)celebrities error:(NSError *)error
+ */
+ 
+
+//Search1
+- (void)callbackWithResult:(NSArray *)foundit error:(NSError *)error
 {
     if(!error) {
-        [self.searchResults removeAllObjects];
-        [self.searchResults addObjectsFromArray:celebrities];
+//        [self.searchResults removeAllObjects];
+//        [self.searchResults addObjectsFromArray:foundit];
         [self.searchDisplayController.searchResultsTableView reloadData];
     }
 }
 
-*/
+
 
 // UiTableViewController data source and delegate methods
 
@@ -241,7 +257,7 @@
     return 1;
 }
 
-
+/*
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.searchDisplayController.searchResultsTableView) {
@@ -251,30 +267,27 @@
         return self.DataModelList.count;
     }
 }
-/*
+*/
 // Added for search
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   
-    
     //Added for search
     if (tableView == self.tableView) {
         //if (tableView == self.searchDisplayController.searchResultsTableView) {
-        //NSLog(@"Prase Count: %ld", [self.objects count]);
-        return self.objects.count;
+        //NSLog(@"Prase Count: %ld", (unsigned long)[self.objects count]);
+        return [self.DataModelList count];
         
     } else {
-        //NSLog(@"Search Count: %ld", [self.searchResults count]);
+        NSLog(@"Search Count: %ld", (unsigned long)[self.searchResults count]);
         return self.searchResults.count;
-        
-        
     }
    
     // Return the number of rows in the section.
     return [self.DataModelList count];
 }
-*/
 
+//NO
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -291,17 +304,20 @@
     
 }
 */
-
+//Search2
+/*
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
     //[self.searchResults removeAllObjects];
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"event contains[c] %@", searchText];
     self.searchResults = [self.DataModelList filteredArrayUsingPredicate:resultPredicate];
 }
+ */
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid"];
+    /*
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellid"];
     }
@@ -325,27 +341,35 @@
     }
     
     return cell;
-   
-    /*
+   */
+    
+    
+    //Search1
+    
+    if (cell == nil) {
+         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellid"];
+     }
+    
+    DataModel* hi = nil;
     if (tableView == self.tableView) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid"];
         
         // Configure the cell...
-        DataModel* hi = [self.DataModelList objectAtIndex:indexPath.row];
+        hi = [self.DataModelList objectAtIndex:indexPath.row];
         cell.textLabel.text = hi.event;
         cell.detailTextLabel.text = hi.where;
         
         return cell;
     }
     else {
-        UITableViewCell *cell = [self.searchController.searchResultsTableView dequeueReusableCellWithIdentifier:@"searchCell"];
-        DataModel* hi = [self.searchResults objectAtIndex:indexPath.row];
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
+        hi = [self.searchResults objectAtIndex:indexPath.row];
         cell.textLabel.text = hi.event;
         cell.detailTextLabel.text = hi.where;
         
         return cell;
     }
-    */
+    
     
 //    if (cell == nil) {
 //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellid"];

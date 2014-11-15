@@ -4,38 +4,75 @@
 \margl1440\margr1440\vieww18780\viewh15560\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\f0\fs24 \cf0 FreeFoodFinder \
+\f0\b\fs24 \cf0 FreeFoodFinder 
+\b0 \
 \
 Team:  Chris Metcalf, Josh Gutierrez, James Sweetman\
 \
-Alpha Version:\
+Beta Version Goals:\
 \
-The deliverable for the Alpha Version was quite straightforward - the basic layout of each view.  \
+The deliverables for the Beta Version included:\
+\
+1. Data models for each event\
+2. Ability to post event\
+3. Sort headline based on time of event\
+4.  Push notifications \
+ \
+We are using Parse for our backend.  As such, we are including the Parse frameworks which need to be included in the project frameworks.  They would also be needed to be added under Build Phases, Link Binary with Libraries.   \
 \
 The views include:\
-OpeningViewController:  This is a UIViewController with 4 buttons:  All Events, Near You, Happening Now, and Add Event.\
-	 All Events - Clicking on this takes you to the CDViewController.  This will display all the events in a table view and have a search bar at the top.  The search bar has not 		been implemented, but this is good, as we didn\'92t promise it yet.\
-	Happening Now - Clicking on this takes you to the HappeningViewController.  This will display all events around the current time.  So it\'92s essentially a search based on the 		current time plus 2 hours.  We can also display this as a map (still debating that).  This will also be implemented.\
-	Near You - This takes you to MapViewController.  At the top will be a map view of events near you that are within an hour of the current time.  This MapKitView is not 		included yet, as it requires it to be implemented or the program crashes.  So this is essentially a search based on location, displayed on a map.  Below it is a table 		view that will be a list of the events on the map.\
-	Add Event - This takes you to the AddEventViewController where you can add an event.\
+	
+\b OpeningViewController
+\b0 :  This is a UIViewController with 4 buttons:  All Events, Near You, Happening Now, and Add Event.\
+	
+\b All Events
+\b0 : Clicking on this takes you to the EventTableViewController.  The backend is Parse.  We grab all events from the database, and we display all the events in a 	table view and have a search bar at the top.  As promised for Beta, the Events are sorted based on the time of the event, in military time, with the earliest event at the top.  	
+\b Add Event
+\b0 :  This takes you to the AddEventViewController where you can add an event.\
+	
+\b Happening Now
+\b0 :  Clicking on this takes you to the HappeningViewController.  This will display all events around the current time.  So it\'92s essentially a search based on 	the current time plus 2 hours. \
+	
+\b Near You:  
+\b0 This takes you to MapViewController.  At the top will be a map view of events near you that are within an hour of the current time.  This MapKitView is not 		included yet, as it requires it to be implemented or the program crashes.  So this is essentially a search based on location, displayed on a map.  Below it is a table 		view that will be a list of the events on the map.\
 \
-CDViewController - As mentioned above, it lists all events, has a search bar, and an add event button.  Clicking on an event goes to IndivCDViewController which lists the \
-	the details of an event.  Add event goes to the AddEventViewController.  \
-IndivCDViewController - Lists the details of an event. \
-HappeningViewControllers - Will display the search result of all events based on current time plus 2 hours.\
-MapViewController - Will display events on MapKitView and also list the nearby events (within say 1/2 mile) to your current location within an hour of the current time. \
-AddViewController - Enables you to add an event. \
+
+\b ViewControllers:
+\b0 \
+
+\b EventTableViewController
+\b0  - As mentioned above, it lists all events, has a search bar, and an add event button.  Clicking on an event goes to IndivCDViewController which lists the details of an event.  Add event goes to the AddEventViewController.  \
+
+\b IndivCDViewController
+\b0  - Lists the details of an event. \
+
+\b HappeningViewControllers
+\b0  - Will display the search result of all events based on current time plus 2 hours.\
+
+\b MapViewController
+\b0  - Will display events on MapKitView and also list the nearby events (within say 1/2 mile) to your current location within an hour of the current time. \
+
+\b AddViewController
+\b0  - Enables you to add an event. \
 \
-Several things will need to be implemented:\
-1.  Integration with Parse. \
-2.  Search bar functionality\
-3.  Search by current location and display in map view.  \
-4.  Search by current time and display in table view. \
-5.  Optional - Push notifications\
-6.  Optional - Add a registration and sign in using Facebook, etc.\
+
+\b Beta Deliverables:
+\b0 \
+For Beta, we accomplished our deliverables.  The data models are created, and users can post an event.  That event is posted to the Parse database, which is integrated into the app and serves as the backend database.  When users click on All Events, events are sorted by time, with the earliest event at the top of the screen.  In addition, when users post a new event, we push to users that a new event has been posted. \
+\
+
+\b Final Version:
+\b0 \
+As we have been designing the Beta, it is clear that we intend to refine several items, and add others: \
+\
+1.  DataModel:  Currently, we are inputting the time as military time as a string, and having the app only be for today\'92s events.  We will add a UIDatePicker so that users can select date and time and store as a NSDate object.  This will be key for using the apps clock to sort for events based on current time for the HappeningNow button that users can select. The HappeningNow will display events within the current time plus 2 hours. \
+2.  Search bar functionality:  Users can search by events or food.  We have set this up, but it isn\'92t performing correctly yet.  \
+3.  Search by current location and display in map view:  This is a module scheduled for final version.  \
+5.  Push notifications - Push based on user interests, and/or time (say 15 minutes of an event starting)\
+	Optional - Add a registration and sign in using Facebook, etc. so that users can specify their interests (so we can tailor push notifications)\
 7. Optional - Adding Twitter functionality\
 \
-We had originally mentioned push notifications and a commenting section for the final version.  We are thinking that maybe this isn\'92t necessary so we might not include that.  We will discuss that further with you.  Thanks.\
+\
 \
 \
 \
