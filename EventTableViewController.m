@@ -113,15 +113,18 @@
     
     self.DataModelList = [NSMutableArray new];
     PFQuery *query = [PFQuery queryWithClassName:@"FoodEvent"];
-    [query orderByAscending:@"time"];
+    [query addAscendingOrder:@"pickedDate"];
+    [query addAscendingOrder:@"pickedTime"];
+    //[query orderByAscending:@"pickedTime"];
     NSArray *parse_list = [query findObjects];
-   
+
     for (PFObject *obj in parse_list) {
         DataModel *dm = [[DataModel alloc] init];
         dm.event = obj[@"event"];
         //NSLog(@"obj name: %@", obj[@"name"]);
         dm.where = obj[@"where"];
-        dm.time = obj[@"time"];
+        dm.pickedTime = obj[@"pickedTime"];
+        dm.pickedDate = obj[@"pickedDate"];
         dm.food = obj[@"food"];
         //dm.date =obj[@"date"];
         [self.DataModelList addObject:dm];
@@ -185,7 +188,7 @@
     NSLog(@"Here");
     NSMutableArray *newResults = [NSMutableArray new];
     for (DataModel *event in self.DataModelList) {
-        if ([event.event containsString:searchTerm] || [event.food containsString:searchTerm] || [event.where containsString:searchTerm] || [event.time containsString:searchTerm]) {
+        if ([event.event containsString:searchTerm] || [event.food containsString:searchTerm] || [event.where containsString:searchTerm] || [event.pickedTime containsString:searchTerm] || [event.pickedDate containsString:searchTerm]) {
             [newResults addObject:event];
         }
     }

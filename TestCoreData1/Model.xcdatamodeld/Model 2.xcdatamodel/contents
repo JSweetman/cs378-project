@@ -3,11 +3,10 @@
     <entity name="Contact" syncable="YES">
         <attribute name="event" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="food" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="pickedDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pickedTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="where" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Contact" positionX="-36" positionY="9" width="128" height="120"/>
+        <element name="Contact" positionX="-36" positionY="9" width="128" height="105"/>
     </elements>
 </model>

@@ -29,11 +29,13 @@
     // Do any additional setup after loading the view.
     self.event.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
     self.where.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
-    self.time.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
+    self.pickedTime.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
+    self.pickedDate.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
     self.food.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
     self.event.text = self.hey.event;
     self.where.text = self.hey.where;
-    self.time.text =self.hey.time;
+    self.pickedTime.text =self.hey.pickedTime;
+    self.pickedDate.text = self.hey.pickedDate;
     self.food.text = self.hey.food;
 }
 

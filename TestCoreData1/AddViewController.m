@@ -41,8 +41,11 @@
     [super viewDidLoad];
     self.event.delegate = self;
     self.where.delegate = self;
-    self.time.delegate = self;
+    //self.time.delegate = self;
+    
     self.food.delegate = self;
+    
+    [self.myDatePicker addTarget:self action:@selector(pkrValueChange:) forControlEvents:UIControlEventValueChanged];
     
     // Register for keyboard notifications.
     //
@@ -73,79 +76,63 @@
     
   
     
-    //PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    //testObject[@"foo"] = @"bar";
-    //[testObject saveInBackground];
-    
-    
-    // Do any additional setup after loading the view.
-    /*
-    // register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:self.view.window];
-    // register for keyboard notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:self.view.window];
-    
-    keyboardIsShown = NO;
-    //make contentSize bigger than your scrollSize (you will need to figure out for your own use case)
-    CGSize scrollContentSize = CGSizeMake(320, 345);
-    self.scrollView.contentSize = scrollContentSize;
-    */
-}
-
-/*
-- (void)keyboardWillHide:(NSNotification *)n
-{
-    NSDictionary* userInfo = [n userInfo];
-    
-    // get the size of the keyboard
-    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    
-    // resize the scrollview
-    CGRect viewFrame = self.scrollView.frame;
-    // I'm also subtracting a constant kTabBarHeight because my UIScrollView was offset by the UITabBar so really only the portion of the keyboard that is leftover pass the UITabBar is obscuring my UIScrollView.
-    viewFrame.size.height += (keyboardSize.height - kTabBarHeight);
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [self.scrollView setFrame:viewFrame];
-    [UIView commitAnimations];
-    
-    keyboardIsShown = NO;
-}
-
-- (void)keyboardWillShow:(NSNotification *)n
-{
-    // This is an ivar I'm using to ensure that we do not do the frame size adjustment on the `UIScrollView` if the keyboard is already shown.  This can happen if the user, after fixing editing a `UITextField`, scrolls the resized `UIScrollView` to another `UITextField` and attempts to edit the next `UITextField`.  If we were to resize the `UIScrollView` again, it would be disastrous.  NOTE: The keyboard notification will fire even when the keyboard is already shown.
-    if (keyboardIsShown) {
-        return;
     }
+
+- (void)datePickerChanged:(UIDatePicker *)datePicker
+{
+    //NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //[dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm"];
+    //NSString *strDate = [dateFormatter stringFromDate:datePicker.date];
+    //self.pickedTime.text = strDate;
     
-    NSDictionary* userInfo = [n userInfo];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
     
-    // get the size of the keyboard
-    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+    [timeFormat setDateFormat:@"HH:mm:ss"];
     
-    // resize the noteView
-    CGRect viewFrame = self.scrollView.frame;
-    // I'm also subtracting a constant kTabBarHeight because my UIScrollView was offset by the UITabBar so really only the portion of the keyboard that is leftover pass the UITabBar is obscuring my UIScrollView.
-    viewFrame.size.height -= (keyboardSize.height - kTabBarHeight);
+    NSDate *now = [[NSDate alloc] init];
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [self.scrollView setFrame:viewFrame];
-    [UIView commitAnimations];
-    keyboardIsShown = YES;
+    NSString *theDate = [dateFormat stringFromDate:now];
+    NSString *theTime = [timeFormat stringFromDate:now];
+    
+    self.pickedTime.text = theTime;
+    self.pickedDate.text = theDate;
+    NSLog(@"time is %@\n", _pickedTime);
+    NSLog(@"date is %@\n", _pickedDate);
 }
 
-*/
+- (IBAction)pkrValueChange:(UIDatePicker *)sender {
+    NSLog(@"I'm here\n");
+    /*
+    UIDatePicker *picker = (UIDatePicker *)sender;
+    NSString *dateString;
+    
+    dateString = [NSDateFormatter localizedStringFromDate:[picker date]
+                                                dateStyle:NSDateFormatterMediumStyle
+                                                timeStyle:NSDateFormatterNoStyle];
+    
+    [textField setText:dateString];
+    */
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    
+    NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+    [timeFormat setDateFormat:@"HH:mm:ss"];
+    
+    NSDate *now = [sender date];
+    //[[NSDate alloc] init];
 
+    
+    NSString *theDate = [dateFormat stringFromDate:now];
+    NSString *theTime = [timeFormat stringFromDate:now];
+    
+    self.pickedTime.text = theTime;
+    self.pickedDate.text = theDate;
+    NSLog(@"time is %@\n", _pickedTime);
+    NSLog(@"date is %@\n", _pickedDate);
+    
+}
 
 -(void)modifiedData:(NSString*)data
 {
@@ -184,13 +171,23 @@
     NSManagedObject *newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Contact" inManagedObjectContext:context];
     [newContact setValue: dm.event forKey:@"event"];
     [newContact setValue: dm.where forKey:@"where"];
-    [newContact setValue: dm.time forKey:@"time"];
+    [newContact setValue:dm.pickedTime forKey:@"pickedTime"];
+    [newContact setValue:dm.pickedTime forKey:@"pickedDate"];
+    //[newContact setValue: dm.time forKey:@"time"];
     [newContact setValue: dm.food forKey:@"food"];
+    NSLog(@"event is %@ \n", _event);
+    NSLog(@"where is %@", _where);
+    NSLog(@"food is %@", _food);
+   
+    NSLog(@"time is %@", _pickedTime);
+    NSLog(@"date is %@", _pickedDate);
     
     PFObject *testObject = [PFObject objectWithClassName: @"FoodEvent"];
     testObject[@"event"] = dm.event;
     testObject[@"where"] = dm.where;
-    testObject[@"time"]= dm.time;
+    testObject[@"pickedTime"]= dm.pickedTime;
+    testObject[@"pickedDate"]= dm.pickedDate;
+
     testObject[@"food"] = dm.food;
     [testObject saveInBackground];
     
@@ -211,7 +208,8 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.event resignFirstResponder];
     [self.where resignFirstResponder];
-    [self.time resignFirstResponder];
+    //[self.pickedTime resignFirstResponder];
+    
     [self.food resignFirstResponder];
 }
 
@@ -274,19 +272,14 @@
 - (IBAction)btnSaveGo:(id)sender {
     
     _d1 = [[DataModel alloc] init];
-    //_d1.delegate = (id)self;
-    
-    //self.name.delegate = self;
-    //self.city.delegate = self;
-    //self.state.delegate = self;
-    //self.phone.delegate = self;
     
     _d1.event = [self.event text];
     _d1.where = [self.where text];
-    _d1.time = [self.time text];
+    _d1.pickedTime = [self.pickedTime text];
+    _d1.pickedDate = [self.pickedDate text];
     _d1.food = [self.food text];
     
-    if ([_d1.event length] > 0 && [_d1.where length] > 0 && [_d1.time length] > 0  && [_d1.food length] > 0){
+    if ([_d1.event length] > 0 && [_d1.where length] > 0  && [_d1.food length] > 0){
         
         [self addNewContact:_d1];
          self.message_label.text = @"Data Saved";
@@ -297,21 +290,6 @@
         [push setMessage:@"New Event added!"];
         [push sendPushInBackground];
         
-  /*
-        Parse.Push.send({
-        channels: [ "Giants", "Mets" ],
-        data: {
-        alert: "The Giants won against the Mets 2-3."
-        }
-        }, {
-        success: function() {
-            // Push was successful
-        },
-        error: function(error) {
-            // Handle error
-        }
-        });
-    */
         
     }
  
@@ -326,6 +304,7 @@
     //[self.navigationController popViewControllerAnimated:YES];
      
 }
+
 
 
 @end

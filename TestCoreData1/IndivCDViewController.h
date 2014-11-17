@@ -14,7 +14,8 @@
 @property DataModel *hey; 
 @property (weak, nonatomic) IBOutlet UILabel *event;
 @property (weak, nonatomic) IBOutlet UILabel *where;
-@property (weak, nonatomic) IBOutlet UILabel *time;
+@property (weak, nonatomic) IBOutlet UILabel *pickedTime;
 @property (weak, nonatomic) IBOutlet UILabel *food;
+@property (weak, nonatomic) IBOutlet UILabel *pickedDate;
 
 @end

@@ -21,6 +21,8 @@
 @property(strong, nonatomic) NSString *where;
 @property(strong, nonatomic) NSString *time;
 @property(strong, nonatomic) NSString *food;
+@property(strong, nonatomic) NSString *pickedTime;
+@property(strong, nonatomic) NSString *pickedDate;
 @property(strong, nonatomic) NSDate *date;
 
 @property (nonatomic, strong) id <DataModelProtocol> delegate;

@@ -66,6 +66,7 @@
 		1A41EA7E19F72EF200E3676C /* HappeningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HappeningViewController.m; sourceTree = "<group>"; };
 		1A41EA8019F7355D00E3676C /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		1A41EA8119F7355D00E3676C /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		1A6C97D81A19B1B1006D5CC2 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
 		1AAF94EB1A13EEC7009E57C7 /* EventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventTableViewController.h; path = ../EventTableViewController.h; sourceTree = "<group>"; };
 		1AAF94EC1A13EEC7009E57C7 /* EventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventTableViewController.m; path = ../EventTableViewController.m; sourceTree = "<group>"; };
 		1AAF94F01A156914009E57C7 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -591,6 +592,7 @@
 		3680A30A19DB3BCC00B4A07F /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				1A6C97D81A19B1B1006D5CC2 /* Model 2.xcdatamodel */,
 				3680A30B19DB3BCC00B4A07F /* Model.xcdatamodel */,
 			);
 			currentVersion = 3680A30B19DB3BCC00B4A07F /* Model.xcdatamodel */;
