@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "DataModel.h"
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 
-@interface HappeningViewController : UITableViewController
+@interface HappeningViewController : PFQueryTableViewController <UITableViewDataSource, UITableViewDelegate>
+
+
+@property DataModel *now;
+@property (strong, nonatomic) NSMutableArray *nowList;
 
 @end

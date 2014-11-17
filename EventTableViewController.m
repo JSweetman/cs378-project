@@ -112,6 +112,7 @@
 {
     
     self.DataModelList = [NSMutableArray new];
+    
     PFQuery *query = [PFQuery queryWithClassName:@"FoodEvent"];
     [query addAscendingOrder:@"pickedDate"];
     [query addAscendingOrder:@"pickedTime"];
@@ -173,6 +174,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue identifier] isEqualToString:@"Details"]){
+         NSLog(@"I'm detail\n");
         IndivCDViewController *vc = segue.destinationViewController;
         NSIndexPath *path = [self.tableView indexPathForCell:sender];
         DataModel *contactToPass = self.DataModelList[path.row];
@@ -181,6 +183,7 @@
     
 }
 
+
 //Added for search1
 
 -(void)filterResults:(NSString *)searchTerm {
@@ -188,7 +191,8 @@
     NSLog(@"Here");
     NSMutableArray *newResults = [NSMutableArray new];
     for (DataModel *event in self.DataModelList) {
-        if ([event.event containsString:searchTerm] || [event.food containsString:searchTerm] || [event.where containsString:searchTerm] || [event.pickedTime containsString:searchTerm] || [event.pickedDate containsString:searchTerm]) {
+        if ([event.event containsString:searchTerm] || [event.food containsString:searchTerm] || [event.where containsString:searchTerm] || [event.pickedTime containsString:searchTerm] || [event.pickedDate containsString:searchTerm])
+        {
             [newResults addObject:event];
         }
     }
