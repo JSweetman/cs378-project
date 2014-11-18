@@ -77,7 +77,7 @@
   
     
     }
-
+/*
 - (void)datePickerChanged:(UIDatePicker *)datePicker
 {
     //NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -101,6 +101,7 @@
     NSLog(@"time is %@\n", _pickedTime);
     NSLog(@"date is %@\n", _pickedDate);
 }
+*/
 
 - (IBAction)pkrValueChange:(UIDatePicker *)sender {
     NSLog(@"I'm here\n");
@@ -267,7 +268,21 @@
 }
 
 
+-(NSString *)getStringfromDate:(NSDate *)current
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    NSString *theDate = [dateFormat stringFromDate:current];
+    return theDate;
+}
 
+-(NSDate *)getDateFromString:(NSString *)theDate
+{
+    NSDateFormatter* myFormatter = [[NSDateFormatter alloc] init];
+    [myFormatter setDateFormat:@"MM-dd-yyyy"];
+    NSDate* myDate = [myFormatter dateFromString:theDate];
+    return myDate;
+}
 
 - (IBAction)btnSaveGo:(id)sender {
     
@@ -279,7 +294,37 @@
     _d1.pickedDate = [self.pickedDate text];
     _d1.food = [self.food text];
     
-    if ([_d1.event length] > 0 && [_d1.where length] > 0  && [_d1.food length] > 0){
+    
+    NSDate *current = [NSDate date];
+        //get current date as string
+        //NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        //[dateFormat setDateFormat:@"MM-dd-yyyy"];
+        //NSString *theDate = [dateFormat stringFromDate:current];
+        
+    NSString *theDate = [self getStringfromDate:current];
+        NSLog(@"the date is %@", theDate);
+        //convert date string back to NSDATE
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+        //NSDate *dateFromString = [[NSDate alloc] init];
+        // voila!
+        //dateFromString = [dateFormatter dateFromString:theDate];
+    NSDate *dateFromString = [self getDateFromString:theDate];
+        
+    NSDateFormatter *hourFormat = [[NSDateFormatter alloc] init];
+    [hourFormat setDateFormat:@"HH"];
+    NSString *theHour = [hourFormat stringFromDate:current];
+    int valueHour = [theHour intValue];
+    
+    NSDate *dateEventDate = [self getDateFromString:_d1.pickedDate];
+    NSString *eventTime = [_d1.pickedTime substringToIndex:2];
+    int testedHour = [eventTime intValue];
+    
+    NSComparisonResult compareDates =[dateEventDate compare:dateFromString];
+    
+    if ((compareDates == NSOrderedSame  && testedHour >= valueHour) || compareDates == NSOrderedDescending)
+    {
+        if ([_d1.event length] > 0 && [_d1.where length] > 0  && [_d1.food length] > 0){
         
         [self addNewContact:_d1];
          self.message_label.text = @"Data Saved";
@@ -289,16 +334,21 @@
         [push setChannel:@"Food"];
         [push setMessage:@"New Event added!"];
         [push sendPushInBackground];
-        
+        }
+        else
+        {
+            self.message_label.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
+            self.message_label.text = @"You must enter a value for all fields!!";
+        }
         
     }
- 
     else
     {
         self.message_label.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
-        self.message_label.text = @"You must enter a value for all fields!!";
+        self.message_label.text = @"You must enter a date and/or time in the future";
     }
-   
+ 
+       
     //[NSThread sleepForTimeInterval:3.0f];
     
     //[self.navigationController popViewControllerAnimated:YES];

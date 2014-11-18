@@ -108,22 +108,40 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSString *)getStringfromDate:(NSDate *)current
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    NSString *theDate = [dateFormat stringFromDate:current];
+    return theDate;
+}
+
+-(NSDate *)getDateFromString:(NSString *)theDate
+{
+    NSDateFormatter* myFormatter = [[NSDateFormatter alloc] init];
+    [myFormatter setDateFormat:@"MM-dd-yyyy"];
+    NSDate* myDate = [myFormatter dateFromString:theDate];
+    return myDate;
+}
+
 - (void)loadModelData
 {
     
     NSDate *current = [NSDate date];
     //get current date as string
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"MM-dd-yyyy"];
-    NSString *theDate = [dateFormat stringFromDate:current];
+    //NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //[dateFormat setDateFormat:@"MM-dd-yyyy"];
+    //NSString *theDate = [dateFormat stringFromDate:current];
     
+    NSString *theDate = [self getStringfromDate:current];
+    NSLog(@"the date is %@", theDate);
     //convert date string back to NSDATE
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
-    NSDate *dateFromString = [[NSDate alloc] init];
+    //NSDate *dateFromString = [[NSDate alloc] init];
     // voila!
-    dateFromString = [dateFormatter dateFromString:theDate];
-    
+    //dateFromString = [dateFormatter dateFromString:theDate];
+    NSDate *dateFromString = [self getDateFromString:theDate];
     
     NSDateFormatter *hourFormat = [[NSDateFormatter alloc] init];
     [hourFormat setDateFormat:@"HH"];
