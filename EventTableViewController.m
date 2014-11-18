@@ -161,7 +161,11 @@
     [query addAscendingOrder:@"pickedTime"];
     //[query orderByAscending:@"pickedTime"];
     NSArray *parse_list = [query findObjects];
-
+    
+    for (PFObject *obj in parse_list) {
+        NSLog(@"object name in Parse: %@", obj[@"event"]);
+    }
+    
     for (PFObject *obj in parse_list) {
         NSString *eventTime = obj[@"pickedTime"];
         NSString *eventDate = obj[@"pickedDate"];
@@ -242,7 +246,7 @@
     NSLog(@"Here");
     NSMutableArray *newResults = [NSMutableArray new];
     for (DataModel *event in self.DataModelList) {
-        if ([event.event containsString:searchTerm] || [event.food containsString:searchTerm] || [event.where containsString:searchTerm] || [event.pickedTime containsString:searchTerm] || [event.pickedDate containsString:searchTerm])
+        if ([[event.event lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.food lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.where lowercaseString]containsString:[searchTerm lowercaseString]] || [[event.pickedTime lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.pickedDate lowercaseString] containsString:[searchTerm lowercaseString]])
         {
             [newResults addObject:event];
         }

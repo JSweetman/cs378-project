@@ -12,6 +12,8 @@
 		1A3C544719E4B59F00295438 /* IndivCDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C544619E4B59F00295438 /* IndivCDViewController.m */; };
 		1A41EA7F19F72EF200E3676C /* HappeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41EA7E19F72EF200E3676C /* HappeningViewController.m */; };
 		1A41EA8219F7355D00E3676C /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41EA8119F7355D00E3676C /* MapViewController.m */; };
+		1A6C97DB1A1BFABA006D5CC2 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6C97DA1A1BFAB9006D5CC2 /* LogInViewController.m */; };
+		1A6C97DE1A1BFD50006D5CC2 /* NewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6C97DD1A1BFD50006D5CC2 /* NewUserViewController.m */; };
 		1AAF94ED1A13EEC7009E57C7 /* EventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF94EC1A13EEC7009E57C7 /* EventTableViewController.m */; };
 		1AAF94F11A156914009E57C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AAF94F01A156914009E57C7 /* Main.storyboard */; };
 		1AE644BD1A15700D000D0EE7 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE644B91A15700D000D0EE7 /* Bolts.framework */; };
@@ -67,6 +69,10 @@
 		1A41EA8019F7355D00E3676C /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		1A41EA8119F7355D00E3676C /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		1A6C97D81A19B1B1006D5CC2 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
+		1A6C97D91A1BFAB9006D5CC2 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
+		1A6C97DA1A1BFAB9006D5CC2 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
+		1A6C97DC1A1BFD50006D5CC2 /* NewUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserViewController.h; sourceTree = "<group>"; };
+		1A6C97DD1A1BFD50006D5CC2 /* NewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserViewController.m; sourceTree = "<group>"; };
 		1AAF94EB1A13EEC7009E57C7 /* EventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventTableViewController.h; path = ../EventTableViewController.h; sourceTree = "<group>"; };
 		1AAF94EC1A13EEC7009E57C7 /* EventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventTableViewController.m; path = ../EventTableViewController.m; sourceTree = "<group>"; };
 		1AAF94F01A156914009E57C7 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -197,6 +203,10 @@
 				1AAF94EB1A13EEC7009E57C7 /* EventTableViewController.h */,
 				1AAF94EC1A13EEC7009E57C7 /* EventTableViewController.m */,
 				1AAF94F01A156914009E57C7 /* Main.storyboard */,
+				1A6C97DC1A1BFD50006D5CC2 /* NewUserViewController.h */,
+				1A6C97DD1A1BFD50006D5CC2 /* NewUserViewController.m */,
+				1A6C97D91A1BFAB9006D5CC2 /* LogInViewController.h */,
+				1A6C97DA1A1BFAB9006D5CC2 /* LogInViewController.m */,
 				1A41EA8019F7355D00E3676C /* MapViewController.h */,
 				1A41EA8119F7355D00E3676C /* MapViewController.m */,
 				1A41EA7D19F72EF200E3676C /* HappeningViewController.h */,
@@ -355,8 +365,10 @@
 				3680A2E419DB31CE00B4A07F /* CDAppDelegate.m in Sources */,
 				3680A2EA19DB31CE00B4A07F /* CDViewController.m in Sources */,
 				1A41EA8219F7355D00E3676C /* MapViewController.m in Sources */,
+				1A6C97DB1A1BFABA006D5CC2 /* LogInViewController.m in Sources */,
 				3680A30C19DB3BCC00B4A07F /* Model.xcdatamodeld in Sources */,
 				1AAF94ED1A13EEC7009E57C7 /* EventTableViewController.m in Sources */,
+				1A6C97DE1A1BFD50006D5CC2 /* NewUserViewController.m in Sources */,
 				1A3C544719E4B59F00295438 /* IndivCDViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

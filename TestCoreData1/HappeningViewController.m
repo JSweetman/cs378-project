@@ -7,6 +7,7 @@
 //
 
 #import "HappeningViewController.h"
+#import "IndivCDViewController.h"
 #import <Parse/Parse.h>
 
 @interface HappeningViewController ()
@@ -118,7 +119,7 @@
         NSLog(@"the picked hour is %@\n", str);
         int testedHour = [str intValue];
         //if ([str isEqualToString: theHour])
-        if ([eventDate isEqualToString:theDate] && testedHour >= valueHour && testedHour <= (valueHour + 1))
+        if ([eventDate isEqualToString:theDate] && (testedHour == valueHour || testedHour == (valueHour + 1)))
         {
             [_nowList addObject:dm];
         }
@@ -176,6 +177,18 @@
     cell.detailTextLabel.text = hi.where;
         
     return cell;
+    
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([[segue identifier] isEqualToString:@"HappeningDetails"]){
+        NSLog(@"I'm detail\n");
+        IndivCDViewController *vc = segue.destinationViewController;
+        NSIndexPath *path = [self.tableView indexPathForCell:sender];
+        DataModel *contactToPass = self.nowList[path.row];
+        vc.hey = contactToPass;
+    }
     
 }
 
