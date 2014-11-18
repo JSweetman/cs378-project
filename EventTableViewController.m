@@ -111,24 +111,57 @@
 - (void)loadModelData
 {
     
+    NSDate *current = [NSDate date];
+    //get current date as string
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    NSString *theDate = [dateFormat stringFromDate:current];
+    
+    //convert date string back to NSDATE
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    NSDate *dateFromString = [[NSDate alloc] init];
+    // voila!
+    dateFromString = [dateFormatter dateFromString:theDate];
+    
+    
+    NSDateFormatter *hourFormat = [[NSDateFormatter alloc] init];
+    [hourFormat setDateFormat:@"HH"];
+    NSDateFormatter *minuteFormat = [[NSDateFormatter alloc] init];
+    [minuteFormat setDateFormat:@"mm"];
+    NSString *theHour = [hourFormat stringFromDate:current];
+    //NSString *theMinute = [minuteFormat stringFromDate:current];
+    NSLog(@"the hour is %@\n", theHour);
+    int valueHour = [theHour intValue];
+    //int valueMinute = [theMinute intValue];
+    
     self.DataModelList = [NSMutableArray new];
     
     PFQuery *query = [PFQuery queryWithClassName:@"FoodEvent"];
+    
     [query addAscendingOrder:@"pickedDate"];
     [query addAscendingOrder:@"pickedTime"];
     //[query orderByAscending:@"pickedTime"];
     NSArray *parse_list = [query findObjects];
 
     for (PFObject *obj in parse_list) {
-        DataModel *dm = [[DataModel alloc] init];
-        dm.event = obj[@"event"];
-        //NSLog(@"obj name: %@", obj[@"name"]);
-        dm.where = obj[@"where"];
-        dm.pickedTime = obj[@"pickedTime"];
-        dm.pickedDate = obj[@"pickedDate"];
-        dm.food = obj[@"food"];
-        //dm.date =obj[@"date"];
-        [self.DataModelList addObject:dm];
+        NSString *eventTime = obj[@"pickedTime"];
+        NSString *eventDate = obj[@"pickedDate"];
+        NSDate *dateEventDate = [dateFormatter dateFromString:eventDate];
+        eventTime = [eventTime substringToIndex:2];
+        int testedHour = [eventTime intValue];
+        NSComparisonResult compareDates =[dateEventDate compare:dateFromString];
+        if ((compareDates == NSOrderedSame  && testedHour >= valueHour)|| compareDates == NSOrderedDescending){
+            DataModel *dm = [[DataModel alloc] init];
+            dm.event = obj[@"event"];
+            //NSLog(@"obj name: %@", obj[@"name"]);
+            dm.where = obj[@"where"];
+            dm.pickedTime = obj[@"pickedTime"];
+            dm.pickedDate = obj[@"pickedDate"];
+            dm.food = obj[@"food"];
+            //dm.date =obj[@"date"];
+            [self.DataModelList addObject:dm];
+        }
         
     }
     for (DataModel *dm in self.DataModelList) {

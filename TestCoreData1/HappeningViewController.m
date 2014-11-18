@@ -87,24 +87,38 @@
     }
     
     
-    NSDate *currentTime = [NSDate date];
+    NSDate *current = [NSDate date];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    
+    //[[NSDate alloc] init];
+    
+    
+    NSString *theDate = [dateFormat stringFromDate:current];
+    
     NSDateFormatter *hourFormat = [[NSDateFormatter alloc] init];
     [hourFormat setDateFormat:@"HH"];
     NSDateFormatter *minuteFormat = [[NSDateFormatter alloc] init];
     [minuteFormat setDateFormat:@"mm"];
-    NSString *theHour = [hourFormat stringFromDate:currentTime];
-    NSString *theMinute = [minuteFormat stringFromDate:currentTime];
+    NSString *theHour = [hourFormat stringFromDate:current];
+    NSString *theMinute = [minuteFormat stringFromDate:current];
     NSLog(@"the hour is %@\n", theHour);
     int valueHour = [theHour intValue];
     int valueMinute = [theMinute intValue];
     int numEvents = [self.DataModelList count];
+    
+    
     for (int i = 0; i < numEvents; i++) {
         DataModel *dm = [[DataModel alloc] init];
         dm = _DataModelList[i];
         NSString *str = dm.pickedTime;
+        NSString *eventDate = dm.pickedDate;
         str = [str substringToIndex: 2];
         NSLog(@"the picked hour is %@\n", str);
-        if ([str isEqualToString: theHour])
+        int testedHour = [str intValue];
+        //if ([str isEqualToString: theHour])
+        if ([eventDate isEqualToString:theDate] && testedHour >= valueHour && testedHour <= (valueHour + 1))
         {
             [_nowList addObject:dm];
         }
