@@ -225,15 +225,66 @@
 }
 
 
+- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath
+{
+    DataModel *dm = [[DataModel alloc] init];
+    
+    //if (tableView == self.searchDisplayController.searchResultsTableView) {
+      if (tableView == self.searchController.searchResultsTableView) {
+        dm = [self.searchResults objectAtIndex: self.searchDisplayController.searchResultsTableView.indexPathForSelectedRow.row];
+        
+        [self performSegueWithIdentifier: @"Details" sender:self];
+        
+        NSLog(@"Search Display Controller");
+    }
+    
+    else {
+        
+        dm = [self.DataModelList objectAtIndex: indexPath.row];
+        
+        //[self performSegueWithIdentifier: @"Details" sender: self];
+        
+        NSLog(@"Default Display Controller");
+    }
+    
+}
+
 //LOOK need to go to AddViewController
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue identifier] isEqualToString:@"Details"]){
          NSLog(@"I'm detail\n");
         IndivCDViewController *vc = segue.destinationViewController;
-        NSIndexPath *path = [self.tableView indexPathForCell:sender];
-        DataModel *contactToPass = self.DataModelList[path.row];
-        vc.hey = contactToPass;
+        //NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+        //DataModel *contactToPass = self.DataModelList[path.row];
+        //vc.hey = contactToPass;
+        
+        if (self.searchController.active) {
+            NSLog(@"Search Display Controller1");
+            DataModel *contactToPass = [self.searchResults objectAtIndex: self.searchDisplayController.searchResultsTableView.indexPathForSelectedRow.row];
+            //DataModel *contactToPass = self.searchResults[path.row];
+            vc.hey = contactToPass;
+            
+        } else {
+            NSLog(@"Default Display Controller1");
+            DataModel *contactToPass = [self.DataModelList objectAtIndex: self.tableView.indexPathForSelectedRow.row];
+            vc.hey = contactToPass;
+        }
+        /*
+        if (sender != self.tableView)
+        {
+            NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+            DataModel *contactToPass = self.DataModelList[path.row];
+            vc.hey = contactToPass;
+        }
+        else
+        {
+        
+            NSIndexPath *path = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            DataModel *contactToPass = self.searchResults[path.row];
+            vc.hey = contactToPass;
+        }
+         */
     }
     
 }
@@ -378,7 +429,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid"];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cellid"];
     /*
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellid"];
@@ -392,11 +443,13 @@
     // Display recipe in the table cell
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"searchCell"];
         hi = [self.searchResults objectAtIndex:indexPath.row];
-        cell.textLabel.text = @"Hi";
+        cell.textLabel.text = hi.event;
         cell.detailTextLabel.text = hi.where;
     }
     else {
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cellid"];
         hi = [self.DataModelList objectAtIndex:indexPath.row];
         cell.textLabel.text = hi.event;
         cell.detailTextLabel.text = hi.where;
@@ -414,7 +467,7 @@
     
     DataModel* hi = nil;
     if (tableView == self.tableView) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid"];
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cellid"];
         
         // Configure the cell...
         hi = [self.DataModelList objectAtIndex:indexPath.row];

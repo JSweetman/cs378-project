@@ -18,7 +18,7 @@ The deliverables for the Beta Version included:\
 3. Sort headline based on time of event\
 4.  Push notifications \
  \
-We are using Parse for our backend.  As such, we are including the Parse frameworks which need to be included in the project frameworks.  They would also be needed to be added under Build Phases, Link Binary with Libraries.   \
+We are using Parse for our backend.  As such, we are including the Parse frameworks which need to be included in the project frameworks.  They also need to be added under Build Phases, Link Binary with Libraries.   \
 \
 The views include:\
 	
@@ -26,7 +26,7 @@ The views include:\
 \b0 :  This is a UIViewController with 4 buttons:  All Events, Near You, Happening Now, and Add Event.\
 	
 \b All Events
-\b0 : Clicking on this takes you to the EventTableViewController.  The backend is Parse.  We grab all events from the database, and we display all the events in a 	table view and have a search bar at the top.  As promised for Beta, the Events are sorted based on the time of the event, in military time, with the earliest event at the top 	sorted by date.  \
+\b0 : Clicking on this takes you to the EventTableViewController.  The backend is Parse.  We grab all events from the database, and we display all the events in a 	table view and have a search bar at the top.  As promised for Beta, the Events are sorted and displayed based on the time of the event, in military time, with the earliest 	event at the top sorted by earliest date and then by time.  \
 	
 \b Add Event
 \b0 :  This takes you to the AddEventViewController where you can add an event.\
@@ -59,16 +59,16 @@ The views include:\
 
 \b Beta Deliverables:
 \b0 \
-For Beta, we accomplished our deliverables.  The data models are created, and users can post an event.  That event is posted to the Parse database, which is integrated into the app and serves as the backend database.  When users click on All Events, events are sorted by time, with the earliest event at the top of the screen.  In addition, when users post a new event, we push to users that a new event has been posted.  Also, when users push Happening Now, events happening within 1 hour of the current time are displayed.  \
+For Beta, we accomplished our deliverables.  The data models are created, and users can post an event.  That event is posted to the Parse database, which is integrated into the app and serves as the backend database.  When users click on All Events, events are sorted by time, with the earliest event at the top of the screen.  In addition, when users post a new event, we push to users that a new event has been posted.  Also, when users push Happening Now, events happening within the next hour of the current time are displayed.  \
 \
 
 \b Final Version:
 \b0 \
 As we have been designing the Beta, it is clear that we intend to refine several items, and add others: \
-1.  Add a detail view so when users press a row on the search result  we display the details like we do on other screens.  This works for other screens (All Events and Happening Now) but search tables are a bit tricky.   \
+1.  Integrate detail view with search result so we display the details like we do on other screens.  This works for other screens (All Events and Happening Now) but search tables are a bit tricky.   \
 2.  Search by current location and display in map view (Near You):  This is a module scheduled for final version. \
-3.  Improve the UI - better display cells, etc.  \
-3.  Push notifications - Push based on user interests, and/or time (say 15 minutes of an event starting)\
+3.  Improve the UI - better display cells, better flow, etc.  \
+3.  Push notifications  refinement- Push based on user interests, and/or time (say 15 minutes of an event starting)\
 	Optional - Add a registration and sign in using Facebook, etc. so that users can specify their interests (so we can tailor push notifications). Also we may require this to add 	an event. \
 4. Optional - Adding Twitter functionality\
 \

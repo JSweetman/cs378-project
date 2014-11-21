@@ -151,6 +151,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A6C97DF1A1EC7E8006D5CC2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		3680A2C719DB31CE00B4A07F = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +205,7 @@
 		3680A2D919DB31CE00B4A07F /* AlphaProject */ = {
 			isa = PBXGroup;
 			children = (
+				1A6C97DF1A1EC7E8006D5CC2 /* Resources */,
 				3680A2E219DB31CE00B4A07F /* CDAppDelegate.h */,
 				3680A2E319DB31CE00B4A07F /* CDAppDelegate.m */,
 				1AAF94EB1A13EEC7009E57C7 /* EventTableViewController.h */,
