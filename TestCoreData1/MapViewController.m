@@ -12,9 +12,12 @@
 @interface MapViewController()
 
 
-
-@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
+@property (nonatomic, strong) CLGeocoder *geocoder;
+@property (nonatomic, strong) MKReverseGeocoder *reverseGeocoder;
+
+@property (nonatomic, strong) CLPlacemark *placemark;
 
 @property (nonatomic, strong) MKCircle *circleOverlay;
 @property (nonatomic, strong) NSMutableArray *annotations;
@@ -41,9 +44,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    mapView.delegate = self;
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    #ifdef __IPHONE_8_0
+    if(IS_OS_8_OR_LATER) {
+        // Use one or the other, not both. Depending on what you put in info.plist
+        //[self.locationManager requestWhenInUseAuthorization];
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    #endif
+    [_locationManager startUpdatingLocation];
+    
+    mapView.showsUserLocation = YES;
+    [mapView setMapType:MKMapTypeStandard];
+    [mapView setZoomEnabled:YES];
+    [mapView setScrollEnabled:YES];
+    
+    /*
     CLLocationManager * locationManager = [[CLLocationManager alloc] init];
-    //[locationManager requestAlwaysAuthorization];
-    [locationManager requestWhenInUseAuthorization];
+    [locationManager requestAlwaysAuthorization];
+    //[locationManager requestWhenInUseAuthorization];
     
     locationManager.distanceFilter = kCLDistanceFilterNone;
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
@@ -62,17 +84,17 @@
     myRegion.center = center;
     myRegion.span = mySpan;
     
-    self.mapView.delegate = self;
-    [self.mapView setShowsUserLocation:YES];
+    //self.mapView.delegate = self;
+    //[self.mapView setShowsUserLocation:YES];
     
     // Start location updates
-    [self.locationManager startUpdatingLocation];
+    //[self.locationManager startUpdatingLocation];
     
     // Cache any current location info
-    CLLocation *currentLocation = _locationManager.location;
-    if (currentLocation) {
-        self.currentLocation = currentLocation;
-    }
+    //CLLocation *currentLocation = _locationManager.location;
+    //if (currentLocation) {
+    //    self.currentLocation = currentLocation;
+    //}
     
     //self.mapPannedSinceLocationUpdate = NO;
     // Do any additional setup after loading the view.
@@ -87,22 +109,89 @@
     //myAnnotation.title = @"Me";
     [self.mapView addAnnotation:myAnnotation];
     
-    
-    
+    */
+}
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self.locationManager startUpdatingLocation];
+    NSLog(@"%@", [self deviceLocation]);
+    
+    //View Area
+    MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
+    region.center.latitude = self.locationManager.location.coordinate.latitude;
+    region.center.longitude = self.locationManager.location.coordinate.longitude;
+    region.span.longitudeDelta = 0.005f;
+    region.span.longitudeDelta = 0.005f;
+    [mapView setRegion:region animated:YES];
+    NSString* test = [self deviceLat];
+    NSLog(@"Latitude test is %@", test);
     
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
+    
     //Get coordinates
     CLLocationCoordinate2D myLocation = [userLocation coordinate];
+    
+    
     //Define Zoom region
+    
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(myLocation, 1500, 1500);
     //Show our location
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
     
+    //MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
+    //[self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
 }
+
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+          fromLocation:(CLLocation *)oldLocation {
+    NSLog(@"in didupdatetoLocation");
+    
+    //self.reverseGeocoder =[[MKReverseGeocoder alloc] initWithCoordinate:newLocation.coordinate];
+    //_reverseGeocoder.delegate=self;
+    //[self.reverseGeocoder start];
+    
+    
+    self.currentLocation = newLocation;
+    [self.geocoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        
+        NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
+        if (error == nil) {
+            NSLog(@"here");
+            self.placemark = [placemarks lastObject];
+            self.addressLabel.text = [NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
+                                 _placemark.subThoroughfare, _placemark.thoroughfare,
+                                 _placemark.postalCode, _placemark.locality,
+                                 _placemark.administrativeArea,
+                                 _placemark.country];
+        } else {
+            NSLog(@"%@", error.debugDescription);
+        }
+    } ];
+}
+
+
+- (NSString *)deviceLocation {
+    return [NSString stringWithFormat:@"latitude: %f longitude: %f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
+}
+- (NSString *)deviceLat {
+    return [NSString stringWithFormat:@"%f", self.locationManager.location.coordinate.latitude];
+}
+- (NSString *)deviceLon {
+    return [NSString stringWithFormat:@"%f", self.locationManager.location.coordinate.longitude];
+}
+- (NSString *)deviceAlt {
+    return [NSString stringWithFormat:@"%f", self.locationManager.location.altitude];
+}
+
+
 /*
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
@@ -227,13 +316,7 @@
 }
 
 /*
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    self.currentLocation = newLocation;
-}
+
 - (void)startStandardUpdates {
     [self.locationManager startUpdatingLocation];
     
