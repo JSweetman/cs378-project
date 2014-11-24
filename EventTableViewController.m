@@ -11,9 +11,10 @@
 #import "DataModel.h"
 #import "IndivCDViewController.h"
 #import <Parse/Parse.h>
+#import "SimpleTableCell.h"
 
 @interface EventTableViewController ()
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView* tableView;
 @property (strong, nonatomic) NSMutableArray *DataModelList;
 
 
@@ -34,6 +35,10 @@
 
 
 @implementation EventTableViewController
+{
+    NSArray *tableData;
+    NSArray *thumbnails;
+}
 
 -(id)initWithCoder:(NSCoder *)aCoder {
     self = [super initWithCoder:aCoder];
@@ -51,7 +56,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // Initialize table data
+    tableData = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
     
+    // Initialize thumbnails
+    thumbnails = [NSArray arrayWithObjects:@"egg_benedict.jpg", @"mushroom_risotto.jpg", @"full_breakfast.jpg", @"hamburger.jpg", @"ham_and_egg_sandwich.jpg", @"creme_brelee.jpg", @"white_chocolate_donut.jpg", @"starbucks_coffee.jpg", @"vegetable_curry.jpg", @"instant_noodle_with_egg.jpg", @"noodle_with_bbq_pork.jpg", @"japanese_noodle_with_pork.jpg", @"green_tea.jpg", @"thai_shrimp_cake.jpg", @"angry_birds_cake.jpg", @"ham_and_cheese_panini.jpg", nil];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"SimpleTableCell" bundle: [NSBundle mainBundle]]
+          forCellReuseIdentifier:@"SimpleTableCell"];
+    
+
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation addUniqueObject:@"Food" forKey:@"channels"];
     [currentInstallation saveInBackground];
@@ -242,7 +256,7 @@
         
         dm = [self.DataModelList objectAtIndex: indexPath.row];
         
-        //[self performSegueWithIdentifier: @"Details" sender: self];
+        [self performSegueWithIdentifier: @"Details" sender: self];
         
         NSLog(@"Default Display Controller");
     }
@@ -296,7 +310,8 @@
     
     NSLog(@"Here");
     NSMutableArray *newResults = [NSMutableArray new];
-    for (DataModel *event in self.DataModelList) {
+    for (DataModel *event in self.DataModelList)
+    {
         if ([[event.event lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.food lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.where lowercaseString]containsString:[searchTerm lowercaseString]] || [[event.pickedTime lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.pickedDate lowercaseString] containsString:[searchTerm lowercaseString]])
         {
             [newResults addObject:event];
@@ -429,7 +444,10 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cellid"];
+    //UITableViewCell
+    
+    static NSString *simpleTableId = @"SimpleTableCell";
+    SimpleTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableId];
     /*
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellid"];
@@ -462,28 +480,67 @@
     //Search1
     
     if (cell == nil) {
-         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellid"];
+         cell = (SimpleTableCell*)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableId];
      }
     
     DataModel* hi = nil;
     if (tableView == self.tableView) {
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cellid"];
+        NSLog(@"in forcell tableview");
+        SimpleTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableId];
         
         // Configure the cell...
         hi = [self.DataModelList objectAtIndex:indexPath.row];
-        cell.textLabel.text = hi.event;
-        cell.detailTextLabel.text = hi.where;
-        
+        NSLog(@"event hi is %@", hi.event);
+        cell.eventLabel.text = hi.event;
+        cell.timeLabel.text = hi.pickedTime;
+        NSLog(@"event is %@", cell.eventLabel.text);
+        NSLog(@"tiem  is %@", cell.timeLabel.text);
+        int count = 0;
+        for (NSString *foodSample in tableData)
+        {
+            if ([[foodSample lowercaseString] containsString:[hi.food lowercaseString]])
+            {
+                NSLog (@"found it\n");
+                NSLog(@"count is %d", count);
+                cell.thumbNailImageView.image = [UIImage imageNamed:[thumbnails objectAtIndex:count]];
+                return cell;
+            }
+                count = count + 1;
+        }
+        //cell.textLabel.text = hi.event;
+        //cell.detailTextLabel.text = hi.where;
+        //cell.thumbNailImageView.image = [UIImage imageNamed:[thumbnails objectAtIndex:count]];
         return cell;
     }
     else {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
+        //UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
+        SimpleTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableId];
         hi = [self.searchResults objectAtIndex:indexPath.row];
-        cell.textLabel.text = hi.event;
-        cell.detailTextLabel.text = hi.where;
+        //cell.textLabel.text = hi.event;
+        //cell.detailTextLabel.text = hi.where;
+        cell.eventLabel.text = hi.event;
+        cell.timeLabel.text = hi.pickedTime;
+        int count = 0;
+        for (NSString *foodSample in tableData)
+        {
+            if ([[foodSample lowercaseString] containsString:[hi.food lowercaseString]])
+            {
+                NSLog (@"found it\n");
+                NSLog(@"count is %d", count);
+                cell.thumbNailImageView.image = [UIImage imageNamed:[thumbnails objectAtIndex:count]];
+                return cell;
+            }
+            count = count + 1;
+        }
         
         return cell;
     }
+ 
+/*
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 78;
+}
+*/
     
     
 //    if (cell == nil) {

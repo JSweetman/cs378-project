@@ -9,12 +9,18 @@
 #import "HappeningViewController.h"
 #import "IndivCDViewController.h"
 #import <Parse/Parse.h>
+#import "SimpleTableCell.h"
 
 @interface HappeningViewController ()
 @property (strong, nonatomic) NSMutableArray *DataModelList;
 @end
 
 @implementation HappeningViewController
+{
+    NSArray *tableData;
+    NSArray *thumbnails;
+}
+
 
 -(id)initWithCoder:(NSCoder *)aCoder {
     self = [super initWithCoder:aCoder];
@@ -31,6 +37,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Initialize table data
+    tableData = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
+    
+    // Initialize thumbnails
+    thumbnails = [NSArray arrayWithObjects:@"egg_benedict.jpg", @"mushroom_risotto.jpg", @"full_breakfast.jpg", @"hamburger.jpg", @"ham_and_egg_sandwich.jpg", @"creme_brelee.jpg", @"white_chocolate_donut.jpg", @"starbucks_coffee.jpg", @"vegetable_curry.jpg", @"instant_noodle_with_egg.jpg", @"noodle_with_bbq_pork.jpg", @"japanese_noodle_with_pork.jpg", @"green_tea.jpg", @"thai_shrimp_cake.jpg", @"angry_birds_cake.jpg", @"ham_and_cheese_panini.jpg", nil];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"SimpleTableCell" bundle: [NSBundle mainBundle]]
+         forCellReuseIdentifier:@"SimpleTableCell"];
     
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation addUniqueObject:@"Food" forKey:@"channels"];
@@ -162,23 +177,58 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellnum"];
+    static NSString *simpleTableId = @"SimpleTableCell";
+    SimpleTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableId];
+    
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellnum"];
+        cell = (SimpleTableCell*)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableId];
     }
     
     DataModel* hi = nil;
+    if (tableView == self.tableView)
+    {
+        NSLog(@"in forcell tableview");
+        
+        // Configure the cell...
+        hi = [self.nowList objectAtIndex:indexPath.row];
+        NSLog(@"event hi is %@", hi.event);
+        cell.eventLabel.text = hi.event;
+        cell.timeLabel.text = hi.pickedTime;
+        NSLog(@"event is %@", cell.eventLabel.text);
+        NSLog(@"tiem  is %@", cell.timeLabel.text);
+        int count = 0;
+        for (NSString *foodSample in tableData)
+        {
+            if ([[foodSample lowercaseString] containsString:[hi.food lowercaseString]])
+            {
+                NSLog (@"found it\n");
+                NSLog(@"count is %d", count);
+                cell.thumbNailImageView.image = [UIImage imageNamed:[thumbnails objectAtIndex:count]];
+                return cell;
+            }
+            count = count + 1;
+        }
+        //cell.textLabel.text = hi.event;
+        //cell.detailTextLabel.text = hi.where;
+        //cell.thumbNailImageView.image = [UIImage imageNamed:[thumbnails objectAtIndex:count]];
+        
+    }
     
-        
-    // Configure the cell...
-    hi = [self.nowList objectAtIndex:indexPath.row];
-    cell.textLabel.text = hi.event;
-    cell.detailTextLabel.text = hi.where;
-        
     return cell;
-    
 }
+
+- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath
+{
+    DataModel *dm = [[DataModel alloc] init];
+    
+    dm = [self.nowList objectAtIndex: indexPath.row];
+        
+    [self performSegueWithIdentifier: @"HappeningDetails" sender: self];
+        
+    NSLog(@"Default Display Controller");
+}
+    
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
