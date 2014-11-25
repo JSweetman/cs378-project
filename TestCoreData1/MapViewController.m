@@ -14,8 +14,8 @@
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
-@property (nonatomic, strong) CLGeocoder *geocoder;
-@property (nonatomic, strong) MKReverseGeocoder *reverseGeocoder;
+@property (nonatomic, strong) CLGeocoder *reverseGeocoder;
+
 
 @property (nonatomic, strong) CLPlacemark *placemark;
 
@@ -134,7 +134,7 @@
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    
+    NSLog(@"in didupdateUser");
     //Get coordinates
     CLLocationCoordinate2D myLocation = [userLocation coordinate];
     
@@ -145,8 +145,55 @@
     //Show our location
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
     
+    
+    
     //MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
     //[self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+}
+
+- (void)reverseGeocode:(CLLocation *)location {
+    CLGeocoder *reverseGeocoder = [[CLGeocoder alloc] init];
+    [reverseGeocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        NSLog(@"Finding address");
+        if (error) {
+            NSLog(@"Error %@", error.description);
+        } else {
+            self.placemark = [placemarks lastObject];
+            self.addressLabel.text = [NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
+                                      _placemark.subThoroughfare, _placemark.thoroughfare,
+                                      _placemark.postalCode, _placemark.locality,
+                                      _placemark.administrativeArea,
+                                      _placemark.country];
+            //[self geocodeAddressString: self.addressLabel.text];
+            
+            //[self geocodeAddressString: @"1 Infinite Loop, Cupertino, CA 95014"];
+        }
+    }];
+    
+}
+
+-(CLLocationCoordinate2D)geocodeAddressString:(NSString*) myStringLocation{
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    __block CLLocationCoordinate2D center;
+    
+    [geocoder geocodeAddressString:myStringLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (error) {
+            NSLog(@"%@", error);
+        }
+        else
+        {
+            CLPlacemark *placemark = [placemarks lastObject];
+            MKCoordinateRegion region;
+            region.center.latitude = placemark.location.coordinate.latitude;
+            region.center.longitude = placemark.location.coordinate.longitude;
+            //center.latitude = placemark.location.coordinate.latitude;
+            //center.longitude = placemark.location.coordinate.longitude;
+            NSLog(@"Latitude is %@", [NSString stringWithFormat:@"%f", region.center.latitude]);
+            }
+    }];
+    
+    
+    return center;
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -160,8 +207,10 @@
     
     
     self.currentLocation = newLocation;
+    [self reverseGeocode:self.currentLocation];
+        /*
     [self.geocoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        
+     
         NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
         if (error == nil) {
             NSLog(@"here");
@@ -175,6 +224,7 @@
             NSLog(@"%@", error.debugDescription);
         }
     } ];
+     */
 }
 
 
