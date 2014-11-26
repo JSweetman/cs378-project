@@ -29,6 +29,9 @@
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UISearchDisplayController *searchController;
 @property (nonatomic, strong) NSArray *searchResults;
+@property (nonatomic, strong) NSMutableArray *days;
+@property (nonatomic, strong) NSMutableDictionary *groupedEvents;
+
 //@property (nonatomic, strong) NSMutableArray *searchResults;
 @end
 
@@ -38,6 +41,7 @@
 {
     NSArray *tableData;
     NSArray *thumbnails;
+    
 }
 
 -(id)initWithCoder:(NSCoder *)aCoder {
@@ -56,6 +60,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     // Initialize table data
     tableData = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
     
@@ -113,7 +119,7 @@
     [super viewDidAppear:animated];
     
     [self loadModelData];
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -142,19 +148,13 @@
 {
     
     NSDate *current = [NSDate date];
-    //get current date as string
-    //NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    //[dateFormat setDateFormat:@"MM-dd-yyyy"];
-    //NSString *theDate = [dateFormat stringFromDate:current];
     
     NSString *theDate = [self getStringfromDate:current];
     NSLog(@"the date is %@", theDate);
     //convert date string back to NSDATE
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
-    //NSDate *dateFromString = [[NSDate alloc] init];
-    // voila!
-    //dateFromString = [dateFormatter dateFromString:theDate];
+    
     NSDate *dateFromString = [self getDateFromString:theDate];
     
     NSDateFormatter *hourFormat = [[NSDateFormatter alloc] init];
@@ -173,7 +173,7 @@
     
     [query addAscendingOrder:@"pickedDate"];
     [query addAscendingOrder:@"pickedTime"];
-    //[query orderByAscending:@"pickedTime"];
+    
     NSArray *parse_list = [query findObjects];
     
     for (PFObject *obj in parse_list) {
@@ -200,41 +200,10 @@
         }
         
     }
+    [self groupEventsIntoDays];
     for (DataModel *dm in self.DataModelList) {
         NSLog(@"object name for loop name: %@", dm.event);
     }
-    /*
-     CDAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-     NSManagedObjectContext *context = appDelegate.managedObjectContext;
-     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Contact" inManagedObjectContext:context];
-     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-     [request setEntity:entityDescription];
-     
-     // LOOK
-     //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(name = %@)", _d1.name];    [request setPredicate:predicate];
-     
-     // Fetch (read) the data
-     NSError *error;
-     NSArray *objects = [context executeFetchRequest:request error:&error];
-     self.DataModelList = [NSMutableArray new];
-     
-     if ([objects count] == 0) {
-     NSLog(@"No Matches");
-     } else {
-     NSManagedObject *item = nil;
-     //LOOK
-     for (int i = 0; i < [objects count]; i++) {
-     item = objects[i];
-     DataModel *dm = [[DataModel alloc] init];
-     dm.event = [item valueForKey:@"event"];
-     dm.where = [item valueForKey:@"where"];
-     dm.time =[item valueForKey:@"time"];
-     dm.food =[item valueForKey:@"food"];
-     [self.DataModelList addObject: dm];
-     }
-     }
-     
-     */
     
 }
 
@@ -242,10 +211,17 @@
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath
 {
     DataModel *dm = [[DataModel alloc] init];
-    
+    //NSInteger rowIndex = indexPath.section+indexPath.row;
+    //NSIndexPath *selectedIndex= [self.tableView indexPathForSelectedRow];
     //if (tableView == self.searchDisplayController.searchResultsTableView) {
-      if (tableView == self.searchController.searchResultsTableView) {
-        dm = [self.searchResults objectAtIndex: self.searchDisplayController.searchResultsTableView.indexPathForSelectedRow.row];
+    if (tableView == self.searchController.searchResultsTableView) {
+        NSIndexPath *selectedIndex= [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+        NSLog(@" indexPath row in didSelect %d", selectedIndex.row);
+        NSLog(@" indexPath section %d",selectedIndex.section);
+          //NSString *date = [self.days objectAtIndex:selectedIndex.section];
+          //dm = [((NSMutableArray*)[self.groupedEvents objectForKey:date]) objectAtIndex:selectedIndex.row];
+        dm = [self.searchResults objectAtIndex: selectedIndex.row];
+        //dm = [self.searchResults objectAtIndex: self.searchDisplayController.searchResultsTableView.indexPathForSelectedRow.row];
         
         [self performSegueWithIdentifier: @"Details" sender:self];
         
@@ -253,9 +229,13 @@
     }
     
     else {
-        
-        dm = [self.DataModelList objectAtIndex: indexPath.row];
-        
+        NSIndexPath *selectedIndex= [self.tableView indexPathForSelectedRow];
+        NSLog(@"//////////////////////////////////////////////////////");
+        NSLog(@" indexPath row %d", selectedIndex.row);
+        NSLog(@" indexPath section %d",selectedIndex.section);
+        //dm = [self.DataModelList objectAtIndex: indexPath.row];
+        NSString *date = [self.days objectAtIndex:indexPath.section];
+        [((NSMutableArray*)[self.groupedEvents objectForKey:date]) objectAtIndex:selectedIndex.row];
         [self performSegueWithIdentifier: @"Details" sender: self];
         
         NSLog(@"Default Display Controller");
@@ -269,36 +249,35 @@
     if ([[segue identifier] isEqualToString:@"Details"]){
          NSLog(@"I'm detail\n");
         IndivCDViewController *vc = segue.destinationViewController;
-        //NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-        //DataModel *contactToPass = self.DataModelList[path.row];
-        //vc.hey = contactToPass;
-        
+        //[[globalArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]
         if (self.searchController.active) {
             NSLog(@"Search Display Controller1");
-            DataModel *contactToPass = [self.searchResults objectAtIndex: self.searchDisplayController.searchResultsTableView.indexPathForSelectedRow.row];
-            //DataModel *contactToPass = self.searchResults[path.row];
-            vc.hey = contactToPass;
+         
+            NSIndexPath *selectedIndex= [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            NSLog(@" indexPath row %d", selectedIndex.row);
+            NSLog(@" indexPath section %d",selectedIndex.section);
+            DataModel *contactToPass = [self.searchResults objectAtIndex: selectedIndex.row];
             
+            //NSIndexPath *selectedIndex= [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            //NSString *date = [self.days objectAtIndex:selectedIndex.section];
+            //DataModel *contactToPass = [((NSMutableArray*)[self.groupedEvents objectForKey:date]) objectAtIndex:selectedIndex.row];
+            vc.hey = contactToPass;
+        //objectAtIndex: [self.tableView indexPathForSelectedRow].section]
         } else {
             NSLog(@"Default Display Controller1");
-            DataModel *contactToPass = [self.DataModelList objectAtIndex: self.tableView.indexPathForSelectedRow.row];
+            
+            NSIndexPath *selectedIndex= [self.tableView indexPathForSelectedRow];
+            
+            //NSIndexPath *indexPath = (NSIndexPath *)sender;
+            NSString *date = [self.days objectAtIndex:selectedIndex.section];
+            NSLog(@"//////////////////////////////////////////////////////");
+            DataModel *contactToPass = [((NSMutableArray*)[self.groupedEvents objectForKey:date]) objectAtIndex:selectedIndex.row];
+             //= [self.DataModelList objectAtIndex: selectedIndex.row];
+            
+            //DataModel *contactToPass = [self.DataModelList objectAtIndex: indexPath.row];
             vc.hey = contactToPass;
         }
-        /*
-        if (sender != self.tableView)
-        {
-            NSIndexPath *path = [self.tableView indexPathForSelectedRow];
-            DataModel *contactToPass = self.DataModelList[path.row];
-            vc.hey = contactToPass;
-        }
-        else
-        {
         
-            NSIndexPath *path = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-            DataModel *contactToPass = self.searchResults[path.row];
-            vc.hey = contactToPass;
-        }
-         */
     }
     
 }
@@ -318,31 +297,10 @@
         }
     }
     
-    //NSString *predicateText = @"event";
-    //NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"event CONTAINS[c] %@", searchTerm];
-    
-    //PFQuery *query = [PFQuery queryWithClassName: @"FoodEvent" predicate: resultPredicate];
-    
-    //self.searchResults = (NSMutableArray*)[self.DataModelList filteredArrayUsingPredicate:resultPredicate];
-    
-//    PFQuery *query = [PFQuery queryWithClassName:@"FoodEvent"];
-    //[query whereKeyExists:@"event"];
-    //[query whereKeyExists:@"where"];
-    //[query whereKeyExists:@"time"];
-    //[query whereKeyExists:@"food"];
-//    [query whereKey:@"event" containsString:searchTerm];
-    //[query whereKey:@"where" containsString:searchTerm];
-    //[query whereKey:@"time" containsString:searchTerm];
-    //[query whereKey:@"food" containsString:searchTerm];
-    
-    //[query findObjectsInBackgroundWithTarget:self selector:@selector(callbackWithResult:error:)];
-    
-//    NSArray *results  = [query findObjects];
     
     NSLog(@"The results are : %@", newResults);
     NSLog(@"The count is %u", newResults.count);
     
-    //This is breaking it.
     
     self.searchResults = newResults;
      
@@ -351,19 +309,7 @@
     [self filterResults:searchString];
     return YES;
 }
-//Added for search2
-/*
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
-{
-    [self filterContentForSearchText:searchString
-                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
-                                      objectAtIndex:[self.searchDisplayController.searchBar
-                                                     selectedScopeButtonIndex]]];
-    
-    return YES;
-}
- */
- 
+
 
 //Search1
 - (void)callbackWithResult:(NSArray *)foundit error:(NSError *)error
@@ -371,110 +317,143 @@
     if(!error) {
 //        [self.searchResults removeAllObjects];
 //        [self.searchResults addObjectsFromArray:foundit];
-        [self.searchDisplayController.searchResultsTableView reloadData];
+//        [self.searchDisplayController.searchResultsTableView reloadData];
     }
 }
 
 
 
 // UiTableViewController data source and delegate methods
-
+/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
     return 1;
 }
-
-/*
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        return self.searchResults.count;
-        
-    } else {
-        return self.DataModelList.count;
-    }
-}
 */
-// Added for search
+
+
+- (void)groupEventsIntoDays
+{
+    self.days = [NSMutableArray new];
+    self.groupedEvents = [NSMutableDictionary new];
+    for (DataModel *event in self.DataModelList)
+    {
+        
+        if (![self.days containsObject:event.pickedDate])
+        {
+            NSLog(@"I'm in group");
+            NSLog(@"object is %@", event.pickedDate);
+            [self.days addObject: event.pickedDate];
+            NSLog(@"days object is %@", self.days[0]);
+            [self.groupedEvents setObject:[NSMutableArray arrayWithObject:event] forKey:event.pickedDate];
+        }
+        else
+        {
+            [((NSMutableArray*)[self.groupedEvents objectForKey:event.pickedDate]) addObject:event];
+        }
+    }
+    
+    //self.days = [[self.days sortedArrayUsingSelector:@selector(compare:)] mutableCopy];
+    
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    NSLog(@"days count is %d\n", [self.days count]);
+    if (tableView == self.tableView){
+        return [self.days count];
+    }
+    else{
+        return 1;
+    }
+        
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  
+    
+    
     //Added for search
     if (tableView == self.tableView) {
-        //if (tableView == self.searchDisplayController.searchResultsTableView) {
-        //NSLog(@"Prase Count: %ld", (unsigned long)[self.objects count]);
-        return [self.DataModelList count];
+        
+        NSString *sectionTitle = [self.days objectAtIndex:section];
+        NSArray *sectionDate = [self.groupedEvents objectForKey: sectionTitle];
+        return [sectionDate count];
+        //return [self.DataModelList count];
         
     } else {
         NSLog(@"Search Count: %ld", (unsigned long)[self.searchResults count]);
+        NSLog(@"number of search rows %d", self.searchResults.count);
         return self.searchResults.count;
     }
-   
+    
     // Return the number of rows in the section.
     return [self.DataModelList count];
 }
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    //if (tableView == self.searchDisplayController.searchResultsTableView){
+        
+     //   return nil;
+        
+    //}
+    // create the parent view that will hold header Label
+    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 22.0)];
+    
+    UIImage *image = [UIImage imageNamed:@"Background_320x22"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    
+    // create the button object
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    
+    headerLabel.backgroundColor = [UIColor orangeColor];
+    headerLabel.opaque = NO;
+    headerLabel.textColor = [UIColor whiteColor];
+    headerLabel.highlightedTextColor = [UIColor blueColor];
+    headerLabel.font = [UIFont boldSystemFontOfSize:16];
+    headerLabel.frame = CGRectMake(0.0, 0.0, 320.0, 22.0);
+    NSString *dateAsString = [self.days objectAtIndex:section];
+    if (tableView == self.tableView)
+    {
+        [headerLabel setText:dateAsString];    //headerLabel.text = @"My Header"; // i.e. array element
+    }
+    else
+    {
+       [headerLabel setText: @"Search Results"];
+    }
+    [customView addSubview:imageView];
+    [customView addSubview:headerLabel];
+    
+    return customView;
+}
 
-//NO
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid" forIndexPath:indexPath];
-    // Configure the cell...
-    DataModel* hi = [self.DataModelList objectAtIndex:indexPath.row];
-    cell.textLabel.text = hi.event;
-    cell.detailTextLabel.text = hi.where;
-    
-    return cell;
-    
-    
-    
-    
+    return 22.0;
 }
-*/
-//Search2
-/*
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    //[self.searchResults removeAllObjects];
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"event contains[c] %@", searchText];
-    self.searchResults = [self.DataModelList filteredArrayUsingPredicate:resultPredicate];
+    
+    NSLog(@"section title is %@",[self.days objectAtIndex:section] );
+    return [self.days objectAtIndex:section];
 }
- */
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     
     //UITableViewCell
+    //NSArray *sectionDate = [groupedEvents objectForKey:sectionTitle];
+    NSString *date = [self.days objectAtIndex:indexPath.section];
+    DataModel *event;
+    //NSLog(@"in cell date is %@", date);
     
+    //DataModel *event = [self.groupedEvents objectForKey: date];
+    
+    //NSLog(@"Event is %@\n", event.event);
     static NSString *simpleTableId = @"SimpleTableCell";
     SimpleTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableId];
-    /*
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellid"];
-    }
-    
-    //DataModel *dm = nil;
-    DataModel* hi = nil;
-    
-    
-     
-    // Display recipe in the table cell
-    
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"searchCell"];
-        hi = [self.searchResults objectAtIndex:indexPath.row];
-        cell.textLabel.text = hi.event;
-        cell.detailTextLabel.text = hi.where;
-    }
-    else {
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cellid"];
-        hi = [self.DataModelList objectAtIndex:indexPath.row];
-        cell.textLabel.text = hi.event;
-        cell.detailTextLabel.text = hi.where;
-    }
-    
-    return cell;
-   */
     
     
     //Search1
@@ -483,26 +462,37 @@
          cell = (SimpleTableCell*)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableId];
      }
     
-    DataModel* hi = nil;
+    //DataModel* hi = nil;
     if (tableView == self.tableView) {
         NSLog(@"in forcell tableview");
-        SimpleTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableId];
+        //SimpleTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableId];
         
         // Configure the cell...
-        hi = [self.DataModelList objectAtIndex:indexPath.row];
-        NSLog(@"event hi is %@", hi.event);
-        cell.eventLabel.text = hi.event;
-        cell.timeLabel.text = hi.pickedTime;
-        NSLog(@"event is %@", cell.eventLabel.text);
-        NSLog(@"tiem  is %@", cell.timeLabel.text);
+        //hi = [self.DataModelList objectAtIndex:indexPath.row];
+        //NSLog(@"event hi is %@", hi.event);
+        //cell.eventLabel.text = hi.event;
+        //cell.timeLabel.text = hi.pickedTime;
+        
+        
+        //NSLog(@"event is %@", cell.eventLabel.text);
+        //NSLog(@"tiem  is %@", cell.timeLabel.text);
+        event = [((NSMutableArray*)[self.groupedEvents objectForKey:date]) objectAtIndex:indexPath.row];
+        
+        cell.eventLabel.text = event.event;
+        cell.timeLabel.text = event.pickedTime;
+        cell.whereLabel.text = event.where;
+        NSLog(@"//////////////////////////////////////////////////////");
         int count = 0;
         for (NSString *foodSample in tableData)
         {
-            if ([[foodSample lowercaseString] containsString:[hi.food lowercaseString]])
+            if ([[foodSample lowercaseString] containsString:[event.food lowercaseString]])
             {
                 NSLog (@"found it\n");
                 NSLog(@"count is %d", count);
                 cell.thumbNailImageView.image = [UIImage imageNamed:[thumbnails objectAtIndex:count]];
+                NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForCell:cell];
+                NSLog(@" indexPath row for LIST %@ in cell is %d", event.event, indexPath.row);
+                NSLog(@" indexPath section for LIST %@ in cell is  %d",event.event, indexPath.section);
                 return cell;
             }
                 count = count + 1;
@@ -512,22 +502,35 @@
         //cell.thumbNailImageView.image = [UIImage imageNamed:[thumbnails objectAtIndex:count]];
         return cell;
     }
+ 
+
+   
     else {
         //UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
-        SimpleTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableId];
-        hi = [self.searchResults objectAtIndex:indexPath.row];
+        
+        //[self.searchDisplayController.searchResultsTableView reloadData];
+        //SimpleTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:simpleTableId];
+        event = [self.searchResults objectAtIndex:indexPath.row];
         //cell.textLabel.text = hi.event;
         //cell.detailTextLabel.text = hi.where;
-        cell.eventLabel.text = hi.event;
-        cell.timeLabel.text = hi.pickedTime;
+        
+        //NSLog(@"index path for %@ is %d", event.event, indexPath.row);
+        
+        NSLog(@"//////////////////////////////////////////////////////");
+        cell.eventLabel.text = event.event;
+        cell.whereLabel.text = event.event;
+        cell.timeLabel.text = event.pickedTime;
         int count = 0;
         for (NSString *foodSample in tableData)
         {
-            if ([[foodSample lowercaseString] containsString:[hi.food lowercaseString]])
+            if ([[foodSample lowercaseString] containsString:[event.food lowercaseString]])
             {
                 NSLog (@"found it\n");
                 NSLog(@"count is %d", count);
                 cell.thumbNailImageView.image = [UIImage imageNamed:[thumbnails objectAtIndex:count]];
+                NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForCell:cell];
+                NSLog(@" indexPath row for event %@ in cell is %d", event.event, indexPath.row);
+                NSLog(@" indexPath section in cell %@ in cell is  %d",event.event, indexPath.section);
                 return cell;
             }
             count = count + 1;
@@ -535,14 +538,16 @@
         
         return cell;
     }
- 
-/*
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 78;
+
 }
-*/
-    
-    
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 75;
+}
+
+
 //    if (cell == nil) {
 //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellid"];
 // 
@@ -562,7 +567,7 @@
     
     
     
-}
+//}
 
 
 /*

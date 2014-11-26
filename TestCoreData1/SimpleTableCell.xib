@@ -14,29 +14,37 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnM-Ge-Q5c">
-                        <rect key="frame" x="92" y="22" width="205" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="101" y="37" width="205" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="highlightedColor" red="0.050980396570000003" green="0.023529414089999999" blue="0.96862751250000001" alpha="1" colorSpace="deviceRGB"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPM-XW-i2r">
-                        <rect key="frame" x="92" y="4" width="220" height="21"/>
+                        <rect key="frame" x="101" y="4" width="205" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="highlightedColor" red="0.050980396570000003" green="0.023529414089999999" blue="0.96862751250000001" alpha="1" colorSpace="deviceRGB"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W19-KQ-rea">
-                        <rect key="frame" x="8" y="3" width="82" height="43"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0LG-Dh-kNV"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Where" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcP-fm-1AX">
+                        <rect key="frame" x="101" y="21" width="205" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PZP-jy-8SB">
+                        <rect key="frame" x="8" y="8" width="85" height="45"/>
                     </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="SimpleTableCell" destination="HcN-T2-oQe" id="6ei-5C-TdB"/>
                 <outlet property="eventLabel" destination="gPM-XW-i2r" id="bcs-Rh-fny"/>
-                <outlet property="thumbNailImageView" destination="W19-KQ-rea" id="V4s-tf-S9D"/>
+                <outlet property="thumbNailImageView" destination="PZP-jy-8SB" id="38i-0U-hQx"/>
                 <outlet property="timeLabel" destination="gnM-Ge-Q5c" id="RJC-Ca-pnd"/>
+                <outlet property="whereLabel" destination="lcP-fm-1AX" id="VPx-6Y-KnG"/>
             </connections>
-            <point key="canvasLocation" x="369" y="152"/>
+            <point key="canvasLocation" x="369" y="144"/>
         </tableViewCell>
     </objects>
 </document>

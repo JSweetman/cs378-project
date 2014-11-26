@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SimpleTableCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *whereLabel;
 
 @property(nonatomic,retain) IBOutlet UITableViewCell *SimpleTableCell;
 @property (nonatomic, weak) IBOutlet UILabel *eventLabel;
