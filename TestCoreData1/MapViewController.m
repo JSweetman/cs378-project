@@ -9,6 +9,7 @@
 #import "MapViewController.h"
 #import "Annotation.h"
 
+
 @interface MapViewController()
 
 
@@ -24,22 +25,28 @@
 @property (nonatomic, assign) BOOL mapPinsPlaced;
 @property (nonatomic, assign) BOOL mapPannedSinceLocationUpdate;
 @property (nonatomic, assign) CLLocationAccuracy filterDistance;
+
+
+
 @end
 
 @implementation MapViewController
 @synthesize mapView;
 #define THE_SPAN 0.01f;
 
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+/*
+-(id)initWithCoder:(NSCoder *)aCoder {
+    self = [super initWithCoder:aCoder];
     if (self) {
+        // Customize the table
         
-        // Custom initialization
+        // The className to query on
+        self.parseClassName = @"FoodEvent";
+        [self loadModelData];
     }
     return self;
 }
+*/
 
 - (void)viewDidLoad
 {
@@ -61,6 +68,9 @@
     [mapView setMapType:MKMapTypeStandard];
     [mapView setZoomEnabled:YES];
     [mapView setScrollEnabled:YES];
+    
+    
+    
     
     /*
     CLLocationManager * locationManager = [[CLLocationManager alloc] init];
@@ -115,7 +125,7 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
     
-    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.distanceFilter = 50;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [self.locationManager startUpdatingLocation];
     NSLog(@"%@", [self deviceLocation]);
@@ -124,12 +134,88 @@
     MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
     region.center.latitude = self.locationManager.location.coordinate.latitude;
     region.center.longitude = self.locationManager.location.coordinate.longitude;
-    region.span.longitudeDelta = 0.005f;
-    region.span.longitudeDelta = 0.005f;
+    region.span.longitudeDelta = 0.003f;
+    region.span.longitudeDelta = 0.003f;
     [mapView setRegion:region animated:YES];
     NSString* test = [self deviceLat];
     NSLog(@"Latitude test is %@", test);
+    [self loadModelData];
     
+}
+
+- (void)loadModelData
+{
+    self.nearLocations = [NSMutableArray new];
+    self.DataModelList = [NSMutableArray new];
+    self.nearMeList = [NSMutableArray new];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"FoodEvent"];
+    [query addAscendingOrder:@"pickedDate"];
+    [query addAscendingOrder:@"pickedTime"];
+    //[query orderByAscending:@"pickedTime"];
+    NSArray *parse_list = [query findObjects];
+    
+    for (PFObject *obj in parse_list) {
+        DataModel *dm = [[DataModel alloc] init];
+        dm.event = obj[@"event"];
+        //NSLog(@"obj name: %@", obj[@"name"]);
+        dm.where = obj[@"where"];
+        dm.pickedTime = obj[@"pickedTime"];
+        dm.pickedDate = obj[@"pickedDate"];
+        dm.food = obj[@"food"];
+        //dm.date =obj[@"date"];
+        [self.DataModelList addObject:dm];
+        
+    }
+    
+    
+    NSDate *current = [NSDate date];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    
+    //[[NSDate alloc] init];
+    
+    
+    NSString *theDate = [dateFormat stringFromDate:current];
+    
+    NSDateFormatter *hourFormat = [[NSDateFormatter alloc] init];
+    [hourFormat setDateFormat:@"HH"];
+    NSDateFormatter *minuteFormat = [[NSDateFormatter alloc] init];
+    [minuteFormat setDateFormat:@"mm"];
+    NSString *theHour = [hourFormat stringFromDate:current];
+    NSString *theMinute = [minuteFormat stringFromDate:current];
+    NSLog(@"the hour is %@\n", theHour);
+    int valueHour = [theHour intValue];
+    int valueMinute = [theMinute intValue];
+    int numEvents = [self.DataModelList count];
+    
+    
+    for (int i = 0; i < numEvents; i++) {
+        DataModel *dm = [[DataModel alloc] init];
+        dm = _DataModelList[i];
+        NSString *str = dm.pickedTime;
+        NSString *eventDate = dm.pickedDate;
+        str = [str substringToIndex: 2];
+        //NSLog(@"the event is %@\n", dm.event);
+        int testedHour = [str intValue];
+        //if ([str isEqualToString: theHour])
+        if ([eventDate isEqualToString:theDate] && (testedHour == valueHour || testedHour == (valueHour + 1)))
+        {
+            NSLog(@"///////////////////////");
+            [_nearLocations addObject:dm];
+            //NSLog(@"today events are %@", dm.event);
+            NSLog(@"today events are %@", [[self.nearLocations objectAtIndex:0]event]);
+        }
+        //NSLog(@"today events outside if are %@", [[self.todayEvents objectAtIndex:0]event]);
+        //NSLog(@"today count is %d", [self.nearLocations count]);
+    }
+    //NSLog(@"today count is %d", [self.nearLocations count]);
+    NSLog(@"********************************");
+    //CLLocationCoordinate2D test = [self geocodeAddressString:[[self.nearLocations objectAtIndex:0]where]];
+    //NSLog(@"TEST latitude is %f and longitude is %f", test.latitude, test.longitude);
+    //[self geocodeAddressString: @"950 West 5th St, Austin, TX 78703"];
+    NSLog(@"++++++++++++++++++++++++++++++++++");
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
@@ -137,15 +223,25 @@
     NSLog(@"in didupdateUser");
     //Get coordinates
     CLLocationCoordinate2D myLocation = [userLocation coordinate];
+    CLLocation* user = [[CLLocation alloc] initWithLatitude:myLocation.latitude longitude:myLocation.longitude];
     
+    //Define Zoom regionu
     
-    //Define Zoom region
-    
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(myLocation, 1500, 1500);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(myLocation, 500, 500);
     //Show our location
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
     
+    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+    point.coordinate = userLocation.coordinate;
+    point.title = @"Where am I?";
+    point.subtitle = @"I'm here!!!";
+    [self.mapView addAnnotation:point];
+    //[self reverseGeocode:user];
     
+    CLLocationAccuracy accuracy = 1500;
+    [self queryForAllEventsNearLocation:user withNearbyDistance:accuracy];
+    
+    [self reverseGeocode:user];
     
     //MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
     //[self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
@@ -165,16 +261,17 @@
                                       _placemark.administrativeArea,
                                       _placemark.country];
             //[self geocodeAddressString: self.addressLabel.text];
-            
+            //NSLog(@"//////////////////////////////");
             //[self geocodeAddressString: @"1 Infinite Loop, Cupertino, CA 95014"];
         }
     }];
     
 }
 
--(CLLocationCoordinate2D)geocodeAddressString:(NSString*) myStringLocation{
+-(CLLocationCoordinate2D)geocodeAddressString:(CLLocation *)currentLocation withNearbyDistance:(CLLocationAccuracy)nearbyDistance withAddress: (NSString*)myStringLocation{
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     __block CLLocationCoordinate2D center;
+    NSLog(@"Address is %@", myStringLocation);
     
     [geocoder geocodeAddressString:myStringLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         if (error) {
@@ -182,6 +279,7 @@
         }
         else
         {
+            NSLog(@"Address111 is %@", myStringLocation);
             CLPlacemark *placemark = [placemarks lastObject];
             MKCoordinateRegion region;
             region.center.latitude = placemark.location.coordinate.latitude;
@@ -189,13 +287,73 @@
             //center.latitude = placemark.location.coordinate.latitude;
             //center.longitude = placemark.location.coordinate.longitude;
             NSLog(@"Latitude is %@", [NSString stringWithFormat:@"%f", region.center.latitude]);
+            NSLog(@"Longitude is %@", [NSString stringWithFormat:@"%f", region.center.longitude]);
+            
+            CLLocation *eventLatLog = [[CLLocation alloc] initWithLatitude:region.center.latitude longitude:region.center.longitude];
+            CLLocationDistance distanceLocMeters = [currentLocation distanceFromLocation:eventLatLog];
+            NSLog(@"event is distance is %f", distanceLocMeters);
+            if (distanceLocMeters <= nearbyDistance)
+            {
+                int numEventsNearMe = [self.nearLocations count];
+                for (DataModel* event in self.nearLocations)
+                {
+                    //DataModel *event = [[DataModel alloc] init];
+                    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+                    if (event.where == myStringLocation)
+                    {
+                        point.coordinate = eventLatLog.coordinate;
+                        point.title = event.event;
+                        point.subtitle = event.where;
+                        [self.mapView addAnnotation:point];
+                    }
+        
+                }
             }
+        }
     }];
     
     
     return center;
 }
+/*
 
+-(CLLocationCoordinate2D)locateAddress:(NSString*) address {
+    
+    NSString *location = address;
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:location
+                 completionHandler:^(NSArray* placemarks, NSError* error){
+                     if (placemarks && placemarks.count > 0) {
+                         CLPlacemark *topResult = [placemarks objectAtIndex:0];
+                         MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
+                         
+                         CLLocationCoordinate2D coordinate;
+                         coordinate.latitude = topResult.location.coordinate.latitude;
+                         coordinate.longitude = topResult.location.coordinate.longitude;
+                         
+                         MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+                         point.coordinate = placemark.coordinate;
+                         point.title = @"MK Software Solutions LLC";
+                         point.subtitle =@"test";
+                         
+                         NSLog(@"Lat: %f, Long: %f", coordinate.latitude, coordinate.longitude);
+                         MKCoordinateRegion region;
+                         region.center = [(CLCircularRegion *)placemark.region center];
+                         MKCoordinateSpan span;
+                         span.latitudeDelta=.005;
+                         span.longitudeDelta=.005;
+                         region.span = span;
+                         [self.mapView setRegion:region animated:YES];
+                         
+                         
+                         [self.mapView addAnnotation:point];
+                     }
+                 }
+     ];
+}
+
+*/
+/*
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
           fromLocation:(CLLocation *)oldLocation {
@@ -208,7 +366,7 @@
     
     self.currentLocation = newLocation;
     [self reverseGeocode:self.currentLocation];
-        /*
+ 
     [self.geocoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
      
         NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
@@ -224,9 +382,9 @@
             NSLog(@"%@", error.debugDescription);
         }
     } ];
-     */
+    
 }
-
+*/
 
 - (NSString *)deviceLocation {
     return [NSString stringWithFormat:@"latitude: %f longitude: %f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
@@ -288,21 +446,95 @@
     }
     return _locationManager;
 }
-
 /*
+- (IBAction)addToMap:(id)sender{
+    
+    __block NSArray *annotations;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        annotations = [self queryForAllEventsNearLocation:u withNearbyDistance:<#(CLLocationAccuracy)#>];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            
+            [self.mapView addAnnotations:annotations];
+            
+        });
+    });
+    
+}
+
+- (NSMutableArray *)parseJSONCities{
+    
+    NSMutableArray *retval = [[NSMutableArray alloc]init];
+    NSString *jsonPath = [[NSBundle mainBundle] pathForResource:@"capitals"
+                                                         ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:jsonPath];
+    NSError *error = nil;
+    NSArray *json = [NSJSONSerialization JSONObjectWithData:data
+                                                    options:kNilOptions
+                                                      error:&error];
+    
+    
+}
+*/
 - (void)queryForAllEventsNearLocation:(CLLocation *)currentLocation withNearbyDistance:(CLLocationAccuracy)nearbyDistance {
-    PFQuery *query = [PFQuery queryWithClassName:PAWParsePostsClassName];
     
     if (currentLocation == nil) {
         NSLog(@"%s got a nil location!", __PRETTY_FUNCTION__);
     }
+    int numEvents = [self.nearLocations count];
+    NSLog(@"YYYYYYYYYYYYYYYYYYYYYYYYY");
+    //[self geocodeAddressString:[[self.nearLocations objectAtIndex:0]where]];
+    //NSLog(@"Address is %@", [[self.nearLocations objectAtIndex:0]where]);
+    NSLog(@"YYYYYYYYYYYYYYYYYYYYYYYYY");
     
-    // If no objects are loaded in memory, we look to the cache first to fill the table
-    // and then subsequently do a query against the network.
-    if ([self.allPosts count] == 0) {
-        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    for (int i = 0; i < numEvents; i++) {
+        //DataModel *event = [[DataModel alloc] init];
+        NSString* location = [[self.nearLocations objectAtIndex:i]where];
+        //[self queryForAllEventsNearLocation:user withNearbyDistance:accuracy];
+        [self geocodeAddressString:currentLocation withNearbyDistance:nearbyDistance withAddress:location];
+        //CLLocationCoordinate2D eventLocation = [self geocodeAddressString:[[self.nearLocations objectAtIndex:i]where]];
+        /*l
+        //NSLog(@"Latitude is %@", [NSString stringWithFormat:@"%f", region.center.latitude]);
+        NSLog(@"latitude is %f and longitude is %f", eventLocation.latitude, eventLocation.longitude);
+        CLLocation *eventLatLog = [[CLLocation alloc] initWithLatitude:eventLocation.latitude longitude:eventLocation.longitude];
+        CLLocationDistance distanceLocMeters = [currentLocation distanceFromLocation:eventLatLog];
+        NSLog(@"event is distance is %f", distanceLocMeters);
+        if (distanceLocMeters <= nearbyDistance)
+        {
+            [_nearMeList addObject:event];
+            NSLog(@"in query and list is %@", event.event);
+        }
+         */
     }
-    
+    /*
+    int numEventsNearMe = [self.nearMeList count];
+    for (int j = 0; j < numEventsNearMe; j++)
+    {
+        DataModel *event = [[DataModel alloc] init];
+        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+        CLLocationCoordinate2D eventLocation = [self geocodeAddressString:[[self.nearLocations objectAtIndex:j]where]];
+        NSLog(@"MMMmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+        CLLocation *eventLatLog = [[CLLocation alloc] initWithLatitude:eventLocation.latitude longitude:eventLocation.longitude];
+        //NSLog(@"lat is %d and long is %d", self.eventLatLog->latitude, self.eventLatLog->longitude);
+        point.coordinate = eventLatLog.coordinate;
+        point.title = event.event;
+        point.subtitle = event.where;
+        [self.mapView addAnnotation:point];
+    }
+     */
+}
+/*
+        JFMapAnnotation *temp = [[JFMapAnnotation alloc]init];
+        [temp setTitle:[record valueForKey:@"Capital"]];
+        [temp setSubtitle:[record valueForKey:@"Country"]];
+        [temp setCoordinate:CLLocationCoordinate2DMake([[record valueForKey:@"Latitude"]floatValue], [[record valueForKey:@"Longitude"]floatValue])];
+        [retval addObject:temp];
+  */
+
+/*
+    return retval;
     // Query for posts sort of kind of near our current location.
     PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
     [query whereKey:PAWParsePostLocationKey nearGeoPoint:point withinKilometers:PAWWallPostMaximumSearchDistance];

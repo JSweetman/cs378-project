@@ -13,13 +13,13 @@
 #import <Parse/Parse.h>
 #import "SimpleTableCell.h"
 
-@interface EventTableViewController ()
-@property (weak, nonatomic) IBOutlet UITableView* tableView;
-@property (strong, nonatomic) NSMutableArray *DataModelList;
+//@interface EventTableViewController ()
+//@property (weak, nonatomic) IBOutlet UITableView* tableView;
+//@property (strong, nonatomic) NSMutableArray *DataModelList;
 
 
 
-@end
+//@end
 
 
 @interface EventTableViewController() <UISearchDisplayDelegate, UISearchBarDelegate> {
@@ -43,6 +43,7 @@
     NSArray *thumbnails;
     
 }
+@synthesize DataModelList;
 
 -(id)initWithCoder:(NSCoder *)aCoder {
     self = [super initWithCoder:aCoder];
@@ -119,7 +120,7 @@
     [super viewDidAppear:animated];
     
     [self loadModelData];
-    //[self.tableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -216,8 +217,8 @@
     //if (tableView == self.searchDisplayController.searchResultsTableView) {
     if (tableView == self.searchController.searchResultsTableView) {
         NSIndexPath *selectedIndex= [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-        NSLog(@" indexPath row in didSelect %d", selectedIndex.row);
-        NSLog(@" indexPath section %d",selectedIndex.section);
+        NSLog(@" indexPath row in didSelect %d", indexPath.row);
+        NSLog(@" indexPath section %d",indexPath.section);
           //NSString *date = [self.days objectAtIndex:selectedIndex.section];
           //dm = [((NSMutableArray*)[self.groupedEvents objectForKey:date]) objectAtIndex:selectedIndex.row];
         dm = [self.searchResults objectAtIndex: selectedIndex.row];

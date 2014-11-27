@@ -13,7 +13,7 @@
 
 
 @interface EventTableViewController : PFQueryTableViewController <UITableViewDataSource, UITableViewDelegate>
-
-//@interface EventTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView* tableView;
+@property (strong, nonatomic) NSMutableArray *DataModelList;//@interface EventTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

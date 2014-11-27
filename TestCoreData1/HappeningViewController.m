@@ -12,7 +12,7 @@
 #import "SimpleTableCell.h"
 
 @interface HappeningViewController ()
-@property (strong, nonatomic) NSMutableArray *DataModelList;
+
 @end
 
 @implementation HappeningViewController
@@ -137,6 +137,8 @@
         if ([eventDate isEqualToString:theDate] && (testedHour == valueHour || testedHour == (valueHour + 1)))
         {
             [_nowList addObject:dm];
+            NSLog(@"//////////////////////////////////////////");
+             NSLog(@"today events outside if are %@", [[self.nowList objectAtIndex:0]event]);
         }
     }
 

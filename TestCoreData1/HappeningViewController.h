@@ -17,5 +17,5 @@
 
 @property DataModel *now;
 @property (strong, nonatomic) NSMutableArray *nowList;
-
+@property (strong, nonatomic) NSMutableArray *DataModelList;
 @end
