@@ -34,6 +34,15 @@
 		1A6CCD111A22CAE600E0869E /* white_chocolate_donut.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1A6CCD011A22CAE600E0869E /* white_chocolate_donut.jpg */; };
 		1A6CCD131A22CD1900E0869E /* SimpleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A6CCD121A22CD1900E0869E /* SimpleTableCell.xib */; };
 		1A6CCD161A22CECC00E0869E /* SimpleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6CCD151A22CECC00E0869E /* SimpleTableCell.m */; };
+		1A6CCD1E1A27C96300E0869E /* CoolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6CCD1D1A27C96300E0869E /* CoolButton.m */; };
+		1A6CCD221A27CB4700E0869E /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6CCD211A27CB4700E0869E /* Common.m */; };
+		1A6CCD2A1A27E0D000E0869E /* images-2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1A6CCD271A27E0D000E0869E /* images-2.jpeg */; };
+		1A6CCD2B1A27E0D000E0869E /* images-3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1A6CCD281A27E0D000E0869E /* images-3.jpeg */; };
+		1A6CCD2C1A27E0D000E0869E /* images-4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1A6CCD291A27E0D000E0869E /* images-4.jpeg */; };
+		1A6CCD3D1A27F10200E0869E /* images-5.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1A6CCD3B1A27F10200E0869E /* images-5.jpeg */; };
+		1A6CCD3E1A27F10200E0869E /* images-6.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1A6CCD3C1A27F10200E0869E /* images-6.jpeg */; };
+		1A6CCD451A27F12A00E0869E /* Unknown-3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1A6CCD411A27F12A00E0869E /* Unknown-3.jpeg */; };
+		1A6CCD461A27F12A00E0869E /* Unknown-4 in Resources */ = {isa = PBXBuildFile; fileRef = 1A6CCD421A27F12A00E0869E /* Unknown-4 */; };
 		1AAF94ED1A13EEC7009E57C7 /* EventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF94EC1A13EEC7009E57C7 /* EventTableViewController.m */; };
 		1AAF94F11A156914009E57C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AAF94F01A156914009E57C7 /* Main.storyboard */; };
 		1AE644BD1A15700D000D0EE7 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE644B91A15700D000D0EE7 /* Bolts.framework */; };
@@ -115,6 +124,17 @@
 		1A6CCD121A22CD1900E0869E /* SimpleTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleTableCell.xib; sourceTree = "<group>"; };
 		1A6CCD141A22CECC00E0869E /* SimpleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTableCell.h; sourceTree = "<group>"; };
 		1A6CCD151A22CECC00E0869E /* SimpleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTableCell.m; sourceTree = "<group>"; };
+		1A6CCD1C1A27C96300E0869E /* CoolButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoolButton.h; sourceTree = "<group>"; };
+		1A6CCD1D1A27C96300E0869E /* CoolButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoolButton.m; sourceTree = "<group>"; };
+		1A6CCD201A27CB4700E0869E /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		1A6CCD211A27CB4700E0869E /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		1A6CCD271A27E0D000E0869E /* images-2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "images-2.jpeg"; path = "../../../../../Downloads/images-2.jpeg"; sourceTree = "<group>"; };
+		1A6CCD281A27E0D000E0869E /* images-3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "images-3.jpeg"; path = "../../../../../Downloads/images-3.jpeg"; sourceTree = "<group>"; };
+		1A6CCD291A27E0D000E0869E /* images-4.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "images-4.jpeg"; path = "../../../../../Downloads/images-4.jpeg"; sourceTree = "<group>"; };
+		1A6CCD3B1A27F10200E0869E /* images-5.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "images-5.jpeg"; path = "../../../../../Downloads/images-5.jpeg"; sourceTree = "<group>"; };
+		1A6CCD3C1A27F10200E0869E /* images-6.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "images-6.jpeg"; path = "../../../../../Downloads/images-6.jpeg"; sourceTree = "<group>"; };
+		1A6CCD411A27F12A00E0869E /* Unknown-3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Unknown-3.jpeg"; path = "../../../../../Downloads/Unknown-3.jpeg"; sourceTree = "<group>"; };
+		1A6CCD421A27F12A00E0869E /* Unknown-4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Unknown-4"; path = "../../../../../Downloads/Unknown-4"; sourceTree = "<group>"; };
 		1AAF94EB1A13EEC7009E57C7 /* EventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventTableViewController.h; path = ../EventTableViewController.h; sourceTree = "<group>"; };
 		1AAF94EC1A13EEC7009E57C7 /* EventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventTableViewController.m; path = ../EventTableViewController.m; sourceTree = "<group>"; };
 		1AAF94F01A156914009E57C7 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -235,6 +255,30 @@
 			path = ../../../../../Downloads/simpletable_image_pack;
 			sourceTree = "<group>";
 		};
+		1A6CCD1F1A27CB4700E0869E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1A6CCD201A27CB4700E0869E /* Common.h */,
+				1A6CCD211A27CB4700E0869E /* Common.m */,
+			);
+			name = Common;
+			path = ../../../../../Downloads/Common;
+			sourceTree = "<group>";
+		};
+		1A6CCD3A1A27F0C300E0869E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				1A6CCD411A27F12A00E0869E /* Unknown-3.jpeg */,
+				1A6CCD421A27F12A00E0869E /* Unknown-4 */,
+				1A6CCD3B1A27F10200E0869E /* images-5.jpeg */,
+				1A6CCD3C1A27F10200E0869E /* images-6.jpeg */,
+				1A6CCD291A27E0D000E0869E /* images-4.jpeg */,
+				1A6CCD271A27E0D000E0869E /* images-2.jpeg */,
+				1A6CCD281A27E0D000E0869E /* images-3.jpeg */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		3680A2C719DB31CE00B4A07F = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +334,8 @@
 				1AAF94EB1A13EEC7009E57C7 /* EventTableViewController.h */,
 				1AAF94EC1A13EEC7009E57C7 /* EventTableViewController.m */,
 				1AAF94F01A156914009E57C7 /* Main.storyboard */,
+				1A6CCD3A1A27F0C300E0869E /* Images */,
+				1A6CCD1F1A27CB4700E0869E /* Common */,
 				1A6CCD121A22CD1900E0869E /* SimpleTableCell.xib */,
 				1A6CCD141A22CECC00E0869E /* SimpleTableCell.h */,
 				1A6CCD151A22CECC00E0869E /* SimpleTableCell.m */,
@@ -301,6 +347,8 @@
 				1A41EA8119F7355D00E3676C /* MapViewController.m */,
 				1A41EA7D19F72EF200E3676C /* HappeningViewController.h */,
 				1A41EA7E19F72EF200E3676C /* HappeningViewController.m */,
+				1A6CCD1C1A27C96300E0869E /* CoolButton.h */,
+				1A6CCD1D1A27C96300E0869E /* CoolButton.m */,
 				D04F68F519F066310059049B /* OpeningViewController.h */,
 				D04F68F619F066310059049B /* OpeningViewController.m */,
 				1A3C544519E4B59F00295438 /* IndivCDViewController.h */,
@@ -352,9 +400,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3680A2CF19DB31CE00B4A07F /* TestCoreData1 */ = {
+		3680A2CF19DB31CE00B4A07F /* FreeFoodFinder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3680A30219DB31CE00B4A07F /* Build configuration list for PBXNativeTarget "TestCoreData1" */;
+			buildConfigurationList = 3680A30219DB31CE00B4A07F /* Build configuration list for PBXNativeTarget "FreeFoodFinder" */;
 			buildPhases = (
 				3680A2CC19DB31CE00B4A07F /* Sources */,
 				3680A2CD19DB31CE00B4A07F /* Frameworks */,
@@ -364,7 +412,7 @@
 			);
 			dependencies = (
 			);
-			name = TestCoreData1;
+			name = FreeFoodFinder;
 			productName = TestCoreData1;
 			productReference = 3680A2D019DB31CE00B4A07F /* TestCoreData1.app */;
 			productType = "com.apple.product-type.application";
@@ -402,7 +450,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3680A2CB19DB31CE00B4A07F /* Build configuration list for PBXProject "AlphaProject" */;
+			buildConfigurationList = 3680A2CB19DB31CE00B4A07F /* Build configuration list for PBXProject "FreeFoodFinder" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -415,7 +463,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3680A2CF19DB31CE00B4A07F /* TestCoreData1 */,
+				3680A2CF19DB31CE00B4A07F /* FreeFoodFinder */,
 				3680A2F019DB31CE00B4A07F /* TestCoreData1Tests */,
 			);
 		};
@@ -427,13 +475,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A6CCD051A22CAE600E0869E /* full_breakfast.jpg in Resources */,
+				1A6CCD3D1A27F10200E0869E /* images-5.jpeg in Resources */,
 				1AAF94F11A156914009E57C7 /* Main.storyboard in Resources */,
 				1A6CCD031A22CAE600E0869E /* creme_brelee.jpg in Resources */,
+				1A6CCD461A27F12A00E0869E /* Unknown-4 in Resources */,
 				1A6CCD101A22CAE600E0869E /* vegetable_curry.jpg in Resources */,
 				1A6CCD0F1A22CAE600E0869E /* thai_shrimp_cake.jpg in Resources */,
+				1A6CCD2B1A27E0D000E0869E /* images-3.jpeg in Resources */,
 				3680A2EC19DB31CE00B4A07F /* Images.xcassets in Resources */,
 				1A6CCD131A22CD1900E0869E /* SimpleTableCell.xib in Resources */,
+				1A6CCD3E1A27F10200E0869E /* images-6.jpeg in Resources */,
+				1A6CCD2A1A27E0D000E0869E /* images-2.jpeg in Resources */,
+				1A6CCD2C1A27E0D000E0869E /* images-4.jpeg in Resources */,
 				1A6CCD111A22CAE600E0869E /* white_chocolate_donut.jpg in Resources */,
+				1A6CCD451A27F12A00E0869E /* Unknown-3.jpeg in Resources */,
 				1A6CCD0A1A22CAE600E0869E /* instant_noodle_with_egg.jpg in Resources */,
 				1A6CCD091A22CAE600E0869E /* hamburger.jpg in Resources */,
 				1A6CCD0D1A22CAE600E0869E /* noodle_with_bbq_pork.jpg in Resources */,
@@ -464,6 +519,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A6CCD1E1A27C96300E0869E /* CoolButton.m in Sources */,
+				1A6CCD221A27CB4700E0869E /* Common.m in Sources */,
 				3680A2E019DB31CE00B4A07F /* main.m in Sources */,
 				D04F68F719F066310059049B /* OpeningViewController.m in Sources */,
 				1A6CCD161A22CECC00E0869E /* SimpleTableCell.m in Sources */,
@@ -495,7 +552,7 @@
 /* Begin PBXTargetDependency section */
 		3680A2F719DB31CE00B4A07F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3680A2CF19DB31CE00B4A07F /* TestCoreData1 */;
+			target = 3680A2CF19DB31CE00B4A07F /* FreeFoodFinder */;
 			targetProxy = 3680A2F619DB31CE00B4A07F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -680,7 +737,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3680A2CB19DB31CE00B4A07F /* Build configuration list for PBXProject "AlphaProject" */ = {
+		3680A2CB19DB31CE00B4A07F /* Build configuration list for PBXProject "FreeFoodFinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3680A30019DB31CE00B4A07F /* Debug */,
@@ -689,7 +746,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3680A30219DB31CE00B4A07F /* Build configuration list for PBXNativeTarget "TestCoreData1" */ = {
+		3680A30219DB31CE00B4A07F /* Build configuration list for PBXNativeTarget "FreeFoodFinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3680A30319DB31CE00B4A07F /* Debug */,

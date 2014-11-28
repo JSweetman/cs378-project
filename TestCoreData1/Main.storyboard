@@ -80,8 +80,8 @@
             <objects>
                 <viewController id="Y1V-EZ-vhQ" customClass="AddViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dbg-a4-GYQ"/>
-                        <viewControllerLayoutGuide type="bottom" id="Dvq-rS-yh2"/>
+                        <viewControllerLayoutGuide type="top" id="gRR-P9-0bz"/>
+                        <viewControllerLayoutGuide type="bottom" id="rOs-gb-1dw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="AddViewController" id="N19-6u-AF5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -91,7 +91,7 @@
                                 <rect key="frame" x="-38" y="0.0" width="378" height="480"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Add" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XE0-1v-xn5">
-                                        <rect key="frame" x="49" y="57" width="280" height="21"/>
+                                        <rect key="frame" x="49" y="52" width="280" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -131,15 +131,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESk-Tb-i0o">
-                                        <rect key="frame" x="49" y="361" width="280" height="30"/>
-                                        <state key="normal" title="Save">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="btnSaveGo:" destination="Y1V-EZ-vhQ" eventType="touchUpInside" id="VaS-iG-Pij"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FOOD:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2t9-Mx-AJV">
                                         <rect key="frame" x="57" y="157" width="53" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -172,6 +163,15 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESk-Tb-i0o">
+                                        <rect key="frame" x="49" y="361" width="280" height="30"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnSaveGo:" destination="Y1V-EZ-vhQ" eventType="touchUpInside" id="VaS-iG-Pij"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -200,8 +200,8 @@
             <objects>
                 <viewController id="Hwy-fX-ArK" customClass="IndivCDViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hKD-NT-vu7"/>
-                        <viewControllerLayoutGuide type="bottom" id="DGf-LR-AZu"/>
+                        <viewControllerLayoutGuide type="top" id="Rhr-DL-TlM"/>
+                        <viewControllerLayoutGuide type="bottom" id="YnK-ab-6YA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bLN-4T-CU4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -315,58 +315,57 @@
             <objects>
                 <viewController id="uxC-C5-AEw" customClass="OpeningViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="GwB-9M-Qwd"/>
-                        <viewControllerLayoutGuide type="bottom" id="fAV-Nb-iCg"/>
+                        <viewControllerLayoutGuide type="top" id="3tK-zI-1aC"/>
+                        <viewControllerLayoutGuide type="bottom" id="tBh-ri-uqp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9vL-8A-jxo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ccl-Jg-oQW">
-                                <rect key="frame" x="20" y="195" width="280" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Near You">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="b0g-Uv-VQ3" kind="push" id="ala-yL-9If"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjk-a3-gOk">
-                                <rect key="frame" x="20" y="269" width="280" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Happening Now">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="5S6-OY-FKc" kind="push" identifier="Happening" id="IK1-FZ-DEq"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtA-q0-QkB">
-                                <rect key="frame" x="20" y="339" width="280" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Add Event">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Y1V-EZ-vhQ" kind="push" identifier="AddViewController" id="guQ-up-knz"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Pg-Z0-ugM">
-                                <rect key="frame" x="20" y="133" width="280" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Unknown-3.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="S8w-YE-IYE">
+                                <rect key="frame" x="0.0" y="64" width="320" height="424"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLY-4d-d1q" customClass="CoolButton">
+                                <rect key="frame" x="16" y="162" width="288" height="50"/>
                                 <state key="normal" title="All Events">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="1" green="0.57016126909999998" blue="0.2711519946" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="9ko-2l-TgN" kind="push" id="EKh-Kx-fvl"/>
+                                    <segue destination="9ko-2l-TgN" kind="push" id="J7G-Fu-imo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nil-BJ-PMh" customClass="CoolButton">
+                                <rect key="frame" x="16" y="215" width="288" height="50"/>
+                                <state key="normal" title="Near You">
+                                    <color key="titleColor" red="1" green="0.57016126909999998" blue="0.2711519946" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="b0g-Uv-VQ3" kind="push" id="Lls-RJ-3Xx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAZ-UM-fXn" customClass="CoolButton">
+                                <rect key="frame" x="16" y="339" width="288" height="50"/>
+                                <state key="normal" title="Add Event">
+                                    <color key="titleColor" red="1" green="0.57016126909999998" blue="0.2711519946" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Y1V-EZ-vhQ" kind="push" id="5N9-y6-yll"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qol-Ud-RMa" customClass="CoolButton">
+                                <rect key="frame" x="16" y="273" width="288" height="50"/>
+                                <state key="normal" title="Happening Now">
+                                    <color key="titleColor" red="1" green="0.57016126909999998" blue="0.2711519946" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="5S6-OY-FKc" kind="push" id="scO-yd-BbR"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.57024801140000003" blue="0.1790781411" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Free Food Finder" id="k3a-74-XdM"/>
@@ -380,8 +379,8 @@
             <objects>
                 <viewController id="gIo-zI-lW8" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2Ya-bh-2nX"/>
-                        <viewControllerLayoutGuide type="bottom" id="lo7-xv-Ofr"/>
+                        <viewControllerLayoutGuide type="top" id="obP-At-bsr"/>
+                        <viewControllerLayoutGuide type="bottom" id="cUA-NH-59q"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bsQ-9r-i0x">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -422,8 +421,8 @@
             <objects>
                 <viewController id="SWf-Z6-pck" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Wfv-vh-hsG"/>
-                        <viewControllerLayoutGuide type="bottom" id="odS-Mw-v3D"/>
+                        <viewControllerLayoutGuide type="top" id="mIX-cT-0kq"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yfh-R6-mws"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3Tb-H0-l28">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -469,8 +468,8 @@
             <objects>
                 <viewController id="RMe-QE-eyM" customClass="NewUserViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nvE-DI-QcS"/>
-                        <viewControllerLayoutGuide type="bottom" id="8zA-Gb-hP3"/>
+                        <viewControllerLayoutGuide type="top" id="NYR-nr-gxo"/>
+                        <viewControllerLayoutGuide type="bottom" id="EbC-fk-CfM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ugb-yz-Gin">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -574,8 +573,8 @@
             <objects>
                 <viewController id="b0g-Uv-VQ3" customClass="MapViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0hg-o8-RX8"/>
-                        <viewControllerLayoutGuide type="bottom" id="afd-HK-6LO"/>
+                        <viewControllerLayoutGuide type="top" id="byR-Bh-J7S"/>
+                        <viewControllerLayoutGuide type="bottom" id="LQ2-Cl-5Fb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="4xX-rd-llQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -610,13 +609,16 @@
             <point key="canvasLocation" x="246" y="1529"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Unknown-3.jpeg" width="201" height="251"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="guQ-up-knz"/>
+        <segue reference="5N9-y6-yll"/>
         <segue reference="1wB-xH-XOC"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>

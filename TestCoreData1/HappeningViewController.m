@@ -223,8 +223,8 @@
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath
 {
     DataModel *dm = [[DataModel alloc] init];
-    
-    dm = [self.nowList objectAtIndex: indexPath.row];
+    NSIndexPath *selectedIndex= [self.tableView indexPathForSelectedRow];    
+    dm = [self.nowList objectAtIndex: selectedIndex.row];
         
     [self performSegueWithIdentifier: @"HappeningDetails" sender: self];
         
@@ -237,13 +237,29 @@
     if ([[segue identifier] isEqualToString:@"HappeningDetails"]){
         NSLog(@"I'm detail\n");
         IndivCDViewController *vc = segue.destinationViewController;
-        NSIndexPath *path = [self.tableView indexPathForCell:sender];
-        DataModel *contactToPass = self.nowList[path.row];
+        NSIndexPath *selectedIndex= [self.tableView indexPathForSelectedRow];
+        
+        //NSIndexPath *indexPath = (NSIndexPath *)sender;
+        //NSString *date = [self.days objectAtIndex:selectedIndex.section];
+        NSLog(@"//////////////////////////////////////////////////////");
+        DataModel *contactToPass = [self.nowList objectAtIndex:selectedIndex.row];
+        //= [self.DataModelList objectAtIndex: selectedIndex.row];
+        
+        //DataModel *contactToPass = [self.DataModelList objectAtIndex: indexPath.row];
         vc.hey = contactToPass;
+        
+        //IndivCDViewController *vc = segue.destinationViewController;
+        //NSIndexPath *path = [self.tableView indexPathForCell:sender];
+        //DataModel *contactToPass = self.nowList[path.row];
+        //vc.hey = contactToPass;
     }
     
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 75;
+}
 /*
 #pragma mark - Navigation
 

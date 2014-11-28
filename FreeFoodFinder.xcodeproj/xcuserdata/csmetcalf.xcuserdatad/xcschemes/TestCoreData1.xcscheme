@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3680A2CF19DB31CE00B4A07F"
-            BuildableName = "TestCoreData1.app"
-            BlueprintName = "TestCoreData1"
-            ReferencedContainer = "container:AlphaProject.xcodeproj">
+            BuildableName = "FreeFoodFinder.app"
+            BlueprintName = "FreeFoodFinder"
+            ReferencedContainer = "container:FreeFoodFinder.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3680A2CF19DB31CE00B4A07F"
-            BuildableName = "TestCoreData1.app"
-            BlueprintName = "TestCoreData1"
-            ReferencedContainer = "container:AlphaProject.xcodeproj">
+            BuildableName = "FreeFoodFinder.app"
+            BlueprintName = "FreeFoodFinder"
+            ReferencedContainer = "container:FreeFoodFinder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>

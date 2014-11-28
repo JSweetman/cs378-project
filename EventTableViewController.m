@@ -43,7 +43,7 @@
     NSArray *thumbnails;
     
 }
-@synthesize DataModelList;
+
 
 -(id)initWithCoder:(NSCoder *)aCoder {
     self = [super initWithCoder:aCoder];
