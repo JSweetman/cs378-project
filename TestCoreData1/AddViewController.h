@@ -11,7 +11,8 @@
 
 @interface AddViewController : UIViewController<DataModelProtocol,UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIPickerView *picker;
+@property (strong, nonatomic) IBOutlet UIPickerView *pickerFood;
+@property (strong, nonatomic) IBOutlet UIPickerView *pickerWhere;
 
 @property (weak, nonatomic) IBOutlet UITextField *event;
 @property (weak, nonatomic) IBOutlet UITextField *where;

@@ -24,6 +24,7 @@
     UITextField *textFieldWithFocus;
     NSArray* pickerDataFood;
     NSArray* pickerDataWhere;
+    NSArray* pickerAddress;
 }
 
 
@@ -45,20 +46,26 @@
     //Picker
     // Initialize Data
     pickerDataFood = @[@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini"];
-    pickerDataWhere = @[ @[@"GDC", @"2317 Speedway, Austin, TX 78712"]];
+    pickerDataWhere = @[@"GDC", @"Test"];
+    pickerAddress = @[@"2317 Speedway, Austin, TX 78712", @"950 West 5th St, Austin, TX 78703"];
     
     
     // Connect data
-    self.picker.dataSource = self;
-    self.picker.delegate = self;
+    
+    self.pickerFood = [[UIPickerView alloc] initWithFrame:CGRectZero];
+    self.pickerWhere = [[UIPickerView alloc] initWithFrame:CGRectZero];
+    
+    [self attachPickerToTextField:self.food :self.pickerFood];
+    [self attachPickerToTextField:self.where :self.pickerWhere];
+    
+    //self.picker.dataSource = self;
+    //elf.picker.delegate = self;
     
     ////////////////////////
     
     self.event.delegate = self;
-    self.where.delegate = self;
-    //self.time.delegate = self;
-    
-    self.food.delegate = self;
+    //self.where.delegate = self;
+    //self.food.delegate = self;
     
     [self.myDatePicker addTarget:self action:@selector(pkrValueChange:) forControlEvents:UIControlEventValueChanged];
     
@@ -66,10 +73,13 @@
     //
     // Register for when the keyboard is shown.
     // To make sure the text field that has focus can be seen by the user.
+    //if (self == self.event.delegate)
+    //{
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:@"UIKeyboardWillShowNotification"
                                                object:nil];
+    //}
     // Register for when the keyboard is hidden.
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidHide:)
@@ -88,10 +98,17 @@
     // Right now, no scrolling would occur because the content and the scroll view
     // are the same size.
     self.scrollView.contentSize = originalViewFrame.size;
+}
+
+- (void)attachPickerToTextField: (UITextField*) textField :(UIPickerView*) picker{
+    picker.delegate = self;
+    picker.dataSource = self;
     
-  
+    textField.delegate = self;
+    textField.inputView = picker;
     
-    }
+}
+
 /*
 - (void)datePickerChanged:(UIDatePicker *)datePicker
 {
@@ -181,45 +198,70 @@
 // The number of rows of data
 - (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return pickerDataFood.count;
+    if (pickerView == self.pickerFood){
+        return pickerDataFood.count;
+    }
+    else if (pickerView == self.pickerWhere){
+        return pickerDataWhere.count;
+    }
+    
+    return 0;
 }
 
 // The data to return for the row and component (column) that's being passed in
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return pickerDataFood[row];
+    
+    if (pickerView == self.pickerFood){
+        return [pickerDataFood objectAtIndex:row];
+    }
+    else if (pickerView == self.pickerWhere){
+        return [pickerDataWhere objectAtIndex:row];
+    }
+    
+    return @"???";
+    //return pickerDataFood[row];
     //return [self.pickerData objectAtIndex:row];
 }
 
-// Catpure the picker view selection
-/*
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    // This method is triggered whenever the user makes a change to the picker selection.
-    // The parameter named row and component represents what was selected.
-}
- 
- */
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     
     UILabel *thisLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-    thisLabel.text = [pickerDataFood objectAtIndex:row];
+    
+    if (pickerView == self.pickerFood){
+        thisLabel.text = [pickerDataFood objectAtIndex:row];
+    }
+    else if (pickerView == self.pickerWhere){
+        thisLabel.text = [pickerDataWhere objectAtIndex:row];
+    }
+    
     
     return thisLabel;
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
     
-    return 50;
+    return 40;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
-    int chosen = [pickerView selectedRowInComponent:component];
-    NSLog(@"you choose %@", [pickerDataFood objectAtIndex:chosen]);
+    if (pickerView == self.pickerFood){
+        self.food.text = [pickerDataFood objectAtIndex:row];
+    }
+    else if (pickerView == self.pickerWhere){
+        self.where.text = [pickerDataWhere objectAtIndex:row];
+    }
+    
+    //int chosen = [pickerView selectedRowInComponent:component];
+    //NSLog(@"you choose %@", [pickerDataFood objectAtIndex:chosen]);
 }
+
+
+#pragma mark - Picker delegate stuff
+
 
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -272,16 +314,17 @@
 {
     // Indicate we're done with the keyboard. Make it go away.
     [textField resignFirstResponder];
+    
     return YES;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.event resignFirstResponder];
     [self.where resignFirstResponder];
-    //[self.pickedTime resignFirstResponder];
-    
     [self.food resignFirstResponder];
+    //[self.pickedTime resignFirstResponder];
 }
+
 
 
 // Called when the keyboard will be shown.
@@ -356,9 +399,17 @@
 - (IBAction)btnSaveGo:(id)sender {
     
     _d1 = [[DataModel alloc] init];
-    
+    int count = 0;
+    for (NSString *address in pickerDataWhere)
+    {
+        if ([[self.where text] isEqualToString:address])
+        {
+            _d1.where = [pickerAddress objectAtIndex:count];
+        }
+        count = count + 1;
+    }
     _d1.event = [self.event text];
-    _d1.where = [self.where text];
+    //_d1.where = [self.where text];
     _d1.pickedTime = [self.pickedTime text];
     _d1.pickedDate = [self.pickedDate text];
     _d1.food = [self.food text];
