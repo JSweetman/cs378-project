@@ -12,6 +12,8 @@
 	<dict>
 		<key>00D27117625DB151BA3E6D10AC94C9DBCF0E9472</key>
 		<string>https://github.com/JSweetman/cs378-project.git</string>
+		<key>C7DBEE3065FAF37E959D0C02DE08D96C73B2BF10</key>
+		<string>https://github.com/ParsePlatform/AnyWall.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>FreeFoodFinder.xcodeproj</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>00D27117625DB151BA3E6D10AC94C9DBCF0E9472</key>
 		<string>../..</string>
+		<key>C7DBEE3065FAF37E959D0C02DE08D96C73B2BF10</key>
+		<string>../../../../AnyWall/AnyWall</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/JSweetman/cs378-project.git</string>
@@ -28,6 +32,14 @@
 	<string>00D27117625DB151BA3E6D10AC94C9DBCF0E9472</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C7DBEE3065FAF37E959D0C02DE08D96C73B2BF10</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AnyWall</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

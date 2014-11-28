@@ -22,6 +22,7 @@
 {
     CGRect originalViewFrame;
     UITextField *textFieldWithFocus;
+    NSArray* pickerData;
 }
 
 
@@ -39,6 +40,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //Picker
+    // Initialize Data
+    pickerData = @[@"Item 1", @"Item 2", @"Item 3", @"Item 4", @"Item 5", @"Item 6"];
+    
+    // Connect data
+    self.picker.dataSource = self;
+    self.picker.delegate = self;
+    
+    ////////////////////////
+    
     self.event.delegate = self;
     self.where.delegate = self;
     //self.time.delegate = self;
@@ -153,6 +165,57 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+///////////////////////////////////////////////////////////////////////
+// The number of columns of data
+- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// The number of rows of data
+- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return pickerData.count;
+}
+
+// The data to return for the row and component (column) that's being passed in
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return pickerData[row];
+    //return [self.pickerData objectAtIndex:row];
+}
+
+// Catpure the picker view selection
+/*
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    // This method is triggered whenever the user makes a change to the picker selection.
+    // The parameter named row and component represents what was selected.
+}
+ 
+ */
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    
+    UILabel *thisLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
+    thisLabel.text = [pickerData objectAtIndex:row];
+    
+    return thisLabel;
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    
+    return 50;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    int chosen = [pickerView selectedRowInComponent:component];
+    NSLog(@"you choose %@", [pickerData objectAtIndex:chosen]);
+}
+
+/////////////////////////////////////////////////////////////////////////////////
 
 
 #pragma mark - Navigation

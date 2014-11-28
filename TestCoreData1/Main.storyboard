@@ -90,12 +90,6 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rKi-NP-5eg">
                                 <rect key="frame" x="-38" y="0.0" width="378" height="480"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Add" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XE0-1v-xn5">
-                                        <rect key="frame" x="49" y="52" width="280" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EVENT:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMv-Dd-sPB">
                                         <rect key="frame" x="53" y="79" width="57" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -132,12 +126,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FOOD:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2t9-Mx-AJV">
-                                        <rect key="frame" x="57" y="157" width="53" height="21"/>
+                                        <rect key="frame" x="55" y="157" width="53" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="di8-xP-EI3">
-                                        <rect key="frame" x="13" y="191" width="378" height="162"/>
+                                        <rect key="frame" x="13" y="197" width="378" height="162"/>
                                         <date key="date" timeIntervalSinceReferenceDate="437879334.50317502">
                                             <!--2014-11-17 01:08:54 +0000-->
                                         </date>
@@ -170,6 +164,7 @@
                                         </state>
                                         <connections>
                                             <action selector="btnSaveGo:" destination="Y1V-EZ-vhQ" eventType="touchUpInside" id="VaS-iG-Pij"/>
+                                            <segue destination="uxC-C5-AEw" kind="push" id="0Sc-wi-8cU"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -352,7 +347,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Y1V-EZ-vhQ" kind="push" id="5N9-y6-yll"/>
+                                    <segue destination="SWf-Z6-pck" kind="push" id="crZ-7s-TkS"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qol-Ud-RMa" customClass="CoolButton">
@@ -374,49 +369,7 @@
             </objects>
             <point key="canvasLocation" x="-215" y="158"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="4pa-tl-FOp">
-            <objects>
-                <viewController id="gIo-zI-lW8" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="obP-At-bsr"/>
-                        <viewControllerLayoutGuide type="bottom" id="cUA-NH-59q"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="bsQ-9r-i0x">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vry-MX-RBv">
-                                <rect key="frame" x="16" y="152" width="288" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Log In">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="SWf-Z6-pck" kind="push" id="CIp-jh-Q4N"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kg8-AL-Kva">
-                                <rect key="frame" x="16" y="214" width="288" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Sign Up">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="RMe-QE-eyM" kind="push" identifier="SignUp" id="D5H-8I-XiQ"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="0.57016126914208831" blue="0.27115199459891259" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q4J-ZH-Rd0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-424" y="732"/>
-        </scene>
-        <!--Login View Controller-->
+        <!--Free Food Finder-->
         <scene sceneID="xgZ-Bg-mAK">
             <objects>
                 <viewController id="SWf-Z6-pck" customClass="LoginViewController" sceneMemberID="viewController">
@@ -450,10 +403,31 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kg8-AL-Kva" customClass="CoolButton">
+                                <rect key="frame" x="26" y="291" width="288" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="RMe-QE-eyM" kind="push" id="pA7-zi-rUP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OgU-5F-Em0" customClass="CoolButton">
+                                <rect key="frame" x="220" y="223" width="64" height="34"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Y1V-EZ-vhQ" kind="push" id="jpY-DG-MnF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.57016126909999998" blue="0.2711519946" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="IeA-9i-YKC"/>
+                    <navigationItem key="navigationItem" title="Free Food Finder" id="IeA-9i-YKC"/>
                     <connections>
                         <outlet property="passwordField" destination="bdd-Ag-jHn" id="FP7-cy-mjI"/>
                         <outlet property="usernameField" destination="qJL-oX-9So" id="1rf-s4-cEO"/>
@@ -461,9 +435,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kD2-bE-Se1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-514" y="1279"/>
+            <point key="canvasLocation" x="-531" y="853"/>
         </scene>
-        <!--New User View Controller-->
+        <!--Free Food Finder-->
         <scene sceneID="HnX-FS-5dV">
             <objects>
                 <viewController id="RMe-QE-eyM" customClass="NewUserViewController" sceneMemberID="viewController">
@@ -508,10 +482,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7H-Pj-9K8" customClass="CoolButton">
+                                <rect key="frame" x="200" y="317" width="72" height="30"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.57016126909999998" blue="0.2711519946" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="weS-af-nRa"/>
+                    <navigationItem key="navigationItem" title="Free Food Finder" id="weS-af-nRa"/>
                     <connections>
                         <outlet property="passwordAgainField" destination="dLj-bV-Rrd" id="NVO-0O-AUP"/>
                         <outlet property="passwordField" destination="3NP-dD-dH7" id="4Ky-js-Enb"/>
@@ -520,7 +500,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7yx-k6-G2M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-169" y="1280"/>
+            <point key="canvasLocation" x="-177" y="853"/>
         </scene>
         <!--Happening View Controller-->
         <scene sceneID="WfA-FD-joS">
@@ -618,7 +598,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="5N9-y6-yll"/>
+        <segue reference="0Sc-wi-8cU"/>
+        <segue reference="jpY-DG-MnF"/>
         <segue reference="1wB-xH-XOC"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
