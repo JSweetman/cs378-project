@@ -23,6 +23,24 @@
     return self;
 }
 
+-(NSString*) convert24To12:(NSString*) stringDate
+{
+    
+    //NSLog(@"TIME IS %@", stringDate);
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    
+    NSDate *date = [dateFormatter dateFromString:stringDate];
+    
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    
+    NSString *formattedDate = [dateFormatter stringFromDate:date];
+    
+    return formattedDate;
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -34,7 +52,7 @@
     self.food.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
     self.event.text = self.hey.event;
     self.where.text = self.hey.where;
-    self.pickedTime.text =self.hey.pickedTime;
+    self.pickedTime.text = [self convert24To12:self.hey.pickedTime];
     self.pickedDate.text = self.hey.pickedDate;
     self.food.text = self.hey.food;
 }

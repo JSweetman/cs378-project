@@ -164,7 +164,6 @@
                                         </state>
                                         <connections>
                                             <action selector="btnSaveGo:" destination="Y1V-EZ-vhQ" eventType="touchUpInside" id="VaS-iG-Pij"/>
-                                            <segue destination="uxC-C5-AEw" kind="push" id="0Sc-wi-8cU"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -292,6 +291,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mLc-8w-HYk" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="mqX-W9-VLb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NVd-Vd-se3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -598,9 +598,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="0Sc-wi-8cU"/>
-        <segue reference="jpY-DG-MnF"/>
         <segue reference="1wB-xH-XOC"/>
+        <segue reference="jpY-DG-MnF"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

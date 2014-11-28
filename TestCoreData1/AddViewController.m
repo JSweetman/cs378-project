@@ -22,7 +22,8 @@
 {
     CGRect originalViewFrame;
     UITextField *textFieldWithFocus;
-    NSArray* pickerData;
+    NSArray* pickerDataFood;
+    NSArray* pickerDataWhere;
 }
 
 
@@ -43,7 +44,9 @@
     
     //Picker
     // Initialize Data
-    pickerData = @[@"Item 1", @"Item 2", @"Item 3", @"Item 4", @"Item 5", @"Item 6"];
+    pickerDataFood = @[@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini"];
+    pickerDataWhere = @[ @[@"GDC", @"2317 Speedway, Austin, TX 78712"]];
+    
     
     // Connect data
     self.picker.dataSource = self;
@@ -133,9 +136,12 @@
     NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
     [timeFormat setDateFormat:@"HH:mm:ss"];
     
-    NSDate *now = [sender date];
+    NSDate* now = [sender date];
     //[[NSDate alloc] init];
-
+    //NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //[dateFormatter setDateFormat:@"hh:mm a"];
+    //NSString *str_date = [dateFormatter stringFromDate:[NSDate date]];
+    
     
     NSString *theDate = [dateFormat stringFromDate:now];
     NSString *theTime = [timeFormat stringFromDate:now];
@@ -175,13 +181,13 @@
 // The number of rows of data
 - (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return pickerData.count;
+    return pickerDataFood.count;
 }
 
 // The data to return for the row and component (column) that's being passed in
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return pickerData[row];
+    return pickerDataFood[row];
     //return [self.pickerData objectAtIndex:row];
 }
 
@@ -199,7 +205,7 @@
 {
     
     UILabel *thisLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-    thisLabel.text = [pickerData objectAtIndex:row];
+    thisLabel.text = [pickerDataFood objectAtIndex:row];
     
     return thisLabel;
 }
@@ -212,7 +218,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
     int chosen = [pickerView selectedRowInComponent:component];
-    NSLog(@"you choose %@", [pickerData objectAtIndex:chosen]);
+    NSLog(@"you choose %@", [pickerDataFood objectAtIndex:chosen]);
 }
 
 /////////////////////////////////////////////////////////////////////////////////

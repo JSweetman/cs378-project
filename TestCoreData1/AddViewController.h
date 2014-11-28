@@ -28,4 +28,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *pickedTime;
 @property (weak, nonatomic) IBOutlet UILabel *pickedDate;
 
+@property(weak, nonatomic) NSString* timeAMPM;
 @end

@@ -42,6 +42,7 @@
     tableData = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
     
     // Initialize thumbnails
+    
     thumbnails = [NSArray arrayWithObjects:@"egg_benedict.jpg", @"mushroom_risotto.jpg", @"full_breakfast.jpg", @"hamburger.jpg", @"ham_and_egg_sandwich.jpg", @"creme_brelee.jpg", @"white_chocolate_donut.jpg", @"starbucks_coffee.jpg", @"vegetable_curry.jpg", @"instant_noodle_with_egg.jpg", @"noodle_with_bbq_pork.jpg", @"japanese_noodle_with_pork.jpg", @"green_tea.jpg", @"thai_shrimp_cake.jpg", @"angry_birds_cake.jpg", @"ham_and_cheese_panini.jpg", nil];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"SimpleTableCell" bundle: [NSBundle mainBundle]]
@@ -177,6 +178,24 @@
     return [self.nowList count];
 }
 
+-(NSString*) convert24To12:(NSString*) stringDate
+{
+    
+    //NSLog(@"TIME IS %@", stringDate);
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    
+    NSDate *date = [dateFormatter dateFromString:stringDate];
+    
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    
+    NSString *formattedDate = [dateFormatter stringFromDate:date];
+    
+    return formattedDate;
+    
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     
     static NSString *simpleTableId = @"SimpleTableCell";
@@ -196,7 +215,7 @@
         hi = [self.nowList objectAtIndex:indexPath.row];
         NSLog(@"event hi is %@", hi.event);
         cell.eventLabel.text = hi.event;
-        cell.timeLabel.text = hi.pickedTime;
+        cell.timeLabel.text = [self convert24To12:hi.pickedTime];
         NSLog(@"event is %@", cell.eventLabel.text);
         NSLog(@"tiem  is %@", cell.timeLabel.text);
         int count = 0;

@@ -13,6 +13,7 @@
 #import <Parse/Parse.h>
 #import "SimpleTableCell.h"
 
+
 //@interface EventTableViewController ()
 //@property (weak, nonatomic) IBOutlet UITableView* tableView;
 //@property (strong, nonatomic) NSMutableArray *DataModelList;
@@ -442,6 +443,24 @@
     return [self.days objectAtIndex:section];
 }
 
+-(NSString*) convert24To12:(NSString*) stringDate
+{
+    
+    //NSLog(@"TIME IS %@", stringDate);
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    
+    NSDate *date = [dateFormatter dateFromString:stringDate];
+    
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    
+    NSString *formattedDate = [dateFormatter stringFromDate:date];
+    
+    return formattedDate;
+
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     
     //UITableViewCell
@@ -480,7 +499,7 @@
         event = [((NSMutableArray*)[self.groupedEvents objectForKey:date]) objectAtIndex:indexPath.row];
         
         cell.eventLabel.text = event.event;
-        cell.timeLabel.text = event.pickedTime;
+        cell.timeLabel.text = [self convert24To12:event.pickedTime];
         cell.whereLabel.text = event.where;
         NSLog(@"//////////////////////////////////////////////////////");
         int count = 0;
@@ -520,7 +539,7 @@
         NSLog(@"//////////////////////////////////////////////////////");
         cell.eventLabel.text = event.event;
         cell.whereLabel.text = event.event;
-        cell.timeLabel.text = event.pickedTime;
+        cell.timeLabel.text = [self convert24To12:event.pickedTime];
         int count = 0;
         for (NSString *foodSample in tableData)
         {
