@@ -151,7 +151,7 @@
 		1AEFCBD01A0C45F200E5FE56 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		1AEFCBD21A0C45F900E5FE56 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1AEFCBD41A0C460100E5FE56 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		3680A2D019DB31CE00B4A07F /* TestCoreData1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestCoreData1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3680A2D019DB31CE00B4A07F /* FreeFoodFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeFoodFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3680A2D319DB31CE00B4A07F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3680A2D519DB31CE00B4A07F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3680A2D719DB31CE00B4A07F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -292,7 +292,7 @@
 		3680A2D119DB31CE00B4A07F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3680A2D019DB31CE00B4A07F /* TestCoreData1.app */,
+				3680A2D019DB31CE00B4A07F /* FreeFoodFinder.app */,
 				3680A2F119DB31CE00B4A07F /* TestCoreData1Tests.xctest */,
 			);
 			name = Products;
@@ -414,7 +414,7 @@
 			);
 			name = FreeFoodFinder;
 			productName = TestCoreData1;
-			productReference = 3680A2D019DB31CE00B4A07F /* TestCoreData1.app */;
+			productReference = 3680A2D019DB31CE00B4A07F /* FreeFoodFinder.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3680A2F019DB31CE00B4A07F /* TestCoreData1Tests */ = {

@@ -22,7 +22,7 @@
 		<key>00D27117625DB151BA3E6D10AC94C9DBCF0E9472</key>
 		<string>../..</string>
 		<key>C7DBEE3065FAF37E959D0C02DE08D96C73B2BF10</key>
-		<string>../../../../AnyWall/AnyWall</string>
+		<string>../../../AnyWall/AnyWall</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/JSweetman/cs378-project.git</string>

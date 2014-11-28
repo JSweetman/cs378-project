@@ -107,6 +107,17 @@
     textField.delegate = self;
     textField.inputView = picker;
     
+    // Create done button in UIPickerView
+    UIToolbar*  mypickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 56)];
+    mypickerToolbar.barStyle = UIBarStyleBlackOpaque;
+    [mypickerToolbar sizeToFit];
+    NSMutableArray *barItems = [[NSMutableArray alloc] init];
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    [barItems addObject:flexSpace];
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked)];
+    [barItems addObject:doneBtn];
+    [mypickerToolbar setItems:barItems animated:YES];
+    textField.inputAccessoryView = mypickerToolbar;
 }
 
 /*
@@ -322,6 +333,7 @@
     [self.event resignFirstResponder];
     [self.where resignFirstResponder];
     [self.food resignFirstResponder];
+    //[self.pickerFood resignFirstResponder];
     //[self.pickedTime resignFirstResponder];
 }
 
@@ -367,6 +379,22 @@
     }];
 }
 
+- (void) pickerDoneClicked{
+    //[self.where resignFirstResponder];
+    if (self.pickerFood){
+        [self.food resignFirstResponder];
+    }
+    if (self.pickerWhere){
+        [self.where resignFirstResponder];
+    }
+    /*
+    [UIView animateWithDuration:0.3 animations:^{
+        // Restore the parent view and scroll content view to their original sizes
+        self.view.frame = originalViewFrame;
+        self.scrollView.contentSize = originalViewFrame.size;
+    }];
+     */
+}
 // Called when you touch inside a text field.
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
