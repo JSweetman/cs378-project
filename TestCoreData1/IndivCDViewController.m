@@ -40,6 +40,15 @@
     return formattedDate;
     
 }
+-(NSString*)grabStreetAddress:(NSString*) address
+{
+    NSArray *subStrings = [address componentsSeparatedByString:@","];
+    for (int i = 0; i < [subStrings count]; i++)
+    {
+        NSLog(@"string on array position %d is : %@", i, [subStrings objectAtIndex:i]);
+    }
+    return [subStrings objectAtIndex:0];
+}
 
 - (void)viewDidLoad
 {
@@ -51,7 +60,7 @@
     self.pickedDate.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
     self.food.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
     self.event.text = self.hey.event;
-    self.where.text = self.hey.where;
+    self.where.text = [self grabStreetAddress:self.hey.where];
     self.pickedTime.text = [self convert24To12:self.hey.pickedTime];
     self.pickedDate.text = self.hey.pickedDate;
     self.food.text = self.hey.food;

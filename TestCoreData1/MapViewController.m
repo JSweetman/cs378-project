@@ -268,6 +268,16 @@
     
 }
 
+-(NSString*)grabStreetAddress:(NSString*) address
+{
+    NSArray *subStrings = [address componentsSeparatedByString:@","];
+    for (int i = 0; i < [subStrings count]; i++)
+    {
+        NSLog(@"string on array position %d is : %@", i, [subStrings objectAtIndex:i]);
+    }
+    return [subStrings objectAtIndex:0];
+}
+
 -(CLLocationCoordinate2D)geocodeAddressString:(CLLocation *)currentLocation withNearbyDistance:(CLLocationAccuracy)nearbyDistance withAddress: (NSString*)myStringLocation{
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     __block CLLocationCoordinate2D center;
@@ -303,7 +313,7 @@
                     {
                         point.coordinate = eventLatLog.coordinate;
                         point.title = event.event;
-                        point.subtitle = event.where;
+                        point.subtitle = [self grabStreetAddress: event.where];
                         [self.mapView addAnnotation:point];
                     }
         

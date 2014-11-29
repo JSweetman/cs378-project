@@ -470,6 +470,17 @@
 
 }
 
+-(NSString*)grabStreetAddress:(NSString*) address
+{
+    NSArray *subStrings = [address componentsSeparatedByString:@","];
+    for (int i = 0; i < [subStrings count]; i++)
+    {
+        NSLog(@"string on array position %d is : %@", i, [subStrings objectAtIndex:i]);
+    }
+    return [subStrings objectAtIndex:0];
+}
+
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     
     //UITableViewCell
@@ -509,7 +520,9 @@
         
         cell.eventLabel.text = event.event;
         cell.timeLabel.text = [self convert24To12:event.pickedTime];
-        cell.whereLabel.text = event.where;
+        //cell.whereLabel.text = event.where;
+        cell.whereLabel.text = [self grabStreetAddress:event.where];
+        
         NSLog(@"//////////////////////////////////////////////////////");
         int count = 0;
         for (NSString *foodSample in tableData)
