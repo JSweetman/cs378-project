@@ -507,15 +507,24 @@
         }
         else
         {
-            self.message_label.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
-            self.message_label.text = @"You must enter a value for all fields!!";
+           
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"You must enter a value for all fields!!" delegate:nil cancelButtonTitle:@"Hide" otherButtonTitles:nil];
+            //alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            [alert show];
+            
+            //self.message_label.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
+            //self.message_label.text = @"You must enter a value for all fields!!";
         }
         
     }
     else
     {
-        self.message_label.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
-        self.message_label.text = @"You must enter a date and/or time in the future";
+        
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"You must enter a date and/or time in the future" delegate:nil cancelButtonTitle:@"Hide" otherButtonTitles:nil];
+        //alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [alert show];
+        //self.message_label.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
+        //self.message_label.text = @"You must enter a date and/or time in the future";
     }
  
        

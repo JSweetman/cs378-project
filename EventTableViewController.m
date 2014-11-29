@@ -461,6 +461,10 @@
     [dateFormatter setDateFormat:@"hh:mm a"];
     
     NSString *formattedDate = [dateFormatter stringFromDate:date];
+    if ([[formattedDate substringToIndex:1] isEqualToString: @"0"])
+    {
+        formattedDate = [formattedDate substringFromIndex:1];
+    }
     
     return formattedDate;
 
