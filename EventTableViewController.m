@@ -216,10 +216,11 @@
     //NSInteger rowIndex = indexPath.section+indexPath.row;
     //NSIndexPath *selectedIndex= [self.tableView indexPathForSelectedRow];
     //if (tableView == self.searchDisplayController.searchResultsTableView) {
+    
     if (tableView == self.searchController.searchResultsTableView) {
-        NSIndexPath *selectedIndex= [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-        NSLog(@" indexPath row in didSelect %d", indexPath.row);
-        NSLog(@" indexPath section %d",indexPath.section);
+        NSIndexPath *selectedIndex= [self.searchController.searchResultsTableView indexPathForSelectedRow];
+        NSLog(@" indexPath row in didSelect %d", selectedIndex.row);
+        NSLog(@" indexPath section %d",selectedIndex.section);
           //NSString *date = [self.days objectAtIndex:selectedIndex.section];
           //dm = [((NSMutableArray*)[self.groupedEvents objectForKey:date]) objectAtIndex:selectedIndex.row];
         dm = [self.searchResults objectAtIndex: selectedIndex.row];
@@ -242,6 +243,7 @@
         
         NSLog(@"Default Display Controller");
     }
+   
     
 }
 
@@ -255,7 +257,7 @@
         if (self.searchController.active) {
             NSLog(@"Search Display Controller1");
          
-            NSIndexPath *selectedIndex= [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            NSIndexPath *selectedIndex= [self.searchController.searchResultsTableView indexPathForSelectedRow];
             NSLog(@" indexPath row %d", selectedIndex.row);
             NSLog(@" indexPath section %d",selectedIndex.section);
             DataModel *contactToPass = [self.searchResults objectAtIndex: selectedIndex.row];
@@ -309,7 +311,7 @@
 }
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-    [self.searchDisplayController.searchResultsTableView reloadData];
+    //[self.searchDisplayController.searchResultsTableView reloadData];
     [self filterResults:searchString];
     return YES;
 }
