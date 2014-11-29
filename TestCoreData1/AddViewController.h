@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) IBOutlet UIPickerView *pickerFood;
 @property (strong, nonatomic) IBOutlet UIPickerView *pickerWhere;
+- (IBAction)whenButtonTapped:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITextField *event;
 @property (weak, nonatomic) IBOutlet UITextField *where;

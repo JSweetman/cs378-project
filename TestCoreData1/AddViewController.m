@@ -58,6 +58,8 @@
     [self attachPickerToTextField:self.food :self.pickerFood];
     [self attachPickerToTextField:self.where :self.pickerWhere];
     
+    
+    //self.pickerFood.hidden = YES;
     //self.picker.dataSource = self;
     //elf.picker.delegate = self;
     
@@ -117,6 +119,9 @@
     UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked)];
     [barItems addObject:doneBtn];
     [mypickerToolbar setItems:barItems animated:YES];
+    
+    
+    //self.pickerFood.showsSelectionIndicator = YES;
     textField.inputAccessoryView = mypickerToolbar;
 }
 
@@ -200,6 +205,23 @@
     // Dispose of any resources that can be recreated.
 }
 ///////////////////////////////////////////////////////////////////////
+
+- (IBAction)whenButtonTapped:(id)sender
+{
+    
+    [self attachPickerToTextField:self.food :self.pickerFood];
+    /*
+    if(self.pickerFood.hidden) //it is appearing
+    {
+        self.pickerFood.hidden = NO;
+    }
+    else
+    {
+        self.pickerFood.hidden = YES;
+    }\*/
+    
+}
+
 // The number of columns of data
 - (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -502,7 +524,5 @@
     //[self.navigationController popViewControllerAnimated:YES];
      
 }
-
-
 
 @end
