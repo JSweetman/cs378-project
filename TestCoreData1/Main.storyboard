@@ -192,7 +192,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="uxC-C5-AEw" kind="push" id="3vz-NR-D2U"/>
+                                    <segue destination="uxC-C5-AEw" kind="push" identifier="main" id="3vz-NR-D2U"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -311,12 +311,12 @@
             </objects>
             <point key="canvasLocation" x="791" y="493"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Free Food Finder-->
         <scene sceneID="wv7-sS-Fok">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mLc-8w-HYk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="mqX-W9-VLb"/>
+                    <navigationItem key="navigationItem" title="Free Food Finder" id="mqX-W9-VLb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NVd-Vd-se3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -632,9 +632,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="3vz-NR-D2U"/>
+        <segue reference="sCZ-HK-8fc"/>
         <segue reference="LA2-9o-cPf"/>
-        <segue reference="1wB-xH-XOC"/>
+        <segue reference="HZp-66-SjU"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

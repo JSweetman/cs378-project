@@ -498,7 +498,7 @@
         
         [self addNewContact:_d1];
          self.message_label.text = @"Data Saved";
-        
+        [self performSegueWithIdentifier:@"main" sender:self];
         // Send a notification to all devices subscribed to the "Giants" channel.
         PFPush *push = [[PFPush alloc] init];
         [push setChannel:@"Food"];
