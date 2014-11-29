@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
-        <!--Event Table View Controller-->
+        <!--Free Food Finder-->
         <scene sceneID="pxD-54-1JR">
             <objects>
                 <tableViewController id="9ko-2l-TgN" customClass="EventTableViewController" sceneMemberID="viewController">
@@ -51,7 +51,7 @@
                             <outlet property="delegate" destination="9ko-2l-TgN" id="c2Z-a1-xKD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="m1L-Om-4tU">
+                    <navigationItem key="navigationItem" title="Free Food Finder" id="m1L-Om-4tU">
                         <barButtonItem key="rightBarButtonItem" title="+" id="gRV-ng-nNX">
                             <connections>
                                 <segue destination="Y1V-EZ-vhQ" kind="push" identifier="AddViewController" id="qhq-tK-HZP"/>
@@ -623,7 +623,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="1wB-xH-XOC"/>
         <segue reference="cHX-2B-FTh"/>
-        <segue reference="jpY-DG-MnF"/>
+        <segue reference="qhq-tK-HZP"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
