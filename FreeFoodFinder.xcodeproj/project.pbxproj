@@ -45,6 +45,7 @@
 		1A6CCD461A27F12A00E0869E /* Unknown-4 in Resources */ = {isa = PBXBuildFile; fileRef = 1A6CCD421A27F12A00E0869E /* Unknown-4 */; };
 		1AAF94ED1A13EEC7009E57C7 /* EventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF94EC1A13EEC7009E57C7 /* EventTableViewController.m */; };
 		1AAF94F11A156914009E57C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AAF94F01A156914009E57C7 /* Main.storyboard */; };
+		1AC146AE1A2A5B5C00F3DB1E /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC146AD1A2A5B5C00F3DB1E /* ActivityView.m */; };
 		1AE644BD1A15700D000D0EE7 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE644B91A15700D000D0EE7 /* Bolts.framework */; };
 		1AE644BE1A15700D000D0EE7 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE644BA1A15700D000D0EE7 /* Parse.framework */; };
 		1AE644BF1A15700D000D0EE7 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE644BB1A15700D000D0EE7 /* ParseFacebookUtils.framework */; };
@@ -138,6 +139,8 @@
 		1AAF94EB1A13EEC7009E57C7 /* EventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventTableViewController.h; path = ../EventTableViewController.h; sourceTree = "<group>"; };
 		1AAF94EC1A13EEC7009E57C7 /* EventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventTableViewController.m; path = ../EventTableViewController.m; sourceTree = "<group>"; };
 		1AAF94F01A156914009E57C7 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		1AC146AC1A2A5B5C00F3DB1E /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
+		1AC146AD1A2A5B5C00F3DB1E /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
 		1AE644B91A15700D000D0EE7 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "parse-library-1.5.0/Bolts.framework"; sourceTree = "<group>"; };
 		1AE644BA1A15700D000D0EE7 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "parse-library-1.5.0/Parse.framework"; sourceTree = "<group>"; };
 		1AE644BB1A15700D000D0EE7 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = "parse-library-1.5.0/ParseFacebookUtils.framework"; sourceTree = "<group>"; };
@@ -341,6 +344,8 @@
 				1A6CCD151A22CECC00E0869E /* SimpleTableCell.m */,
 				1A6C97DC1A1BFD50006D5CC2 /* NewUserViewController.h */,
 				1A6C97DD1A1BFD50006D5CC2 /* NewUserViewController.m */,
+				1AC146AC1A2A5B5C00F3DB1E /* ActivityView.h */,
+				1AC146AD1A2A5B5C00F3DB1E /* ActivityView.m */,
 				1A6C97D91A1BFAB9006D5CC2 /* LogInViewController.h */,
 				1A6C97DA1A1BFAB9006D5CC2 /* LogInViewController.m */,
 				1A41EA8019F7355D00E3676C /* MapViewController.h */,
@@ -526,6 +531,7 @@
 				1A6CCD161A22CECC00E0869E /* SimpleTableCell.m in Sources */,
 				1A41EA7F19F72EF200E3676C /* HappeningViewController.m in Sources */,
 				1A3C544119E0AAD000295438 /* DataModel.m in Sources */,
+				1AC146AE1A2A5B5C00F3DB1E /* ActivityView.m in Sources */,
 				1A3C544419E0B12500295438 /* AddViewController.m in Sources */,
 				3680A2E419DB31CE00B4A07F /* CDAppDelegate.m in Sources */,
 				3680A2EA19DB31CE00B4A07F /* CDViewController.m in Sources */,

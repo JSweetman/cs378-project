@@ -12,7 +12,7 @@
 #import <Parse/Parse.h>
 //#import <ParseFacebookUtils/PFFacebookUtils.h>
 
-//#import "ActivityView.h"
+#import "ActivityView.h"
 #import "NewUserViewController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate, UIScrollViewDelegate,NewUserViewControllerDelegate>
@@ -260,6 +260,7 @@
         
         if (user) {
             [self.delegate loginViewControllerDidLogin:self];
+            [self performSegueWithIdentifier:@"Add" sender:self];
         } else {
             // Didn't get a user.
             NSLog(@"%s didn't get a user!", __PRETTY_FUNCTION__);
@@ -344,7 +345,7 @@
 }
 
 #pragma mark ActivityView
-/*
+
 - (void)setActivityViewVisible:(BOOL)visible {
     if (self.activityViewVisible == visible) {
         return;
@@ -365,5 +366,5 @@
         _activityView = nil;
     }
 }
-*/
+
 @end

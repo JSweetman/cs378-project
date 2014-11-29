@@ -446,7 +446,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Y1V-EZ-vhQ" kind="push" id="jpY-DG-MnF"/>
+                                    <action selector="loginPressed:" destination="SWf-Z6-pck" eventType="touchUpInside" id="0se-li-Bs5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -454,8 +454,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Free Food Finder" id="IeA-9i-YKC"/>
                     <connections>
+                        <outlet property="backgroundView" destination="3Tb-H0-l28" id="kWm-h3-IFz"/>
+                        <outlet property="loginButton" destination="OgU-5F-Em0" id="h6X-Mv-D4D"/>
                         <outlet property="passwordField" destination="bdd-Ag-jHn" id="FP7-cy-mjI"/>
                         <outlet property="usernameField" destination="qJL-oX-9So" id="1rf-s4-cEO"/>
+                        <segue destination="Y1V-EZ-vhQ" kind="push" identifier="Add" id="LA2-9o-cPf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kD2-bE-Se1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -508,16 +511,31 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7H-Pj-9K8" customClass="CoolButton">
-                                <rect key="frame" x="200" y="317" width="72" height="30"/>
+                                <rect key="frame" x="182" y="317" width="90" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="closeButtonPressed:" destination="RMe-QE-eyM" eventType="touchUpInside" id="bfd-kc-m8J"/>
+                                    <action selector="createAccountPressed:" destination="RMe-QE-eyM" eventType="touchUpInside" id="l82-1b-b17"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwi-zN-Wce">
+                                <rect key="frame" x="236" y="72" width="48" height="30"/>
+                                <state key="normal" title="Sign In">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="SWf-Z6-pck" kind="push" id="GWA-oT-Z4d"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.57016126909999998" blue="0.2711519946" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Free Food Finder" id="weS-af-nRa"/>
                     <connections>
+                        <outlet property="createAccountButton" destination="z7H-Pj-9K8" id="dG9-7t-u8c"/>
                         <outlet property="passwordAgainField" destination="dLj-bV-Rrd" id="NVO-0O-AUP"/>
                         <outlet property="passwordField" destination="3NP-dD-dH7" id="4Ky-js-Enb"/>
                         <outlet property="usernameField" destination="R87-hR-79b" id="q4R-Gv-HHV"/>
@@ -624,8 +642,9 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="3vz-NR-D2U"/>
-        <segue reference="jpY-DG-MnF"/>
-        <segue reference="HZp-66-SjU"/>
+        <segue reference="LA2-9o-cPf"/>
+        <segue reference="crZ-7s-TkS"/>
+        <segue reference="1wB-xH-XOC"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

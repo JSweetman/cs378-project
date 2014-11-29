@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @class NewUserViewController;
 
 @protocol NewUserViewControllerDelegate <NSObject>
