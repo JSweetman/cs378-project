@@ -121,7 +121,7 @@
     [super viewDidAppear:animated];
     
     [self loadModelData];
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -307,7 +307,9 @@
     self.searchResults = newResults;
      
 }
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self.searchDisplayController.searchResultsTableView reloadData];
     [self filterResults:searchString];
     return YES;
 }
@@ -367,7 +369,8 @@
     if (tableView == self.tableView){
         return [self.days count];
     }
-    else{
+    else
+    {
         return 1;
     }
         
