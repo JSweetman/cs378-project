@@ -207,6 +207,7 @@
         
         [self dismissViewControllerAnimated:YES completion:nil];
         [self.delegate newUserViewControllerDidSignup:self];
+        [self performSegueWithIdentifier:@"login" sender:self];
     }];
 }
 

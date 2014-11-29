@@ -511,7 +511,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7H-Pj-9K8" customClass="CoolButton">
-                                <rect key="frame" x="182" y="317" width="90" height="41"/>
+                                <rect key="frame" x="190" y="317" width="90" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -519,15 +519,6 @@
                                 <connections>
                                     <action selector="closeButtonPressed:" destination="RMe-QE-eyM" eventType="touchUpInside" id="bfd-kc-m8J"/>
                                     <action selector="createAccountPressed:" destination="RMe-QE-eyM" eventType="touchUpInside" id="l82-1b-b17"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwi-zN-Wce">
-                                <rect key="frame" x="236" y="72" width="48" height="30"/>
-                                <state key="normal" title="Sign In">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="SWf-Z6-pck" kind="push" id="GWA-oT-Z4d"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -543,7 +534,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7yx-k6-G2M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-177" y="853"/>
+            <point key="canvasLocation" x="-67" y="823"/>
         </scene>
         <!--Happening View Controller-->
         <scene sceneID="WfA-FD-joS">
@@ -643,7 +634,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="3vz-NR-D2U"/>
         <segue reference="LA2-9o-cPf"/>
-        <segue reference="crZ-7s-TkS"/>
         <segue reference="1wB-xH-XOC"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
