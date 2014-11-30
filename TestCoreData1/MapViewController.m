@@ -26,7 +26,7 @@
 @property (nonatomic, assign) BOOL mapPannedSinceLocationUpdate;
 @property (nonatomic, assign) CLLocationAccuracy filterDistance;
 
-
+@property (nonatomic, strong) NSMutableArray* list;
 
 @end
 
@@ -69,9 +69,7 @@
     [mapView setZoomEnabled:YES];
     [mapView setScrollEnabled:YES];
     
-    
-    
-    
+    self.list = [[NSMutableArray alloc] init];
     /*
     CLLocationManager * locationManager = [[CLLocationManager alloc] init];
     [locationManager requestAlwaysAuthorization];
@@ -230,12 +228,23 @@
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(myLocation, 500, 500);
     //Show our location
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+    if ([self.list count] > 2)
+    {
+        NSLog(@"here in list");
+        //MKPointAnnotation *removedPoint = [self.list objectAtIndex:0];
+        [self.mapView removeAnnotations:self.list];
+        //[self.list removeObjectAtIndex:0];
+    }
     
     MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
     point.coordinate = userLocation.coordinate;
     point.title = @"Where am I?";
     point.subtitle = @"I'm here!!!";
     [self.mapView addAnnotation:point];
+    NSLog(@"count is %d",[self.list count]);
+    [self.list addObject:point];
+    
+    
     //[self reverseGeocode:user];
     
     CLLocationAccuracy accuracy = 1500;
