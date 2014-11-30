@@ -85,7 +85,7 @@
                         <viewControllerLayoutGuide type="bottom" id="rOs-gb-1dw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="AddViewController" id="N19-6u-AF5">
-                        <rect key="frame" x="0.0" y="94" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rKi-NP-5eg">
@@ -364,6 +364,9 @@
                                     <color key="titleColor" red="1" green="0.57016126909999998" blue="0.2711519946" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="b0g-Uv-VQ3" kind="push" id="Sc4-jA-x48"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAZ-UM-fXn" customClass="CoolButton">
                                 <rect key="frame" x="16" y="339" width="288" height="50"/>
@@ -663,7 +666,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P7l-h3-reJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="246" y="1529"/>
+            <point key="canvasLocation" x="229" y="997"/>
         </scene>
     </scenes>
     <resources>
@@ -675,9 +678,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="3vz-NR-D2U"/>
-        <segue reference="LA2-9o-cPf"/>
-        <segue reference="Okt-xy-8cY"/>
+        <segue reference="sCZ-HK-8fc"/>
+        <segue reference="fnE-aX-0Ys"/>
+        <segue reference="uP4-gD-N7g"/>
         <segue reference="1wB-xH-XOC"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
