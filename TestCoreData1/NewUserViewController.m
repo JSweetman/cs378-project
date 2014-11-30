@@ -291,9 +291,13 @@
     PFUser *user = [PFUser user];
     user.username = username;
     user.password = password;
-    PFInstallation *installation = [PFInstallation currentInstallation];
-    installation[@"user"] = [PFUser currentUser];
     NSString *newString = [self.food.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"newString is %@", newString);
+    PFInstallation *installation = [PFInstallation currentInstallation];
+    installation[@"user"] = [PFUser user];
+    NSLog(@"here");
+    //NSString *newString = [self.food.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    //NSLog(@"newString is %@", newString);
     [installation addUniqueObject:newString forKey:@"channels"];
     [installation saveInBackground];
     

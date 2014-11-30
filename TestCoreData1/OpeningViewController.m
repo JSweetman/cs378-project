@@ -9,7 +9,7 @@
 #import "OpeningViewController.h"
 #import "HappeningViewController.h"
 #import <Parse/Parse.h>
-
+#import <ParseUI/ParseUI.h>
 
 @interface OpeningViewController ()
 
@@ -60,5 +60,29 @@
         [self performSegueWithIdentifier: @"AddEvent" sender:self];
     }
         
+}
+
+- (IBAction)clickLogIn:(id)sender {
+    if (![PFUser currentUser])
+    {
+        [self performSegueWithIdentifier: @"SignIn" sender:self];
+    }
+    else
+    {
+        PFUser* hey = [PFUser currentUser];
+        NSString* you = hey.username;
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:you message:@"You are already logged in!!" delegate:nil cancelButtonTitle:@"Hide" otherButtonTitles:nil];
+        //alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [alert show];    }
+}
+
+- (IBAction)clickLogOut:(id)sender {
+    PFUser* hey = [PFUser currentUser];
+    NSString* you = hey.username; ///wtf????
+    [PFUser logOut];
+    
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:you message:@"You are logged out!!" delegate:nil cancelButtonTitle:@"Hide" otherButtonTitles:nil];
+    //alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
 }
 @end

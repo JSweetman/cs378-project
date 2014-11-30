@@ -500,27 +500,39 @@
          self.message_label.text = @"Data Saved";
         [self performSegueWithIdentifier:@"main" sender:self];
         /////////////////////
-        /*PFPush *push = [[PFPush alloc] init];
+        PFPush *push = [[PFPush alloc] init];
         [push setChannel:@"Food"];
         [push setMessage:@"New Event added!"];
         [push sendPushInBackground];
-         */
         
-            
+        
+         /*
             // Find devices associated with these users
-        PFQuery *pushQuery = [PFInstallation query];
+        //PFQuery *pushQuery = [PFInstallation query];
         NSString *newString = [self.food.text stringByReplacingOccurrencesOfString:@" " withString:@""];
             //PFQuery *pushQuery = [PFInstallation query];
         //[pushQuery whereKey:@"user" matchesQuery:userQuery];
-        [pushQuery whereKey:@"channels" equalTo:newString];
+        PFQuery *innerQuery = [PFUser query];
             
-            // Send push notification to query
+            // Use hasPrefix: to only match against the month/date
+        [innerQuery whereKey:@"channels" equalTo:newString];
+            
+            // Build the actual push notification target query
+        PFQuery *query = [PFInstallation query];
+            
+            // only return Installations that belong to a User that
+            // matches the innerQuery
+        [query whereKey:@"user" matchesQuery:innerQuery];
+            
+            // Send the notification.
         PFPush *push = [[PFPush alloc] init];
-        [push setQuery:pushQuery];
+        [push setQuery:query];
+            
+        
         NSString* message = [NSString stringWithFormat:@"New %@ event added!", self.food.text];
         [push setMessage:message];
         [push sendPushInBackground];
-            
+         */
             //PFQuery *pushQuery = [PFInstallation query];
             //[pushQuery whereKey:@"user" matchesQuery:userQuery];
             

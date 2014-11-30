@@ -385,6 +385,26 @@
                                     <segue destination="5S6-OY-FKc" kind="push" id="scO-yd-BbR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6s-Rs-BmX" customClass="CoolButton">
+                                <rect key="frame" x="203" y="408" width="85" height="42"/>
+                                <state key="normal" title="Log Out">
+                                    <color key="titleColor" red="1" green="0.57016126909999998" blue="0.2711519946" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickLogOut:" destination="uxC-C5-AEw" eventType="touchUpInside" id="WZy-uZ-wL2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="38k-qf-P54" customClass="CoolButton">
+                                <rect key="frame" x="29" y="408" width="86" height="42"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleColor" red="1" green="0.57016126909999998" blue="0.2711519946" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickLogIn:" destination="uxC-C5-AEw" eventType="touchUpInside" id="FYn-d3-cc4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>

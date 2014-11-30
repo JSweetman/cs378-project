@@ -10,5 +10,7 @@
 
 @interface OpeningViewController : UIViewController
 - (IBAction)clickButtonAdd:(id)sender;
+- (IBAction)clickLogIn:(id)sender;
+- (IBAction)clickLogOut:(id)sender;
 
 @end
