@@ -10,7 +10,7 @@
             <objects>
                 <tableViewController id="9ko-2l-TgN" customClass="EventTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="XPv-7e-WwN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="386"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="RBy-xo-ZgS">
@@ -58,6 +58,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="dxT-1j-aBq" id="hvE-zE-NQy"/>
                     </connections>
@@ -75,16 +76,16 @@
             </objects>
             <point key="canvasLocation" x="195" y="-272"/>
         </scene>
-        <!--Free Food Finder-->
+        <!--Add-->
         <scene sceneID="x8I-O3-R4e">
             <objects>
-                <viewController id="Y1V-EZ-vhQ" customClass="AddViewController" sceneMemberID="viewController">
+                <viewController title="Add" id="Y1V-EZ-vhQ" customClass="AddViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gRR-P9-0bz"/>
                         <viewControllerLayoutGuide type="bottom" id="rOs-gb-1dw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="AddViewController" id="N19-6u-AF5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="94" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rKi-NP-5eg">
@@ -223,7 +224,7 @@
                         <viewControllerLayoutGuide type="bottom" id="YnK-ab-6YA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bLN-4T-CU4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <userGuides>
                             <userLayoutGuide location="272" affinity="minY"/>
@@ -647,10 +648,10 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="sCZ-HK-8fc"/>
+        <segue reference="3vz-NR-D2U"/>
+        <segue reference="qhq-tK-HZP"/>
         <segue reference="1wB-xH-XOC"/>
-        <segue reference="LA2-9o-cPf"/>
-        <segue reference="Okt-xy-8cY"/>
+        <segue reference="crZ-7s-TkS"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
