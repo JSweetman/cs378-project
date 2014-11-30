@@ -293,6 +293,7 @@
     user.password = password;
     NSString *newString = [self.food.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"newString is %@", newString);
+    /*
     PFInstallation *installation = [PFInstallation currentInstallation];
     installation[@"user"] = [PFUser user];
     NSLog(@"here");
@@ -300,6 +301,7 @@
     //NSLog(@"newString is %@", newString);
     [installation addUniqueObject:newString forKey:@"channels"];
     [installation saveInBackground];
+     */
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
@@ -315,8 +317,16 @@
             [self.usernameField becomeFirstResponder];
             return;
         }
+        PFInstallation *myinstallation = [PFInstallation currentInstallation];
+        [myinstallation setObject:user forKey:@"User"];
         
-        // Success!
+        //[[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
+        [myinstallation addUniqueObject:newString forKey:@"channels"];
+        [myinstallation saveEventually];
+        //installation[@"user"] = [PFUser user];
+        NSLog(@"here");
+        [myinstallation saveInBackground];
+        
         [activityView.activityIndicator stopAnimating];
         [activityView removeFromSuperview];
         
