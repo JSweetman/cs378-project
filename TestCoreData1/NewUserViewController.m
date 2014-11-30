@@ -35,8 +35,8 @@
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Disable automatic adjustment, as we want to occupy all screen real estate
-        self.automaticallyAdjustsScrollViewInsets = NO;
+        
+        ////////self.automaticallyAdjustsScrollViewInsets = YES;
     }
     return self;
 }
@@ -55,6 +55,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    
+    //[self.scrollView setScrollEnabled:YES];
     pickerDataFood = @[@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini"];
     
     self.pickerFood = [[UIPickerView alloc] initWithFrame:CGRectZero];
@@ -70,8 +72,21 @@
     // Save original y position and offsets for floating views
     self.iconImageViewOriginalY = self.iconImageView.frame.origin.y;
     self.iconLogoOffsetY = self.logoImageView.frame.origin.y - self.iconImageView.frame.origin.y;
+  
+    ////////
+    // Remember the starting frame for the view
+    originalViewFrame = self.view.frame;
     
-    }
+    // Set the scroll view to the same size as its parent view - typical
+    self.scrollView.frame = originalViewFrame;
+    
+    // Set the content size to the same size as the scroll view - for now.
+    // Later we'll be changing the content size to allow for scrolling.
+    // Right now, no scrolling would occur because the content and the scroll view
+    // are the same size.
+    self.scrollView.contentSize = originalViewFrame.size;
+    
+}
 ///////////////////
 - (void)attachPickerToTextField: (UITextField*) textField :(UIPickerView*) picker{
     picker.delegate = self;
@@ -184,6 +199,7 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
+
 
 #pragma mark -
 #pragma mark UITextFieldDelegate
@@ -349,10 +365,50 @@
                                                  name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
+                                             selector:@selector(keyboardDidHide:)
                                                  name:UIKeyboardWillHideNotification object:nil];
 }
 
+// Called when the keyboard will be shown.
+- (void) keyboardWillShow:(NSNotification *)note {
+    NSDictionary *userInfo = [note userInfo];
+    CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    
+    int adjust = 0;
+    int pad = 5;
+    
+    int top = originalViewFrame.size.height - keyboardFrame.size.height - pad - textFieldWithFocus.frame.size.height;
+    
+    if (textFieldWithFocus.frame.origin.y > top) {
+        adjust = textFieldWithFocus.frame.origin.y - top;
+    }
+    
+    CGRect newViewFrame = originalViewFrame;
+    newViewFrame.origin.y -= adjust;
+    newViewFrame.size.height = originalViewFrame.size.height + keyboardFrame.size.height;
+    
+    // Change the content size so we can scroll up and expose the text field widgets
+    // currently under the keyboard.
+    CGSize newContentSize = originalViewFrame.size;
+    newContentSize.height += (keyboardFrame.size.height * 2);
+    self.scrollView.contentSize = newContentSize;
+    
+    // Move the view to keep the text field from being covered up by the keyboard.
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.frame = newViewFrame;
+    }];
+}
+
+// Called when the keyboard will be hidden - the user has touched the Return key.
+- (void) keyboardDidHide:(NSNotification *)note {
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        // Restore the parent view and scroll content view to their original sizes
+        self.view.frame = originalViewFrame;
+        self.scrollView.contentSize = originalViewFrame.size;
+    }];
+}
+/*
 - (void)keyboardWillShow:(NSNotification*)notification {
     NSDictionary *userInfo = [notification userInfo];
     CGRect endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -424,5 +480,5 @@
                      }
                      completion:nil];
 }
-
+*/
 @end
