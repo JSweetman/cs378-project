@@ -364,9 +364,6 @@
                                     <color key="titleColor" red="1" green="0.57016126909999998" blue="0.2711519946" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="b0g-Uv-VQ3" kind="push" id="Lls-RJ-3Xx"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAZ-UM-fXn" customClass="CoolButton">
                                 <rect key="frame" x="16" y="339" width="288" height="50"/>
@@ -375,7 +372,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="SWf-Z6-pck" kind="push" id="crZ-7s-TkS"/>
+                                    <action selector="clickButtonAdd:" destination="uxC-C5-AEw" eventType="touchUpInside" id="NOy-sC-BMW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qol-Ud-RMa" customClass="CoolButton">
@@ -392,10 +389,14 @@
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Free Food Finder" id="k3a-74-XdM"/>
+                    <connections>
+                        <segue destination="SWf-Z6-pck" kind="push" identifier="SignIn" id="uP4-gD-N7g"/>
+                        <segue destination="Y1V-EZ-vhQ" kind="push" identifier="AddEvent" id="fnE-aX-0Ys"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DHy-gn-FBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-215" y="158"/>
+            <point key="canvasLocation" x="-215" y="142"/>
         </scene>
         <!--Free Food Finder-->
         <scene sceneID="xgZ-Bg-mAK">
@@ -649,9 +650,9 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="3vz-NR-D2U"/>
-        <segue reference="qhq-tK-HZP"/>
+        <segue reference="fnE-aX-0Ys"/>
+        <segue reference="uP4-gD-N7g"/>
         <segue reference="1wB-xH-XOC"/>
-        <segue reference="crZ-7s-TkS"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface OpeningViewController : UIViewController
+- (IBAction)clickButtonAdd:(id)sender;
 
 @end
