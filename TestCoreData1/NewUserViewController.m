@@ -10,7 +10,7 @@
 #import "ActivityView.h"
 #import <Parse/Parse.h>
 
-@interface NewUserViewController () <UITextFieldDelegate, UIScrollViewDelegate>
+@interface NewUserViewController () <UITextFieldDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton *createAccountButton;
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
@@ -23,6 +23,11 @@
 @end
 
 @implementation NewUserViewController
+{
+    CGRect originalViewFrame;
+    UITextField *textFieldWithFocus;
+    NSArray* pickerDataFood;
+}
 
 #pragma mark -
 #pragma mark Init
@@ -50,6 +55,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    pickerDataFood = @[@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini"];
+    
+    self.pickerFood = [[UIPickerView alloc] initWithFrame:CGRectZero];
+    [self attachPickerToTextField:self.food :self.pickerFood];
+    
     // For dismissing keyboard
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(dismissKeyboard)];
@@ -60,12 +70,107 @@
     // Save original y position and offsets for floating views
     self.iconImageViewOriginalY = self.iconImageView.frame.origin.y;
     self.iconLogoOffsetY = self.logoImageView.frame.origin.y - self.iconImageView.frame.origin.y;
+    
+    }
+///////////////////
+- (void)attachPickerToTextField: (UITextField*) textField :(UIPickerView*) picker{
+    picker.delegate = self;
+    picker.dataSource = self;
+    
+    textField.delegate = self;
+    textField.inputView = picker;
+    
+    // Create done button in UIPickerView
+    UIToolbar*  mypickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 56)];
+    mypickerToolbar.barStyle = UIBarStyleBlackOpaque;
+    [mypickerToolbar sizeToFit];
+    NSMutableArray *barItems = [[NSMutableArray alloc] init];
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    [barItems addObject:flexSpace];
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked)];
+    [barItems addObject:doneBtn];
+    [mypickerToolbar setItems:barItems animated:YES];
+    
+    
+    self.pickerFood.showsSelectionIndicator = YES;
+    textField.inputAccessoryView = mypickerToolbar;
 }
+
+// The number of columns of data
+- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// The number of rows of data
+- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    
+    return pickerDataFood.count;
+    
+}
+
+// The data to return for the row and component (column) that's being passed in
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    
+   return [pickerDataFood objectAtIndex:row];
+
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    
+    UILabel *thisLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
+    
+    if (pickerView == self.pickerFood){
+        thisLabel.text = [pickerDataFood objectAtIndex:row];
+    }
+    
+    
+    return thisLabel;
+}
+    
+
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    
+    return 40;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    self.food.text = [pickerDataFood objectAtIndex:row];
+}
+
+
+- (void) pickerDoneClicked{
+
+    [self.food resignFirstResponder];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.food resignFirstResponder];
+    [self.usernameField resignFirstResponder];
+    [self.passwordAgainField resignFirstResponder];
+    [self.passwordField resignFirstResponder];
+    
+    //[self.pickerFood resignFirstResponder];
+    //[self.pickedTime resignFirstResponder];
+}
+
+
+
+
+
+///////////////////////////////////////////
+
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.usernameField becomeFirstResponder];
+    //[self.usernameField becomeFirstResponder];
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -186,6 +291,12 @@
     PFUser *user = [PFUser user];
     user.username = username;
     user.password = password;
+    PFInstallation *installation = [PFInstallation currentInstallation];
+    installation[@"user"] = [PFUser currentUser];
+    NSString *newString = [self.food.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [installation addUniqueObject:newString forKey:@"channels"];
+    [installation saveInBackground];
+    
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error userInfo][@"error"]

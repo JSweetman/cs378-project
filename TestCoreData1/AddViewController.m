@@ -499,11 +499,37 @@
         [self addNewContact:_d1];
          self.message_label.text = @"Data Saved";
         [self performSegueWithIdentifier:@"main" sender:self];
-        // Send a notification to all devices subscribed to the "Giants" channel.
-        PFPush *push = [[PFPush alloc] init];
+        /////////////////////
+        /*PFPush *push = [[PFPush alloc] init];
         [push setChannel:@"Food"];
         [push setMessage:@"New Event added!"];
         [push sendPushInBackground];
+         */
+        
+            
+            // Find devices associated with these users
+        PFQuery *pushQuery = [PFInstallation query];
+        NSString *newString = [self.food.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+            //PFQuery *pushQuery = [PFInstallation query];
+        //[pushQuery whereKey:@"user" matchesQuery:userQuery];
+        [pushQuery whereKey:@"channels" equalTo:newString];
+            
+            // Send push notification to query
+        PFPush *push = [[PFPush alloc] init];
+        [push setQuery:pushQuery];
+        NSString* message = [NSString stringWithFormat:@"New %@ event added!", self.food.text];
+        [push setMessage:message];
+        [push sendPushInBackground];
+            
+            //PFQuery *pushQuery = [PFInstallation query];
+            //[pushQuery whereKey:@"user" matchesQuery:userQuery];
+            
+            // Send push notification to query
+            //PFPush *push = [[PFPush alloc] init];
+            //[push setQuery:pushQuery]; // Set our Installation query
+            
+        
+            
         }
         else
         {

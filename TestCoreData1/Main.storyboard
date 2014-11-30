@@ -316,7 +316,9 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mLc-8w-HYk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Free Food Finder" id="mqX-W9-VLb"/>
+                    <navigationItem key="navigationItem" title="Free Food Finder" id="mqX-W9-VLb">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="yDN-dA-tk1"/>
+                    </navigationItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NVd-Vd-se3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -478,40 +480,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UserName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUQ-FD-2I5">
-                                <rect key="frame" x="16" y="127" width="87" height="21"/>
+                                <rect key="frame" x="16" y="198" width="87" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R87-hR-79b">
-                                <rect key="frame" x="112" y="118" width="176" height="30"/>
+                                <rect key="frame" x="112" y="189" width="176" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3NP-dD-dH7">
-                                <rect key="frame" x="112" y="181" width="176" height="30"/>
+                                <rect key="frame" x="112" y="252" width="176" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="376-EY-l6Q">
-                                <rect key="frame" x="16" y="181" width="79" height="21"/>
+                                <rect key="frame" x="16" y="252" width="79" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Retype Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cS9-R7-VZg">
-                                <rect key="frame" x="16" y="241" width="154" height="21"/>
+                                <rect key="frame" x="16" y="312" width="154" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dLj-bV-Rrd">
-                                <rect key="frame" x="112" y="270" width="176" height="30"/>
+                                <rect key="frame" x="112" y="341" width="176" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7H-Pj-9K8" customClass="CoolButton">
-                                <rect key="frame" x="190" y="317" width="90" height="41"/>
+                                <rect key="frame" x="190" y="388" width="90" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -521,20 +523,33 @@
                                     <action selector="createAccountPressed:" destination="RMe-QE-eyM" eventType="touchUpInside" id="l82-1b-b17"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notify me of these events:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FdK-KJ-UM7">
+                                <rect key="frame" x="18" y="107" width="201" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HC2-5O-MDb">
+                                <rect key="frame" x="112" y="137" width="176" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.57016126909999998" blue="0.2711519946" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Free Food Finder" id="weS-af-nRa"/>
                     <connections>
                         <outlet property="createAccountButton" destination="z7H-Pj-9K8" id="dG9-7t-u8c"/>
+                        <outlet property="food" destination="HC2-5O-MDb" id="hxc-t7-hua"/>
                         <outlet property="passwordAgainField" destination="dLj-bV-Rrd" id="NVO-0O-AUP"/>
                         <outlet property="passwordField" destination="3NP-dD-dH7" id="4Ky-js-Enb"/>
                         <outlet property="usernameField" destination="R87-hR-79b" id="q4R-Gv-HHV"/>
+                        <segue destination="SWf-Z6-pck" kind="push" identifier="login" id="Okt-xy-8cY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7yx-k6-G2M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-67" y="823"/>
+            <point key="canvasLocation" x="-159" y="853"/>
         </scene>
         <!--Happening View Controller-->
         <scene sceneID="WfA-FD-joS">
@@ -633,8 +648,9 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="sCZ-HK-8fc"/>
+        <segue reference="1wB-xH-XOC"/>
         <segue reference="LA2-9o-cPf"/>
-        <segue reference="HZp-66-SjU"/>
+        <segue reference="Okt-xy-8cY"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -21,6 +21,9 @@
 
 @property (nonatomic, weak) id<NewUserViewControllerDelegate> delegate;
 
+@property (strong, nonatomic) IBOutlet UIPickerView *pickerFood;
+@property (weak, nonatomic) IBOutlet UITextField *food;
+
 @property (nonatomic, strong) IBOutlet UITextField *usernameField;
 @property (nonatomic, strong) IBOutlet UITextField *passwordField;
 @property (nonatomic, strong) IBOutlet UITextField *passwordAgainField;
