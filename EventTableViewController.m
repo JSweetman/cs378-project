@@ -295,7 +295,7 @@
     NSMutableArray *newResults = [NSMutableArray new];
     for (DataModel *event in self.DataModelList)
     {
-        if ([[event.event lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.food lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.where lowercaseString]containsString:[searchTerm lowercaseString]] || [[event.pickedTime lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.pickedDate lowercaseString] containsString:[searchTerm lowercaseString]])
+        if ([[event.event lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.food lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.where lowercaseString]containsString:[searchTerm lowercaseString]] || [[[self convert24To12:event.pickedTime] lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.pickedDate lowercaseString] containsString:[searchTerm lowercaseString]])
         {
             [newResults addObject:event];
         }
@@ -560,7 +560,7 @@
         
         NSLog(@"//////////////////////////////////////////////////////");
         cell.eventLabel.text = event.event;
-        cell.whereLabel.text = event.event;
+        cell.whereLabel.text = [self grabStreetAddress:event.where];
         cell.timeLabel.text = [self convert24To12:event.pickedTime];
         int count = 0;
         for (NSString *foodSample in tableData)
