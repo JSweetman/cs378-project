@@ -334,14 +334,18 @@
             return;
         }
         PFInstallation *myinstallation = [PFInstallation currentInstallation];
-        [myinstallation setObject:user forKey:@"User"];
-        
+        [myinstallation setObject:user forKey:(@"User")];
+        //myinstallation[@"User"] = [PFUser currentUser];
+        //[myinstallation  addUniqueObject:user forKey:(@"User")];
+        //[PFInstallation currentInstallation].objectId]
+        //[myinstallation addUniqueObject:myinstallation.objectId forKey:@"objectId"];
+        //myinstallation[@"user"] = [PFUser user];
         //[[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
         [myinstallation addUniqueObject:newString forKey:@"channels"];
         [myinstallation saveEventually];
-        //installation[@"user"] = [PFUser user];
+        
         NSLog(@"here");
-        [myinstallation saveInBackground];
+        //[myinstallation saveInBackground];
         
         [activityView.activityIndicator stopAnimating];
         [activityView removeFromSuperview];

@@ -509,13 +509,27 @@
         
         
         NSString *newString = [self.food.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        /*
+        PFQuery *innerQuery = [PFUser query];
+            
+            // Use hasPrefix: to only match against the month/date
+            [innerQuery whereKey:@"birthday" hasPrefix:@"08/15"];
+            
+            // Build the actual push notification target query
+            PFQuery *query = [PFInstallation query];
+            
+            // only return Installations that belong to a User that
+            // matches the innerQuery
+            [query whereKey:@"user" matchesQuery:innerQuery];
+         */   
             
         PFPush *push = [[PFPush alloc] init];
         [push setChannel:newString];
         NSString* message = [NSString stringWithFormat:@"New %@ event added!", self.food.text];
         [push setMessage:message];
         [push sendPushInBackground];
-            
+          
+          
         //PFQuery *pushQuery = [PFInstallation query];
         //[pushQuery whereKey:@"user" matchesQuery:userQuery];
         /*
