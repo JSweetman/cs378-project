@@ -166,12 +166,11 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.food resignFirstResponder];
+    [self.email resignFirstResponder];
     [self.usernameField resignFirstResponder];
     [self.passwordAgainField resignFirstResponder];
     [self.passwordField resignFirstResponder];
     
-    //[self.pickerFood resignFirstResponder];
-    //[self.pickedTime resignFirstResponder];
 }
 
 
@@ -205,6 +204,9 @@
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.email) {
+        [self.email becomeFirstResponder];
+    }
     if (textField == self.usernameField) {
         [self.passwordField becomeFirstResponder];
     }
@@ -239,7 +241,7 @@
     // Check that we have a non-zero username and passwords.
     // Compare password and passwordAgain for equality
     // Throw up a dialog that tells them what they did wrong if they did it wrong.
-    
+    NSString *email = self.email.text;
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     NSString *passwordAgain = self.passwordAgainField.text;
@@ -252,10 +254,13 @@
     BOOL textError = NO;
     
     // Messaging nil will return 0, so these checks implicitly check for nil text.
-    if (username.length == 0 || password.length == 0 || passwordAgain.length == 0) {
+    if (email.length == 0 || username.length == 0 || password.length == 0 || passwordAgain.length == 0) {
         textError = YES;
         
         // Set up the keyboard for the first field missing input:
+        if (email.length == 0) {
+            [self.email becomeFirstResponder];
+        }
         if (passwordAgain.length == 0) {
             [self.passwordAgainField becomeFirstResponder];
         }
@@ -307,18 +312,11 @@
     PFUser *user = [PFUser user];
     user.username = username;
     user.password = password;
+    user.email = email; 
     NSString *newString = [self.food.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     [user setObject: newString forKey:(@"preference")];
     NSLog(@"newString is %@", newString);
-    /*
-    PFInstallation *installation = [PFInstallation currentInstallation];
-    installation[@"user"] = [PFUser user];
-    NSLog(@"here");
-    //NSString *newString = [self.food.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    //NSLog(@"newString is %@", newString);
-    [installation addUniqueObject:newString forKey:@"channels"];
-    [installation saveInBackground];
-     */
+    
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
@@ -336,12 +334,7 @@
         }
         PFInstallation *myinstallation = [PFInstallation currentInstallation];
         [myinstallation setObject:user forKey:(@"User")];
-        //myinstallation[@"User"] = [PFUser currentUser];
-        //[myinstallation  addUniqueObject:user forKey:(@"User")];
-        //[PFInstallation currentInstallation].objectId]
-        //[myinstallation addUniqueObject:myinstallation.objectId forKey:@"objectId"];
-        //myinstallation[@"user"] = [PFUser user];
-        //[[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
+        
         [myinstallation setObject:@[newString] forKey:@"channels"];
         [myinstallation saveEventually];
         
@@ -413,77 +406,4 @@
         self.scrollView.contentSize = originalViewFrame.size;
     }];
 }
-/*
-- (void)keyboardWillShow:(NSNotification*)notification {
-    NSDictionary *userInfo = [notification userInfo];
-    CGRect endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect keyboardFrame = [self.view convertRect:endFrame fromView:self.view.window];
-    CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationCurve curve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    
-    CGFloat scrollViewOffsetY = (keyboardFrame.size.height -
-                                 (CGRectGetHeight(self.view.bounds) -
-                                  CGRectGetMaxY(self.createAccountButton.frame)));
-    // Check if scrolling needed
-    if (scrollViewOffsetY < 0) {
-        return;
-    }
-    
-    // Fix the icon and logo if necessary
-    CGFloat bottomViewToCheck = self.iconImageView.frame.origin.y + self.iconImageView.frame.size.height;
-    // Only if the logo is party visible (happens for 3.5-inch device)
-    if (scrollViewOffsetY > bottomViewToCheck) {
-        return;
-    }
-    CGFloat yIconOffset = MAX(scrollViewOffsetY, self.iconImageViewOriginalY);
-    __block CGRect iconFrame = self.iconImageView.frame;
-    
-    [UIView animateWithDuration:duration
-                          delay:0.0
-                        options:curve << 16 | UIViewAnimationOptionBeginFromCurrentState
-                     animations:^{
-                         [self.scrollView setContentOffset:CGPointMake(0.0f, scrollViewOffsetY) animated:NO];
-                         
-                         if (yIconOffset != iconFrame.origin.y) {
-                             // Move icon
-                             iconFrame.origin.y = yIconOffset + 20.0f;
-                             self.iconImageView.frame = iconFrame;
-                             
-                             // Move logo with respect to the icon and
-                             // decrease distance between them slightly
-                             // to avoid overlap with the first text field.
-                             CGRect logoFrame = self.logoImageView.frame;
-                             logoFrame.origin.y = CGRectGetMinY(iconFrame) + self.iconLogoOffsetY - 7.0f;
-                             self.logoImageView.frame = logoFrame;
-                         }
-                     }
-                     completion:nil];
-}
-
-- (void)keyboardWillHide:(NSNotification*)notification {
-    NSDictionary *userInfo = [notification userInfo];
-    CGRect endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect keyboardFrame = [self.view convertRect:endFrame fromView:self.view.window];
-    CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationCurve curve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    
-    [UIView animateWithDuration:duration
-                          delay:0.0
-                        options:curve << 16 | UIViewAnimationOptionBeginFromCurrentState
-                     animations:^{
-                         [self.scrollView setContentOffset:CGPointZero animated:NO];
-                         
-                         if (self.iconImageView.frame.origin.y != self.iconImageViewOriginalY) {
-                             CGRect iconFrame = self.iconImageView.frame;
-                             iconFrame.origin.y = self.iconImageViewOriginalY;
-                             self.iconImageView.frame = iconFrame;
-                             
-                             CGRect logoFrame = self.logoImageView.frame;
-                             logoFrame.origin.y = self.iconImageViewOriginalY + self.iconLogoOffsetY;
-                             self.logoImageView.frame = logoFrame;
-                         }
-                     }
-                     completion:nil];
-}
-*/
 @end

@@ -194,6 +194,7 @@
             dm.event = obj[@"event"];
             //NSLog(@"obj name: %@", obj[@"name"]);
             dm.where = obj[@"where"];
+            dm.buildingName = obj[@"buildingName"];
             dm.pickedTime = obj[@"pickedTime"];
             dm.pickedDate = obj[@"pickedDate"];
             dm.food = obj[@"food"];
@@ -295,7 +296,7 @@
     NSMutableArray *newResults = [NSMutableArray new];
     for (DataModel *event in self.DataModelList)
     {
-        if ([[event.event lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.food lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.where lowercaseString]containsString:[searchTerm lowercaseString]] || [[[self convert24To12:event.pickedTime] lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.pickedDate lowercaseString] containsString:[searchTerm lowercaseString]])
+        if ([[event.event lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.food lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.where lowercaseString]containsString:[searchTerm lowercaseString]] || [[[self convert24To12:event.pickedTime] lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.pickedDate lowercaseString] containsString:[searchTerm lowercaseString]] || [[event.buildingName lowercaseString] containsString:[searchTerm lowercaseString]])
         {
             [newResults addObject:event];
         }
@@ -521,7 +522,8 @@
         cell.eventLabel.text = event.event;
         cell.timeLabel.text = [self convert24To12:event.pickedTime];
         //cell.whereLabel.text = event.where;
-        cell.whereLabel.text = [self grabStreetAddress:event.where];
+        //cell.whereLabel.text = [self grabStreetAddress:event.where];
+        cell.whereLabel.text = [self grabStreetAddress:event.buildingName];
         
         NSLog(@"//////////////////////////////////////////////////////");
         int count = 0;
@@ -560,8 +562,10 @@
         
         NSLog(@"//////////////////////////////////////////////////////");
         cell.eventLabel.text = event.event;
-        cell.whereLabel.text = [self grabStreetAddress:event.where];
+        //cell.whereLabel.text = [self grabStreetAddress:event.where];
+        cell.whereLabel.text = [self grabStreetAddress:event.buildingName];
         cell.timeLabel.text = [self convert24To12:event.pickedTime];
+        
         int count = 0;
         for (NSString *foodSample in tableData)
         {
@@ -589,28 +593,17 @@
     return 75;
 }
 
-
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellid"];
-// 
-//    }
-//    if ([_searchResults count] == 0) {
-//            //cell.mainTitle.text = @"Nothing Found";
-//        return 0;
-//    } 
-//    else {
-//        PFObject *object = [PFObject objectWithClassName:@"FoodEvent"];
-//        object = [_searchResults objectAtIndex:indexPath.row];
-//            //DataModel* obj = [_searchResults objectAtIndex:indexPath.row];
-//        //cell.textLabel.text = object.event;
-//        //cell.detailTextLabel.text = object.where;
-//            
-//    }
-    
-    
-    
-//}
-
+- (IBAction)addButton:(id)sender
+{
+    if (![PFUser currentUser])
+    {
+        [self performSegueWithIdentifier: @"signinFromAllEvents" sender:self];
+    }
+    else
+    {
+        [self performSegueWithIdentifier: @"addFromAllEvents" sender:self];
+    }
+}
 
 /*
  // Override to support conditional editing of the table view.
@@ -645,6 +638,7 @@
  return YES;
  }
  */
+
 
 @end
 

@@ -157,7 +157,17 @@
         DataModel *dm = [[DataModel alloc] init];
         dm.event = obj[@"event"];
         //NSLog(@"obj name: %@", obj[@"name"]);
+        //  int count = 0;
+        //    for (NSString *address in pickerDataWhere)
+        //    {
+        //        if ([[self.where text] isEqualToString:address])
+        //        {
+        //            _d1.where = [pickerAddress objectAtIndex:count];
+        //        }
+        //        count = count + 1;
+        
         dm.where = obj[@"where"];
+        dm.buildingName = obj[@"buildingName"];
         dm.pickedTime = obj[@"pickedTime"];
         dm.pickedDate = obj[@"pickedDate"];
         dm.food = obj[@"food"];
@@ -228,7 +238,7 @@
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(myLocation, 500, 500);
     //Show our location
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
-    if ([self.list count] > 2)
+    if ([self.list count] > 1)
     {
         NSLog(@"here in list");
         //MKPointAnnotation *removedPoint = [self.list objectAtIndex:0];
@@ -322,7 +332,8 @@
                     {
                         point.coordinate = eventLatLog.coordinate;
                         point.title = event.event;
-                        point.subtitle = [self grabStreetAddress: event.where];
+                        //point.subtitle = [self grabStreetAddress: event.where];
+                        point.subtitle = [self grabStreetAddress:event.buildingName];
                         [self.mapView addAnnotation:point];
                     }
         

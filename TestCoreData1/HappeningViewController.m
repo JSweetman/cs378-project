@@ -95,6 +95,7 @@
         dm.event = obj[@"event"];
         //NSLog(@"obj name: %@", obj[@"name"]);
         dm.where = obj[@"where"];
+        dm.buildingName = obj[@"buildingName"];
         dm.pickedTime = obj[@"pickedTime"];
         dm.pickedDate = obj[@"pickedDate"];
         dm.food = obj[@"food"];
@@ -225,7 +226,8 @@
         hi = [self.nowList objectAtIndex:indexPath.row];
         NSLog(@"event hi is %@", hi.event);
         cell.eventLabel.text = hi.event;
-        cell.whereLabel.text = [self grabStreetAddress: hi.where];
+        //cell.whereLabel.text = [self grabStreetAddress: hi.where];
+        cell.whereLabel.text = [self grabStreetAddress:hi.buildingName];
         cell.timeLabel.text = [self convert24To12:hi.pickedTime];
         NSLog(@"event is %@", cell.eventLabel.text);
         NSLog(@"tiem  is %@", cell.timeLabel.text);

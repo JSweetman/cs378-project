@@ -46,9 +46,8 @@
     //Picker
     // Initialize Data
     pickerDataFood = @[@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini"];
-    pickerDataWhere = @[@"GDC", @"Test"];
-    pickerAddress = @[@"2317 Speedway, Austin, TX 78712", @"950 West 5th St, Austin, TX 78703"];
-    
+    pickerDataWhere = @[@"GDC", @"SAC",@"UTC",@"Union",@"WAG", @"TEST"];
+    pickerAddress = @[@"2317 Speedway, Austin, TX 78712", @"2201 SPEEDWAY, AUSTIN, TX 78712", @"105 W 21ST ST, AUSTIN, TX 78712", @"2308 WHITIS AVE, AUSTIN, TX 78705",@"2210 SPEEDWAY, AUSTIN, TX 78705", @"950 West 5th St, Austin, TX 78703"];
     
     // Connect data
     
@@ -357,10 +356,11 @@
     NSManagedObject *newContact = [NSEntityDescription insertNewObjectForEntityForName:@"Contact" inManagedObjectContext:context];
     [newContact setValue: dm.event forKey:@"event"];
     [newContact setValue: dm.where forKey:@"where"];
+    [newContact setValue: dm.buildingName forKey:@"buildingName"];
     [newContact setValue:dm.pickedTime forKey:@"pickedTime"];
     [newContact setValue:dm.pickedTime forKey:@"pickedDate"];
-    //[newContact setValue: dm.time forKey:@"time"];
     [newContact setValue: dm.food forKey:@"food"];
+    
     NSLog(@"event is %@ \n", _event);
     NSLog(@"where is %@", _where);
     NSLog(@"food is %@", _food);
@@ -371,6 +371,8 @@
     PFObject *testObject = [PFObject objectWithClassName: @"FoodEvent"];
     testObject[@"event"] = dm.event;
     testObject[@"where"] = dm.where;
+    testObject[@"buildingName"] = dm.buildingName;
+    //[testObject setValue:dm.buildingName forKey:@"buildingName"];
     testObject[@"pickedTime"]= dm.pickedTime;
     testObject[@"pickedDate"]= dm.pickedDate;
 
@@ -490,17 +492,26 @@
 - (IBAction)btnSaveGo:(id)sender {
     
     _d1 = [[DataModel alloc] init];
-  //  int count = 0;
-//    for (NSString *address in pickerDataWhere)
-//    {
-//        if ([[self.where text] isEqualToString:address])
-//        {
-//            _d1.where = [pickerAddress objectAtIndex:count];
-//        }
-//        count = count + 1;
-//    }
+    int count = 0;
+    for (NSString *address in pickerDataWhere)
+    {
+        if ([[self.where text] isEqualToString:address])
+       {
+            _d1.where = [pickerAddress objectAtIndex:count];
+           _d1.buildingName = [self.where text];
+       }
+       
+       count = count + 1;
+    }
+    
+    if ([_d1.where length] == 0)
+    {
+        _d1.where = [self.where text];
+        _d1.buildingName = [self.where text];
+    }
+    
     _d1.event = [self.event text];
-    _d1.where = [self.where text];
+    // = [self.where text];
     _d1.pickedTime = [self.pickedTime text];
     _d1.pickedDate = [self.pickedDate text];
     _d1.food = [self.food text];

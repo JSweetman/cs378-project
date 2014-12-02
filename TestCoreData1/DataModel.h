@@ -19,6 +19,7 @@
 
 @property(strong, nonatomic) NSString *event;
 @property(strong, nonatomic) NSString *where;
+@property(strong, nonatomic) NSString *buildingName;
 @property(strong, nonatomic) NSString *time;
 @property(strong, nonatomic) NSString *food;
 @property(strong, nonatomic) NSString *pickedTime;

@@ -54,13 +54,15 @@
                     <navigationItem key="navigationItem" title="Free Food Finder" id="m1L-Om-4tU">
                         <barButtonItem key="rightBarButtonItem" title="+" id="gRV-ng-nNX">
                             <connections>
-                                <segue destination="Y1V-EZ-vhQ" kind="push" identifier="AddViewController" id="qhq-tK-HZP"/>
+                                <action selector="addButton:" destination="9ko-2l-TgN" id="may-XA-RII"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="dxT-1j-aBq" id="hvE-zE-NQy"/>
+                        <segue destination="Y1V-EZ-vhQ" kind="push" identifier="addFromAllEvents" id="R1f-q4-mHd"/>
+                        <segue destination="SWf-Z6-pck" kind="push" identifier="signinFromAllEvents" id="jpc-0E-ohM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mhh-7g-anL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -92,32 +94,27 @@
                                 <rect key="frame" x="-38" y="0.0" width="378" height="480"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EVENT:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMv-Dd-sPB">
-                                        <rect key="frame" x="53" y="56" width="57" height="21"/>
+                                        <rect key="frame" x="53" y="33" width="57" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3R4-A3-G0O">
-                                        <rect key="frame" x="130" y="54" width="165" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="WHERE:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZ4-PM-7rZ">
-                                        <rect key="frame" x="53" y="96" width="66" height="21"/>
+                                        <rect key="frame" x="53" y="81" width="66" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tkr-jK-JFB">
-                                        <rect key="frame" x="130" y="92" width="165" height="30"/>
+                                        <rect key="frame" x="130" y="78" width="157" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TIME:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6DE-uI-JXl">
-                                        <rect key="frame" x="65" y="391" width="45" height="21"/>
+                                        <rect key="frame" x="65" y="364" width="45" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rIB-5D-gwb">
-                                        <rect key="frame" x="130" y="128" width="165" height="30"/>
+                                        <rect key="frame" x="130" y="124" width="157" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -127,12 +124,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FOOD:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2t9-Mx-AJV">
-                                        <rect key="frame" x="55" y="132" width="53" height="21"/>
+                                        <rect key="frame" x="55" y="128" width="53" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="di8-xP-EI3">
-                                        <rect key="frame" x="13" y="172" width="378" height="162"/>
+                                        <rect key="frame" x="13" y="161" width="378" height="162"/>
                                         <date key="date" timeIntervalSinceReferenceDate="437879334.50317502">
                                             <!--2014-11-17 01:08:54 +0000-->
                                         </date>
@@ -140,26 +137,26 @@
                                             <action selector="pkrValueChange:" destination="Y1V-EZ-vhQ" eventType="valueChanged" id="F7P-3r-r2L"/>
                                         </connections>
                                     </datePicker>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xn8-cL-pcy">
-                                        <rect key="frame" x="120" y="391" width="211" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xn8-cL-pcy">
+                                        <rect key="frame" x="120" y="364" width="211" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DATE:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QS-sT-IB5">
-                                        <rect key="frame" x="66" y="420" width="66" height="21"/>
+                                        <rect key="frame" x="66" y="393" width="66" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZNb-7Y-db7">
-                                        <rect key="frame" x="123" y="420" width="206" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZNb-7Y-db7">
+                                        <rect key="frame" x="123" y="393" width="206" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESk-Tb-i0o" customClass="CoolButton">
-                                        <rect key="frame" x="65" y="329" width="266" height="35"/>
+                                        <rect key="frame" x="65" y="314" width="266" height="45"/>
                                         <state key="normal" title="Save">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -169,8 +166,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKk-l4-fkk" customClass="CoolButton">
-                                        <rect key="frame" x="300" y="127" width="56" height="33"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                        <rect key="frame" x="294" y="120" width="64" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <state key="normal" title="Choices">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -180,8 +177,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AKR-uS-Ejc" customClass="CoolButton">
-                                        <rect key="frame" x="303" y="91" width="56" height="33"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                        <rect key="frame" x="294" y="72" width="65" height="42"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <state key="normal" title="Choices">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -190,6 +187,11 @@
                                             <action selector="whereButton:" destination="Y1V-EZ-vhQ" eventType="touchUpInside" id="csX-CE-qhJ"/>
                                         </connections>
                                     </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3R4-A3-G0O">
+                                        <rect key="frame" x="130" y="30" width="157" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -235,7 +237,7 @@
                         <viewControllerLayoutGuide type="bottom" id="YnK-ab-6YA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bLN-4T-CU4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <userGuides>
                             <userLayoutGuide location="272" affinity="minY"/>
@@ -518,41 +520,52 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w6A-i4-Paj">
                                 <rect key="frame" x="4" y="15" width="312" height="451"/>
                                 <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vp4-eP-zQq">
+                                        <rect key="frame" x="116" y="61" width="176" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vla-ue-Tzq">
+                                        <rect key="frame" x="22" y="64" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UserName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUQ-FD-2I5">
-                                        <rect key="frame" x="20" y="162" width="87" height="21"/>
+                                        <rect key="frame" x="20" y="197" width="87" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R87-hR-79b">
-                                        <rect key="frame" x="116" y="153" width="176" height="30"/>
+                                        <rect key="frame" x="116" y="188" width="176" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3NP-dD-dH7">
-                                        <rect key="frame" x="116" y="216" width="176" height="30"/>
+                                        <rect key="frame" x="116" y="251" width="176" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="376-EY-l6Q">
-                                        <rect key="frame" x="20" y="216" width="79" height="21"/>
+                                        <rect key="frame" x="20" y="251" width="79" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Retype Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cS9-R7-VZg">
-                                        <rect key="frame" x="20" y="276" width="154" height="21"/>
+                                        <rect key="frame" x="20" y="311" width="154" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dLj-bV-Rrd">
-                                        <rect key="frame" x="116" y="305" width="176" height="30"/>
+                                        <rect key="frame" x="116" y="340" width="176" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7H-Pj-9K8" customClass="CoolButton">
-                                        <rect key="frame" x="194" y="352" width="90" height="41"/>
+                                        <rect key="frame" x="194" y="387" width="90" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Sign Up">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -563,13 +576,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notify me of these events:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FdK-KJ-UM7">
-                                        <rect key="frame" x="22" y="71" width="201" height="32"/>
+                                        <rect key="frame" x="22" y="106" width="201" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HC2-5O-MDb">
-                                        <rect key="frame" x="116" y="101" width="176" height="30"/>
+                                        <rect key="frame" x="116" y="136" width="176" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -581,6 +594,7 @@
                     <navigationItem key="navigationItem" title="Free Food Finder" id="weS-af-nRa"/>
                     <connections>
                         <outlet property="createAccountButton" destination="z7H-Pj-9K8" id="dG9-7t-u8c"/>
+                        <outlet property="email" destination="Vp4-eP-zQq" id="gxw-sp-18I"/>
                         <outlet property="food" destination="HC2-5O-MDb" id="hxc-t7-hua"/>
                         <outlet property="passwordAgainField" destination="dLj-bV-Rrd" id="NVO-0O-AUP"/>
                         <outlet property="passwordField" destination="3NP-dD-dH7" id="4Ky-js-Enb"/>
@@ -690,9 +704,9 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="3vz-NR-D2U"/>
-        <segue reference="fnE-aX-0Ys"/>
-        <segue reference="uP4-gD-N7g"/>
+        <segue reference="R1f-q4-mHd"/>
         <segue reference="1wB-xH-XOC"/>
+        <segue reference="jpc-0E-ohM"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
