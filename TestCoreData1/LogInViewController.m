@@ -259,8 +259,14 @@
         self.activityViewVisible = NO;
         
         if (user) {
+            NSArray *channels = [NSArray arrayWithObject:[user objectForKey:@"preference"]];
             [self.delegate loginViewControllerDidLogin:self];
+            [[PFInstallation currentInstallation] setObject: [PFUser currentUser] forKey:@"User"];
+            [[PFInstallation currentInstallation] setObject:channels forKey:@"channels"];
+            [[PFInstallation currentInstallation] saveInBackground];
+            
             [self performSegueWithIdentifier:@"Add" sender:self];
+            
         } else {
             // Didn't get a user.
             NSLog(@"%s didn't get a user!", __PRETTY_FUNCTION__);

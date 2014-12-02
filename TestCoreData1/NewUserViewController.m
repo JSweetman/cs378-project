@@ -308,6 +308,7 @@
     user.username = username;
     user.password = password;
     NSString *newString = [self.food.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [user setObject: newString forKey:(@"preference")];
     NSLog(@"newString is %@", newString);
     /*
     PFInstallation *installation = [PFInstallation currentInstallation];
@@ -341,7 +342,7 @@
         //[myinstallation addUniqueObject:myinstallation.objectId forKey:@"objectId"];
         //myinstallation[@"user"] = [PFUser user];
         //[[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
-        [myinstallation addUniqueObject:newString forKey:@"channels"];
+        [myinstallation setObject:@[newString] forKey:@"channels"];
         [myinstallation saveEventually];
         
         NSLog(@"here");

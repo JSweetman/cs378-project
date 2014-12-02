@@ -47,10 +47,10 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"SimpleTableCell" bundle: [NSBundle mainBundle]]
          forCellReuseIdentifier:@"SimpleTableCell"];
-    
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation addUniqueObject:@"Food" forKey:@"channels"];
-    [currentInstallation saveInBackground];
+//    
+//    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+//    [currentInstallation addUniqueObject:@"Food" forKey:@"channels"];
+//    [currentInstallation saveInBackground];
     //self.nowList = [NSMutableArray new];
     /*
     if ([_nowList count] == 0) {

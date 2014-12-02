@@ -73,11 +73,11 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"SimpleTableCell" bundle: [NSBundle mainBundle]]
           forCellReuseIdentifier:@"SimpleTableCell"];
     
-
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation addUniqueObject:@"Food" forKey:@"channels"];
-    [currentInstallation saveInBackground];
-    
+//
+//    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+//    [currentInstallation addUniqueObject:@"Food" forKey:@"channels"];
+//    [currentInstallation saveInBackground];
+//    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
